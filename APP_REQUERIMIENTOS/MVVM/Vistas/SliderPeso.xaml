@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.SliderPeso"
+             Title="SliderPeso">
+    <ContentPage.Resources>
+        <Color x:Key="Primary">#ab3527</Color>
+        <Color x:Key="Secondary">#775752</Color>
+        <Color x:Key="Tertiary">#705c2e</Color>
+    </ContentPage.Resources>
+    <VerticalStackLayout>
+        <StackLayout HeightRequest="40"></StackLayout>
+
+        <Slider
+   x:Name="sldRed"
+             Minimum="0"
+    Maximum="100"
+   MaximumTrackColor="{StaticResource Tertiary}"
+   MinimumTrackColor="{StaticResource Secondary}"
+   ThumbColor="{StaticResource Primary}" />
+        <StackLayout HeightRequest="50"></StackLayout>
+
+
+        <Slider
+   x:Name="sldblue"
+    Minimum="0"
+    Maximum="100"
+   MaximumTrackColor="{StaticResource Tertiary}"
+   MinimumTrackColor="{StaticResource Secondary}"
+   ThumbColor="{StaticResource Primary}" />
+
+        <Label Text="{Binding Source={x:Reference sldRed}, Path=Value}">
+            
+            
+        </Label>
+    </VerticalStackLayout>
+</ContentPage>

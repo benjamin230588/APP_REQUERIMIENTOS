@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.Inicio"
+             Title="Inicio"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#165ded</Color>
+            <Color x:Key="Secondary">#7b0cf1</Color>
+            <Color x:Key="tercero">#ffffff</Color>
+            <Color x:Key="SecondaryColor">#9742ff</Color>
+
+            <Style x:Key="btningresar" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+                <Setter Property="TextColor" Value="{StaticResource tercero}" />
+
+            </Style>
+
+            <Style TargetType="Entry">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+               
+               
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid BackgroundColor="#6A1F7A">
+        
+        
+        <VerticalStackLayout Margin="20" Spacing="15">
+            <Image Source="login1.png" Margin="0" HeightRequest="150"></Image>
+
+            <StackLayout HeightRequest="30"></StackLayout>
+
+            <Frame StyleClass="FrameBorder">
+                <Entry x:Name="txtusuario" Text="" ></Entry>
+            </Frame>
+            <Frame StyleClass="FrameBorder">
+                <Entry x:Name="txtpasword" Text=""  ></Entry>
+            </Frame>
+
+            <Button Clicked="Button_Clicked" Text="DALE" BackgroundColor="#00D0B6"></Button>
+        </VerticalStackLayout>
+    </Grid>
+   
+</ContentPage>

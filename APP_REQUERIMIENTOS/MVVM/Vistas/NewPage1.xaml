@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.NewPage1"
+             Title="NewPage1">
+    <!-- Esto es un comentario en XAML -->
+    <VerticalStackLayout >
+        <Image Source="lola111.png">
+            
+            
+        </Image>
+        <Label Text="HOLA"></Label>
+        <Label Text="CARMEN" FontSize="50" FontFamily="prueba"></Label>
+
+    </VerticalStackLayout>
+</ContentPage>

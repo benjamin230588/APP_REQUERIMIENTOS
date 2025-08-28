@@ -1,0 +1,27 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:APP_REQUERIMIENTOS"
+             x:Class="APP_REQUERIMIENTOS.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <Color x:Key="Primary">#165ded</Color>
+                    <Color x:Key="Secondary">#f10c16</Color>
+                    <Color x:Key="tercero">#ffffff</Color>
+                    <Style x:Key="btningresar23" TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+                        <Setter Property="TextColor" Value="{StaticResource tercero}" />
+
+                    </Style>
+
+                </ResourceDictionary>
+                <ResourceDictionary Source="Resources/Styles/Estiloglobal.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+                <ResourceDictionary Source="Resources/Styles/AppStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

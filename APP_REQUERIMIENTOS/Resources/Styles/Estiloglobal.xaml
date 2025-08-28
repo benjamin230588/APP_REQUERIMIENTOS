@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="Primary">#165ded</Color>
+    <Color x:Key="Secondary">#2eaf05</Color>
+    <Color x:Key="tercero">#ffffff</Color>
+    <Style x:Key="btningresar25" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+        <Setter Property="TextColor" Value="{StaticResource tercero}" />
+
+    </Style>
+</ResourceDictionary>
