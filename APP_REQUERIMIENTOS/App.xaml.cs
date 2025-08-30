@@ -9,7 +9,7 @@ namespace APP_REQUERIMIENTOS
             InitializeComponent();
 
             // MainPage = new NavigationPage(new LoginView());
-            MainPage = new RequerimientoView();
+            MainPage = new otro();
             //MainPage = new Pagetabe();
             //new NavigationPage(new Login());
         }

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.Inicio"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="BurlyWood">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="Primary">#165ded</Color>
@@ -23,23 +24,19 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid BackgroundColor="#6A1F7A">
-        
-        
-        <VerticalStackLayout Margin="20" Spacing="15">
-            <Image Source="login1.png" Margin="0" HeightRequest="150"></Image>
+    <StackLayout 
+        Margin="10"
+    BackgroundColor="Red">
 
-            <StackLayout HeightRequest="30"></StackLayout>
+        <BoxView BackgroundColor="Blue" HeightRequest="2"></BoxView>
+        <Button 
+        Text="DALE"
+        Clicked="Button_Clicked"
+        BackgroundColor="#00D0B6"
+       
+        HorizontalOptions="Fill" />
+        <BoxView BackgroundColor="Blue" HeightRequest="2"></BoxView>
 
-            <Frame StyleClass="FrameBorder">
-                <Entry x:Name="txtusuario" Text="" ></Entry>
-            </Frame>
-            <Frame StyleClass="FrameBorder">
-                <Entry x:Name="txtpasword" Text=""  ></Entry>
-            </Frame>
+    </StackLayout>
 
-            <Button Clicked="Button_Clicked" Text="DALE" BackgroundColor="#00D0B6"></Button>
-        </VerticalStackLayout>
-    </Grid>
-   
 </ContentPage>

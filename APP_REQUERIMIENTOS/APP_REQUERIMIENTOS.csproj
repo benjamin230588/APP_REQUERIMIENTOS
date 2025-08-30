@@ -66,6 +66,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="MVVM\Vistas\NewPage2.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Vistas\Pagetabe.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
