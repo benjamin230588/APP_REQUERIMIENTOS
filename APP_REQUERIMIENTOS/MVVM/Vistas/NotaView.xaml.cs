@@ -13,6 +13,6 @@ public partial class NotaView : ContentPage
     private  void btnabre_Clicked(object sender, EventArgs e)
     {
         Application.Current.MainPage = new otro();
-         //await Navigation.PushAsync(new otro());
+        // await Navigation.PushAsync(new otro());
     }
 }

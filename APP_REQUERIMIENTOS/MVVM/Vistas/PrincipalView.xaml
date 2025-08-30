@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.PrincipalView"
+             xmlns:local="clr-namespace:APP_REQUERIMIENTOS.MVVM.Vistas" >
+
+    <TabbedPage.Children>
+        <NavigationPage Title="Agenda" IconImageSource="cliente.png">
+            <x:Arguments>
+                <local:Colores />
+            </x:Arguments>
+        </NavigationPage>
+
+        <NavigationPage Title="Pedido" IconImageSource="pedido.png">
+            <x:Arguments>
+                <local:Inicio />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Venta" IconImageSource="venta.png">
+            <x:Arguments>
+                <local:otro />
+            </x:Arguments>
+        </NavigationPage>
+
+
+    </TabbedPage.Children>
+
+</TabbedPage>

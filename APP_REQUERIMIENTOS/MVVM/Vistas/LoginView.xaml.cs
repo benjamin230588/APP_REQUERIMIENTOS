@@ -28,8 +28,8 @@ public partial class LoginView : ContentPage
         res = await GenericLH.Post<LoginReq>(Constantes.url + Constantes.api_login, model);
         if (res.codigo == 1)
         {
-            await DisplayAlert("Mensaje", "Usuario Logueado", "Cancelar");
-
+            //await Navigation.PushAsync(new PrincipalView());
+            Application.Current.MainPage = new PrincipalView();
         }
         else
         {

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.Colores"
-             Title="Colores">
+            NavigationPage.HasNavigationBar="False" >
 
 
     <ContentPage.Resources>
@@ -65,10 +65,11 @@
                     </StackLayout>
                     
                 </Frame>
+                <Button Text="DALE" x:Name="btndale" Clicked="btndale_Clicked"></Button>
             </StackLayout>
             
             
         </Frame>
-
+        
     </Grid>
 </ContentPage>

@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui.Alerts;
 using System.ComponentModel;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace APP_REQUERIMIENTOS.MVVM.Vistas;
 
@@ -41,5 +42,10 @@ public partial class Colores : ContentPage
           //     CommunityToolkit.Maui.Core.ToastDuration.Short,
             //   12);
         //await toast.Show();
+    }
+
+    private async void btndale_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new SliderPeso());
     }
 }
