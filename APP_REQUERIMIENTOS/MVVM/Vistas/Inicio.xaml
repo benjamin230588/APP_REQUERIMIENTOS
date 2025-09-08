@@ -24,18 +24,21 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout 
-        Margin="10"
-    BackgroundColor="Red">
+    <StackLayout>
 
-        <BoxView BackgroundColor="Blue" HeightRequest="2"></BoxView>
-        <Button 
-        Text="DALE"
-        Clicked="Button_Clicked"
-        BackgroundColor="#00D0B6"
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition  />
+                <RowDefinition  />
+            </Grid.RowDefinitions>
+
+            <Label Text="Fila 88 (Auto)" BackgroundColor="LightBlue" />
+            <BoxView Grid.Row="1" Color="LightGreen" HeightRequest="4"/>
+            <BoxView Grid.Row="2" Color="LightPink" HeightRequest="4"/>
+        </Grid>
+
        
-        HorizontalOptions="Fill" />
-        <BoxView BackgroundColor="Blue" HeightRequest="2"></BoxView>
 
     </StackLayout>
 
