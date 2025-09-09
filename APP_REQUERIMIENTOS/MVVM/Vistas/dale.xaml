@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.dale"
+             Title="dale">
+    <AbsoluteLayout>
+        <!-- Contenido de la página -->
+        <StackLayout AbsoluteLayout.LayoutFlags="All" 
+                     AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     HorizontalOptions="Center"
+                     VerticalOptions="Center">
+            <Entry></Entry>
+            <Button Text="Mostrar carga" Clicked="Button_Clicked"/>
+        </StackLayout>
+        <!-- Overlay bloqueante -->
+        <Grid BackgroundColor="#80000000"
+              IsVisible="False"
+              InputTransparent="False"
+              AbsoluteLayout.LayoutFlags="All"
+              AbsoluteLayout.LayoutBounds="0,0,1,1">
+        
+        
+        <ActivityIndicator IsRunning="True"
+                               Color="White"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+        </Grid>
+    </AbsoluteLayout>
+
+</ContentPage>

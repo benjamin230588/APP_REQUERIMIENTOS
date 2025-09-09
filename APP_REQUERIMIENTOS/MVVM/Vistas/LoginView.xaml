@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.LoginView"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
     <!-- Este es un comentario  <Entry Text="{Binding objeto.usuario}">-->
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -24,23 +25,53 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid BackgroundColor="#6A1F7A">
+    <Grid BackgroundColor="Blue">
+       
 
-
-        <VerticalStackLayout Margin="20" Spacing="15">
+        <StackLayout Orientation="Vertical" Margin="20" Spacing="15" >
             <Image Source="login1.png" Margin="0" HeightRequest="150"></Image>
 
             <StackLayout HeightRequest="30"></StackLayout>
 
             <Frame StyleClass="FrameBorder">
-                <Entry x:Name="txtusuario" Text="" ></Entry>
+                <Entry x:Name="txtusuario" Text="{Binding usuario}" ></Entry>
             </Frame>
             <Frame StyleClass="FrameBorder">
-                <Entry x:Name="txtpasword" Text=""  ></Entry>
+                <Entry x:Name="txtpasword" Text="{Binding pasword}"  ></Entry>
             </Frame>
 
-            <Button x:Name="btningresar" Clicked="btningresar_Clicked" Text="Ingresar" BackgroundColor="#00D0B6"></Button>
-        </VerticalStackLayout>
+            <Button x:Name="btningresar" Command="{Binding MensajeComand}" Text="Ingresar" BackgroundColor="Red"></Button>
+            <Button 
+            Text="Cambiar color"
+            BackgroundColor="{Binding colorprimario}"
+            Command="{Binding SwitchToggledCommandcambio}" 
+            TextColor="White"
+            FontSize="20"/>
+
+
+            <StackLayout Orientation="Horizontal"  HorizontalOptions="Center"
+             VerticalOptions="Center" Spacing="15">
+                <Label Text="Desea recordar contraseña?" TextColor="White" FontSize="16"  VerticalOptions="Center" />
+                <Switch ScaleX="1.2" ScaleY="1.2" IsToggled="True"
+                        VerticalOptions="Center" x:Name="validacontra" ThumbColor="Red" Toggled="validacontra_Toggled" >
+                    
+
+                </Switch>
+
+            </StackLayout>
+        </StackLayout>
+
+        <Grid BackgroundColor="#848484" Opacity=".8" IsVisible="{Binding flgindicador}"
+                   InputTransparent="False">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Grid.GestureRecognizers>
+            <ActivityIndicator
+               HorizontalOptions="Center"
+                IsRunning="{Binding flgindicador}"
+                Color="#DF013A"
+                />
+        </Grid>
     </Grid>
     <!-- 
     <StackLayout Orientation="Vertical" BackgroundColor="Red"

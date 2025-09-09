@@ -26,7 +26,7 @@ namespace APP_REQUERIMIENTOS
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-          //  FormHandler.RemoveBorders();
+           FormHandler.RemoveBorders();
             return builder.Build();
         }
     }

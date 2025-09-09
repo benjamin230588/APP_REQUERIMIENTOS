@@ -5,6 +5,7 @@ using APP_REQUERIMIENTOS.Helpers;
 using APP_REQUERIMIENTOS.Modelos;
 using APP_REQUERIMIENTOS.MVVM.Modelo;
 using System.Reflection;
+using APP_REQUERIMIENTOS.MVVM.VIewModel;
 
 namespace APP_REQUERIMIENTOS.MVVM.Vistas;
 
@@ -14,41 +15,29 @@ public partial class LoginView : ContentPage
     public LoginView()
 	{
 		InitializeComponent();
-        //objeto = new Login { usuario = "camila", pasword = "TODOO" };
-        //BindingContext = objeto;
+
+        BindingContext = new LoginviewModel();
     }
 
-    private async void btningresar_Clicked(object sender, EventArgs e)
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        Respuesta res;
-        LoginReq model = new LoginReq();
-        model.username = "admin";
-        model.password = "123456";
 
-        res = await GenericLH.Post<LoginReq>(Constantes.url + Constantes.api_login, model);
-        if (res.codigo == 1)
+    }
+
+    private void validacontra_Toggled(object sender, ToggledEventArgs e)
+    {
+        if (validacontra.IsToggled)
         {
-            //await Navigation.PushAsync(new PrincipalView());
-            Application.Current.MainPage = new PrincipalView();
+           // validacontra.Handler?.UpdateValue(nameof(Switch.ThumbColor));
+            var sw = (Switch)sender;
+            sw.Handler?.UpdateValue(nameof(Switch.ThumbColor));
+            validacontra.ThumbColor = Microsoft.Maui.Graphics.Colors.Red;
+            validacontra.OnColor= Microsoft.Maui.Graphics.Colors.Red;
         }
         else
         {
-            
-            
-            await DisplayAlert("Error", "Contraseña o usuario incorrecto", "Cancelar");
-
+            validacontra.ThumbColor = Microsoft.Maui.Graphics.Colors.White;
         }
-        //Application.Current.MainPage = new NotaView();
-        //
+
     }
-    /*
-private void txtboton_Clicked(object sender, EventArgs e)
-{
-    string obj = objeto.usuario;
-    objeto = new Login { usuario = "LUNA", pasword = "EEE" };
-    BindingContext = objeto;
-    //objeto.usuario = "DELIA";
-    //DisplayAlert("titulo",obj,"cancel");
-}
-*/
 }
