@@ -9,7 +9,7 @@
                 <ResourceDictionary>
                     <Color x:Key="Primary">#165ded</Color>
                     <Color x:Key="Secondary">#f10c16</Color>
-                    <Color x:Key="tercero">#ffffff</Color>
+                    <Color x:Key="tercero">#165ded</Color>
                     <Style x:Key="btningresar23" TargetType="Button">
                         <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
                         <Setter Property="TextColor" Value="{StaticResource tercero}" />

@@ -20,8 +20,6 @@
 
             <Style TargetType="Entry">
                 <Setter Property="BackgroundColor" Value="Transparent" />
-
-
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -34,27 +32,35 @@
             <StackLayout HeightRequest="30"></StackLayout>
 
             <Frame StyleClass="FrameBorder">
-                <Entry x:Name="txtusuario" Text="{Binding usuario}" ></Entry>
+                <Entry x:Name="txtusuario" 
+                         HorizontalTextAlignment="Center"
+                         FontSize="17"
+                         Placeholder="Ingrese usuario"
+                         Text="{Binding usuario}" ></Entry>
             </Frame>
             <Frame StyleClass="FrameBorder">
-                <Entry x:Name="txtpasword" Text="{Binding pasword}"  ></Entry>
+                <Entry x:Name="txtpasword" 
+                         IsPassword="True"
+                         HorizontalTextAlignment="Center"
+                         FontSize="17"
+                         Placeholder="Ingrese Pasword"
+                         Text="{Binding pasword}"  ></Entry>
             </Frame>
 
-            <Button x:Name="btningresar" Command="{Binding MensajeComand}" Text="Ingresar" BackgroundColor="Red"></Button>
-            <Button 
-            Text="Cambiar color"
-            BackgroundColor="{Binding colorprimario}"
-            Command="{Binding SwitchToggledCommandcambio}" 
-            TextColor="White"
-            FontSize="20"/>
+            <Button x:Name="btningresar" FontSize="17" Command="{Binding IngresarComand}" Text="INGRESAR" BackgroundColor="Red" CornerRadius="15"></Button>
+           
 
 
             <StackLayout Orientation="Horizontal"  HorizontalOptions="Center"
              VerticalOptions="Center" Spacing="15">
                 <Label Text="Desea recordar contraseña?" TextColor="White" FontSize="16"  VerticalOptions="Center" />
-                <Switch ScaleX="1.2" ScaleY="1.2" IsToggled="True"
-                        VerticalOptions="Center" x:Name="validacontra" ThumbColor="Red" Toggled="validacontra_Toggled" >
-                    
+                <Switch ScaleX="1.2" ScaleY="1.2" IsToggled="{Binding estadoSwitch}"
+                        VerticalOptions="Center" x:Name="validacontra" ThumbColor="{Binding colorSwitch}" >
+                    <Switch.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                        EventName="Toggled"
+                        Command="{Binding SwitchToggledCommand}" /> 
+                    </Switch.Behaviors>
 
                 </Switch>
 

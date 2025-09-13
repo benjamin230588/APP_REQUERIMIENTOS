@@ -2,12 +2,14 @@
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.PrincipalView"
-             xmlns:local="clr-namespace:APP_REQUERIMIENTOS.MVVM.Vistas" >
+             xmlns:local="clr-namespace:APP_REQUERIMIENTOS.MVVM.Vistas" 
+             BarBackgroundColor="#F9F9F9"
+             BarTextColor="Black">
 
     <TabbedPage.Children>
         <NavigationPage Title="Agenda" IconImageSource="cliente.png">
             <x:Arguments>
-                <local:Colores />
+                <local:coleccion />
             </x:Arguments>
         </NavigationPage>
 
