@@ -24,20 +24,5 @@ public partial class LoginView : ContentPage
 
     }
 
-    private void validacontra_Toggled(object sender, ToggledEventArgs e)
-    {
-        if (validacontra.IsToggled)
-        {
-           // validacontra.Handler?.UpdateValue(nameof(Switch.ThumbColor));
-            var sw = (Switch)sender;
-            sw.Handler?.UpdateValue(nameof(Switch.ThumbColor));
-            validacontra.ThumbColor = Microsoft.Maui.Graphics.Colors.Red;
-            validacontra.OnColor= Microsoft.Maui.Graphics.Colors.Red;
-        }
-        else
-        {
-            validacontra.ThumbColor = Microsoft.Maui.Graphics.Colors.White;
-        }
-
-    }
+  
 }

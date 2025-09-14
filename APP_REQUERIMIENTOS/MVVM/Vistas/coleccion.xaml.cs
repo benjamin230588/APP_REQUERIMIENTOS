@@ -1,4 +1,5 @@
 using APP_REQUERIMIENTOS.Modelos;
+using APP_REQUERIMIENTOS.MVVM.VIewModel;
 
 namespace APP_REQUERIMIENTOS.MVVM.Vistas;
 
@@ -9,39 +10,9 @@ public partial class coleccion : ContentPage
     public coleccion()
 	{
 		InitializeComponent();
-        lista = new List<Pruebas>();
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
-        lista.Add(new Pruebas() { apellido = "dd", nombre = "cc", nombresegundo = "sedee" });
+        BindingContext = new RequerimientoViewModel();
 
-        lista.Add(new Pruebas() { apellido = "CONTEXTO", nombre = "huaman", nombresegundo = "jota" });
-        BindingContext = this;
+       
 
     }
 }

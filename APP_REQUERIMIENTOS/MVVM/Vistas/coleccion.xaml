@@ -5,7 +5,7 @@
              Title="Agenda">
     <StackLayout Orientation="Vertical">
 
-        <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding lista}"  VerticalOptions="FillAndExpand"> 
+        <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}"  VerticalOptions="FillAndExpand"> 
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="7"  >
 
@@ -18,7 +18,7 @@
                     <Frame BackgroundColor="#FAFAFA"  HasShadow="True" CornerRadius="10" Margin="5,0,5,10" Padding="10,10,13,10" BorderColor="#848484" IsClippedToBounds="True" >
                         <StackLayout Orientation="Vertical"  >
 
-                            <Grid >
+                            <Grid>
                                 
                                 <Label Text="{Binding apellido , Mode=TwoWay}" TextColor="#2E64FE"  />
                               
