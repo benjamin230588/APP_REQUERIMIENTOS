@@ -5,12 +5,12 @@ namespace APP_REQUERIMIENTOS.MVVM.Vistas;
 
 public partial class coleccion : ContentPage
 {
-    public List<Pruebas> lista { get; set; }
+   // public List<Pruebas> lista { get; set; }
 
     public coleccion()
 	{
 		InitializeComponent();
-        BindingContext = new RequerimientoViewModel();
+        BindingContext = new RequerimientoViewModel(Navigation);
 
        
 

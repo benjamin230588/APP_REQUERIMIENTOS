@@ -1,5 +1,10 @@
-﻿using APP_REQUERIMIENTOS.Helpers;
+﻿using APP_REQUERIMIENTOS.ClienteHttp;
+using APP_REQUERIMIENTOS.Helpers;
+using APP_REQUERIMIENTOS.Modelos;
 using APP_REQUERIMIENTOS.MVVM.Modelo;
+using APP_REQUERIMIENTOS.MVVM.Vistas;
+using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +18,14 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
     {
         
         private bool _flgindicador;
-        private List<Requerimiento> _listarequerimiento;
+        private List<RequerimientoDTO> _listarequerimiento;
       
 
 
-        public RequerimientoViewModel()
+        public RequerimientoViewModel(INavigation navigation)
         {
-            listarequerimiento = null;
-           
+            Navigation = navigation;
+            MostrarLista();
         }
        
        
@@ -30,18 +35,50 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             set { SetValue(ref _flgindicador, value); }
         }
 
-        public  List<Requerimiento> listarequerimiento
+        public  List<RequerimientoDTO> listarequerimiento
         {
             get { return _listarequerimiento; }
             set { SetValue(ref _listarequerimiento, value); }
         }
-        public async Task InigresarLogin()
+       
+
+        public async Task MostrarLista()
+        {
+            Respuesta res;
+            try
+            {
+
+
+                List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
+
+                res = await GenericLH.GetAll(Constantes.url + Constantes.api_getlistarequerimiento);
+                if (res.codigo == 1)
+                {
+                    objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
+
+                }
+                listarequerimiento = objres;
+               
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
+            }
+
+
+        }
+
+        public async Task CrearRequerimiento()
         {
             //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
             try
             {
-               
-                flgindicador = false;
+
+
+
+                await Navigation.PushAsync(new FormRequerimientoView("Nuevo Averia"));
+
+
             }
             catch (Exception ex)
             {
@@ -51,10 +88,8 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
 
         }
-      
 
-
-        public ICommand IngresarComand => new Command(async () => await InigresarLogin());
+        public ICommand CrearRequerimientoComand => new Command(async () => await CrearRequerimiento());
 
       }
 

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.FormRequerimientoView"
+             Title="{Binding titulo}">
+    <Grid>
+        <StackLayout>
+            <ScrollView VerticalOptions="FillAndExpand">
+                <StackLayout Margin="10,4">
+
+                    <Label  Text="Cliente" VerticalOptions="Center" FontAttributes="Bold" FontSize="17"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario19"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Tipo Recojo" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario119"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario29"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario273"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario297"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario2"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario233"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario2933"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario244"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario223"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario292"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario2232"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario29232"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario22232"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario2942322"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario23232"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario2934122"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario223432"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                    <Label  Text="Plan" VerticalOptions="Center"  FontAttributes="Bold" FontSize="16"/>
+                    <Frame StyleClass="FrameBorder">
+                        <Entry x:Name="txtusuario2934212"  HorizontalTextAlignment="Center" FontSize="17" Placeholder="Ingrese usuario" ></Entry>
+                    </Frame>
+                </StackLayout>
+
+            </ScrollView>
+            <StackLayout Orientation="Horizontal" Spacing="15" Margin="10,30,10,10">
+                <Button Text="Volver" BackgroundColor="Red"
+                            x:Name="btnVolverLogin"  TextColor="White" HorizontalOptions="FillAndExpand" CornerRadius="15"/>
+                <Button Text="Grabar" Background="Green" TextColor="White" 
+                            x:Name="btnRegistrarUsuario"
+                            CornerRadius="15"  HorizontalOptions="FillAndExpand"/>
+
+
+            </StackLayout>
+        </StackLayout>
+        <Grid  x:Name="gridcontenido"  BackgroundColor="#FAFAFA" Opacity=".8" IsVisible="False">
+            <ActivityIndicator
+               HorizontalOptions="Center"
+                IsRunning="False"
+                Color="#DF013A"
+                />
+        </Grid>
+    </Grid>
+</ContentPage>

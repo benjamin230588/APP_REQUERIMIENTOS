@@ -67,11 +67,15 @@
     </Style>
 
     <Style Class="FrameBorder" TargetType="Frame">
-        <Setter Property="HeightRequest" Value="50" />
-        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="Padding" Value="0" />
         
     </Style>
+    <Style Class="FrameBorderLogin" TargetType="Frame">
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="Padding" Value="10,5" />
 
+    </Style>
     <Style
         ApplyToDerivedTypes="True"
         Class="Margin15"

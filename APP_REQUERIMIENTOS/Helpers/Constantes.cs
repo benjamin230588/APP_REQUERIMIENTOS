@@ -15,7 +15,7 @@ namespace APP_REQUERIMIENTOS.Helpers
     
 
         public const string api_login = "/api/login/Ingreso";
-        public const string api_getcliente = "/Clientes/Index";
+        public const string api_getlistarequerimiento = "/api/Requerimiento/Lista";
         public const string api_getaveria = "/Averias/Index";
     }
 }

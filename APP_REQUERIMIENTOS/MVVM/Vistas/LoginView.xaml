@@ -27,18 +27,18 @@
        
 
         <StackLayout Orientation="Vertical" Margin="20" Spacing="15" >
-            <Image Source="login1.png" Margin="0" HeightRequest="150"></Image>
+            <Image Source="login1.png" Margin="0" HeightRequest="180" ></Image>
 
             <StackLayout HeightRequest="30"></StackLayout>
 
-            <Frame StyleClass="FrameBorder">
+            <Frame StyleClass="FrameBorderLogin">
                 <Entry x:Name="txtusuario" 
                          HorizontalTextAlignment="Center"
                          FontSize="17"
                          Placeholder="Ingrese usuario"
                          Text="{Binding usuario}" ></Entry>
             </Frame>
-            <Frame StyleClass="FrameBorder">
+            <Frame StyleClass="FrameBorderLogin">
                 <Entry x:Name="txtpasword" 
                          IsPassword="True"
                          HorizontalTextAlignment="Center"

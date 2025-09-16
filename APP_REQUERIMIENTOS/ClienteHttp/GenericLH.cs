@@ -32,14 +32,15 @@ namespace APP_REQUERIMIENTOS.ClienteHttp
             }
 
             //Retorne la data
-            public static async Task<Respuesta> GetAll<M>(string url, M obj)
+            public static async Task<Respuesta> GetAll(string url)
             {
                 HttpClient cliente = new HttpClient();
                 //var rpta = await cliente.GetAsync(url);
 
-                var cadena = JsonConvert.SerializeObject(obj);
-                var body = new StringContent(cadena, Encoding.UTF8, "application/json");
-                var rpta = await cliente.PostAsync(url, body);
+               // var cadena = JsonConvert.SerializeObject(obj);
+                //var body = new StringContent(cadena, Encoding.UTF8, "application/json");
+                //var rpta = await cliente.PostAsync(url, body);
+               var rpta = await cliente.GetAsync(url);
                 if (!rpta.IsSuccessStatusCode) return new Respuesta { codigo = 0 };
                 else
                 {
