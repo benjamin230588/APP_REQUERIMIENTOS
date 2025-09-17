@@ -29,6 +29,9 @@ namespace APP_REQUERIMIENTOS.Convertidores
                 case 4:
                     colorDevolver = Colors.Green;
                     break;
+                default:
+                    colorDevolver = Colors.Green;
+                    break;
 
             }
             return colorDevolver;

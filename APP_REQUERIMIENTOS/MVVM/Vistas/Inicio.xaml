@@ -36,6 +36,7 @@
             <Label Text="Fila 88 (Auto)" BackgroundColor="LightBlue" />
             <BoxView Grid.Row="1" Color="LightGreen" HeightRequest="4"/>
             <BoxView Grid.Row="2" Color="LightPink" HeightRequest="4"/>
+            <Button Text="dale" x:Name="btndale" Clicked="btndale_Clicked"></Button>
         </Grid>
 
        

@@ -18,17 +18,31 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
     {
         
         private bool _flgindicador;
+        private bool _flgrefresh;
         private List<RequerimientoDTO> _listarequerimiento;
-      
+        public static RequerimientoViewModel instance;
+        public static RequerimientoViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                return new RequerimientoViewModel(App.Navigate);
 
+            }
+            else return instance;
+        }
 
         public RequerimientoViewModel(INavigation navigation)
         {
+            instance = this;
             Navigation = navigation;
             MostrarLista();
         }
-       
-       
+
+        public bool flgrefresh
+        {
+            get { return _flgrefresh; }
+            set { SetValue(ref _flgrefresh, value); }
+        }
         public bool flgindicador
         {
             get { return _flgindicador; }
@@ -47,10 +61,8 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             Respuesta res;
             try
             {
-
-
                 List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
-
+                flgindicador = true;
                 res = await GenericLH.GetAll(Constantes.url + Constantes.api_getlistarequerimiento);
                 if (res.codigo == 1)
                 {
@@ -58,7 +70,30 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
                 }
                 listarequerimiento = objres;
-               
+                flgindicador = false;
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
+            }
+
+
+        }
+        public async Task MostrarListaRefrsh()
+        {
+            Respuesta res;
+            try
+            {
+                List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
+                flgrefresh = true;
+                res = await GenericLH.GetAll(Constantes.url + Constantes.api_getlistarequerimiento);
+                if (res.codigo == 1)
+                {
+                    objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
+
+                }
+                listarequerimiento = objres;
+                flgrefresh = false;
             }
             catch (Exception ex)
             {
@@ -76,7 +111,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
 
 
-                await Navigation.PushAsync(new FormRequerimientoView("Nuevo Averia"));
+                await App.Navigate.PushAsync(new FormRequerimientoView(new Requerimiento(), "Nuevo Averia"));
 
 
             }
@@ -90,9 +125,10 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         }
 
         public ICommand CrearRequerimientoComand => new Command(async () => await CrearRequerimiento());
+        public ICommand RefreshComand => new Command(async () => await MostrarListaRefrsh());
 
-      }
+    }
 
 
-    
+
 }

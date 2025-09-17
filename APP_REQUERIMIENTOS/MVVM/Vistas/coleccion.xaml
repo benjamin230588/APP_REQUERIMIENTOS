@@ -10,13 +10,14 @@
         </ResourceDictionary>
 
     </ContentPage.Resources>
-    <Grid Padding="0">
-
-        <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}" > 
+    <Grid Padding="5">
+        <RefreshView RefreshColor="Red" IsRefreshing="{Binding flgrefresh}" Command="{Binding RefreshComand}">
+        
+        <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}" SelectionMode="Single" > 
             <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="7"  >
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"  >
 
-                </GridItemsLayout>
+                </LinearItemsLayout>
 
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
@@ -60,10 +61,19 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+            
+       </RefreshView>
         <Button Grid.Row="0" Text="Nuevo" BorderColor="#2b3c3c" BorderWidth="0" FontAttributes="Bold" 
                     BackgroundColor="#FFC733"
                     TextColor="Black" HorizontalOptions="End" WidthRequest="100" CornerRadius="70"
                     HeightRequest="50" Margin="0,0,10,10" VerticalOptions="End" Command="{Binding CrearRequerimientoComand}"/>
 
+        <Grid  x:Name="gridcontenido"  BackgroundColor="#FAFAFA" Opacity=".8" IsVisible="{Binding flgindicador}">
+            <ActivityIndicator
+                    HorizontalOptions="Center"
+                    IsRunning="{Binding flgindicador}"
+                    Color="#DF013A"
+                    />
+        </Grid>
     </Grid>
 </ContentPage>

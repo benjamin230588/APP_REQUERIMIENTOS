@@ -68,7 +68,7 @@
 
     <Style Class="FrameBorder" TargetType="Frame">
         <Setter Property="HeightRequest" Value="40" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="4,0" />
         
     </Style>
     <Style Class="FrameBorderLogin" TargetType="Frame">

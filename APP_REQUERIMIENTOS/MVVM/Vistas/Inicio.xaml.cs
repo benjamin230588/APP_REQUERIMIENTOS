@@ -23,4 +23,10 @@ public partial class Inicio : ContentPage
         Application.Current.MainPage = new NavigationPage( new NotaView());
        // await Navigation.PushAsync(new NotaView());
     }
+
+    private async void btndale_Clicked(object sender, EventArgs e)
+    {
+       // await App.Navigate.PushAsync(new FormRequerimientoView("Nuevo Averia"));
+
+    }
 }

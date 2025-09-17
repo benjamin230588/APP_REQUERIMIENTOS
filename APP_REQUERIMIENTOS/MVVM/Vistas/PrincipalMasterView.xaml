@@ -15,7 +15,7 @@
 
     <!-- Contenido principal -->
     <FlyoutPage.Detail>
-        <NavigationPage>
+        <NavigationPage x:Name="Navigacion">
             <x:Arguments>
                 <pagina:PrincipalView></pagina:PrincipalView>
 

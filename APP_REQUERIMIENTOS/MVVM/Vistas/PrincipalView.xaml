@@ -7,7 +7,7 @@
              BarTextColor="Black">
 
     <TabbedPage.Children>
-        <NavigationPage Title="Agenda" IconImageSource="cliente.png">
+        <NavigationPage  Title="Agenda" IconImageSource="cliente.png">
             <x:Arguments>
                 <local:coleccion />
             </x:Arguments>
