@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.coleccion"
              xmlns:custom="clr-namespace:APP_REQUERIMIENTOS.Convertidores"
-             Title="Agenda">
+             Title="Agenda"
+             x:Name="thispage">
     <ContentPage.Resources>
         <ResourceDictionary>
             <custom:Convertcolores x:Key="StringToColorConverter"/>
@@ -13,52 +14,79 @@
     <Grid Padding="5">
         <RefreshView RefreshColor="Red" IsRefreshing="{Binding flgrefresh}" Command="{Binding RefreshComand}">
         
-        <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}" SelectionMode="Single" > 
+        <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}" 
+                        SelectionMode="Single" SelectionChanged="lstCategoria12_SelectionChanged"  SelectionChangedCommand="{Binding seleccionadoComand}"> 
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10"  >
-
-                </LinearItemsLayout>
-
-            </CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10">
+                    </LinearItemsLayout>
+                </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView>
+                    <StackLayout VerticalOptions="Center">
+                        <Image Source="gata.png"/>
+                        <Label Text="No Hay Data"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                            Text="Eliminar"
+                            BackgroundColor="Red" Invoked="SwipeItem_Invoked"
+                           />
+                                    <SwipeItem
+                            Text="Editar"
+                            BackgroundColor="Blue"
+                             />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
 
-                    <Frame BackgroundColor="#FAFAFA"  HasShadow="True" CornerRadius="10" Margin="5,0,5,10" Padding="10,10,13,10" BorderColor="#848484" IsClippedToBounds="True" >
-                        <StackLayout Orientation="Vertical"  >
-                            <Grid >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
+                            <Frame BackgroundColor="#FAFAFA"  HasShadow="True"
+                             CornerRadius="10" Margin="5,0,5,10" Padding="10,10,13,10" BorderColor="#848484" IsClippedToBounds="True" >
 
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                   
-                                </Grid.RowDefinitions>
-                                <Label Text="{Binding Titulo}" Grid.Column="0" Grid.Row="0"  TextColor="#2E64FE"   Grid.ColumnSpan="3" FontSize="18"/>
-                                <Label Text="{Binding NombreCliente}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
-                                                FontAttributes="Bold"  />
-                                <Label Text="{Binding CodigoCliente,StringFormat='N°{0}'}" Grid.Column="2" Grid.Row="1"
-                                                 FontAttributes="Bold" HorizontalTextAlignment="End" />
+                                <StackLayout Orientation="Vertical"  >
+                                    <Grid >
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
 
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
 
-                                <Label Text="{Binding FechaProgramada,StringFormat='{00:dd/MM/yyyy}'}"  Grid.Column="0" Grid.Row="3"  FontAttributes="Bold" />
-                                <Label Text="12 pm"  Grid.Column="1" Grid.Row="3" FontAttributes="Bold"/>
-                                <Frame Grid.Column="2" Grid.Row="3"  Padding="0" CornerRadius="10">
-                                    <Label Text="{Binding NommbreEstado}"  TextColor="White"  BackgroundColor="{Binding Estado,Converter={StaticResource StringToColorConverter}}"  HorizontalTextAlignment="Center"/>
-                                </Frame>
-                               
-                            </Grid>
+                                        </Grid.RowDefinitions>
+                                        <Label Text="{Binding Titulo}" Grid.Column="0" Grid.Row="0"  TextColor="#2E64FE"   Grid.ColumnSpan="3" FontSize="18"/>
+                                        <Label Text="{Binding NombreCliente}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                          FontAttributes="Bold"  />
+                                        <Label Text="{Binding CodigoCliente,StringFormat='N°{0}'}" Grid.Column="2" Grid.Row="1"
+                           FontAttributes="Bold" HorizontalTextAlignment="End" />
 
 
-                        </StackLayout>
+                                        <Label Text="{Binding FechaProgramada,StringFormat='{00:dd/MM/yyyy}'}"  Grid.Column="0" Grid.Row="3"  FontAttributes="Bold" />
+                                        <Label Text="12 pm"  Grid.Column="1" Grid.Row="3" FontAttributes="Bold"/>
+                                        <Frame Grid.Column="2" Grid.Row="3"  Padding="0" CornerRadius="10">
+                                            <Label Text="{Binding NommbreEstado}"  TextColor="White"  BackgroundColor="{Binding Estado,Converter={StaticResource StringToColorConverter}}"  HorizontalTextAlignment="Center"/>
+                                        </Frame>
+
+                                    </Grid>
+
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.IrRequerimientocommand,Source={x:Reference thispage}}"
+                                CommandParameter="{Binding .}"
+                                />
+                                </Frame.GestureRecognizers>
+                            </Frame>
+
+                        </SwipeView>
+
                       
-                    </Frame>
 
-                </DataTemplate>
+                    </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
             

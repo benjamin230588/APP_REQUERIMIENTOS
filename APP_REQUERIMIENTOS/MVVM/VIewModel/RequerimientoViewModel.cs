@@ -111,7 +111,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
 
 
-                await App.Navigate.PushAsync(new FormRequerimientoView(new Requerimiento(), "Nuevo Averia"));
+                await App.Navigate.PushAsync(new FormRequerimientoView(new RequerimientoDTO(), "Nuevo Averia"));
 
 
             }
@@ -124,8 +124,31 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         }
 
+        public async Task IrRequerimiento(RequerimientoDTO objeto)
+        {
+            //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
+            try
+            {
+
+
+
+                await App.Navigate.PushAsync(new FormRequerimientoView(objeto, "Edicion Averia"));
+
+
+            }
+            catch (Exception ex)
+            {
+                flgindicador = false;
+                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
+
+            }
+
+        }
+        public ICommand IrRequerimientocommand => new Command<RequerimientoDTO>(async (p) => await IrRequerimiento(p));
+
         public ICommand CrearRequerimientoComand => new Command(async () => await CrearRequerimiento());
         public ICommand RefreshComand => new Command(async () => await MostrarListaRefrsh());
+        public ICommand seleccionadoComand => new Command(async () => await MostrarListaRefrsh());
 
     }
 

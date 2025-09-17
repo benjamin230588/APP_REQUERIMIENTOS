@@ -4,7 +4,7 @@
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.FormRequerimientoView"
              Title="{Binding titulo}">
     <Grid>
-        <StackLayout>
+        <StackLayout x:Name="contenido" >
             <ScrollView VerticalOptions="FillAndExpand">
                 <StackLayout Margin="10,4">
 
@@ -42,10 +42,16 @@
 
             </StackLayout>
         </StackLayout>
-        <Grid  x:Name="gridcontenido"  BackgroundColor="#FAFAFA" Opacity=".8" IsVisible="False">
+        <Grid  x:Name="gridcontenido"  BackgroundColor="#FAFAFA" Opacity=".8"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+               IsVisible="{Binding flgindicador}">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Grid.GestureRecognizers>
             <ActivityIndicator
                HorizontalOptions="Center"
-                IsRunning="False"
+                IsRunning="{Binding flgindicador}"
                 Color="#DF013A"
                 />
         </Grid>

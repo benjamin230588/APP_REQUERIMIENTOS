@@ -1,5 +1,6 @@
 ﻿using APP_REQUERIMIENTOS.ClienteHttp;
 using APP_REQUERIMIENTOS.Helpers;
+using APP_REQUERIMIENTOS.Modelos;
 using APP_REQUERIMIENTOS.MVVM.Modelo;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
@@ -15,10 +16,11 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
     public class FormRequerimientoViewModel : BaseViewModel
     {
         private string _titulo;
-        private Requerimiento _objrequerimiento;
+        private RequerimientoDTO _objrequerimiento;
+        private bool _flgindicador;
 
 
-        public FormRequerimientoViewModel(INavigation navigation, Requerimiento model ,string titulo)
+        public FormRequerimientoViewModel(INavigation navigation, RequerimientoDTO model ,string titulo)
         {
             Navigation = navigation;
             this.titulo = titulo;
@@ -26,13 +28,17 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             
         }
 
-
+        public bool flgindicador
+        {
+            get { return _flgindicador; }
+            set { SetValue(ref _flgindicador, value); }
+        }
         public string titulo
         {
             get { return _titulo; }
             set { SetValue(ref _titulo, value); }
         }
-        public Requerimiento objrequerimiento
+        public RequerimientoDTO objrequerimiento
         {
             get { return _objrequerimiento; }
             set { SetValue(ref _objrequerimiento, value); }
@@ -43,14 +49,33 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
            Respuesta res;
            try
             {
-                res = await GenericLH.Post<Requerimiento>(Constantes.url + Constantes.api_getgrabarequerimiento, objrequerimiento);
-                if (res.codigo == 1)
+                flgindicador = true;
+                 await Task.Delay(10000);
+               // Thread.Sleep(10000);
+                if (objrequerimiento.Id==0)
                 {
-                    //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
-                    await RequerimientoViewModel.GetInstance().MostrarLista();
-                    await App.Navigate.PopAsync();
+                    res = await GenericLH.Post<RequerimientoDTO>(Constantes.url + Constantes.api_getgrabarequerimiento, objrequerimiento);
+                    if (res.codigo == 1)
+                    {
+                        //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
+                        await RequerimientoViewModel.GetInstance().MostrarLista();
+                        await App.Navigate.PopAsync();
 
+                    }
                 }
+                else
+                {
+                    res = await GenericLH.Put<RequerimientoDTO>(Constantes.url + Constantes.api_getmodificarequerimiento, objrequerimiento);
+                    if (res.codigo == 1)
+                    {
+                        //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
+                        await RequerimientoViewModel.GetInstance().MostrarLista();
+                        await App.Navigate.PopAsync();
+
+                    }
+                }
+                flgindicador = false;
+
             }
             catch (Exception ex)
             {

@@ -1,5 +1,6 @@
 using APP_REQUERIMIENTOS.Modelos;
 using APP_REQUERIMIENTOS.MVVM.VIewModel;
+using CommunityToolkit.Maui.Core.Views;
 
 namespace APP_REQUERIMIENTOS.MVVM.Vistas;
 
@@ -12,5 +13,14 @@ public partial class coleccion : ContentPage
 		InitializeComponent();
         BindingContext = new RequerimientoViewModel(App.Navigate);
     }
-  
+
+    private void lstCategoria12_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
+
+    private void SwipeItem_Invoked(object sender, EventArgs e)
+    {
+        DisplayAlert("Error", "Error de Conexion", "Cancelar");
+    }
 }
