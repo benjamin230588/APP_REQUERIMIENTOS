@@ -19,8 +19,8 @@ public partial class coleccion : ContentPage
 
     }
 
-    private void SwipeItem_Invoked(object sender, EventArgs e)
+    private async void SwipeItem_Invoked(object sender, EventArgs e)
     {
-        DisplayAlert("Error", "Error de Conexion", "Cancelar");
+       await DisplayAlert("Error", "Error de Conexion", "Cancelar");
     }
 }

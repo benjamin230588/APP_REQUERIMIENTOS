@@ -15,7 +15,7 @@
         <RefreshView RefreshColor="Red" IsRefreshing="{Binding flgrefresh}" Command="{Binding RefreshComand}">
         
         <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}" 
-                        SelectionMode="Single" SelectionChanged="lstCategoria12_SelectionChanged"  SelectionChangedCommand="{Binding seleccionadoComand}"> 
+                        SelectionMode="None" SelectionChanged="lstCategoria12_SelectionChanged"  SelectionChangedCommand="{Binding seleccionadoComand}"> 
             <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10">
                     </LinearItemsLayout>
@@ -42,9 +42,7 @@
                                 </SwipeItems>
                             </SwipeView.RightItems>
 
-                            <Frame BackgroundColor="#FAFAFA"  HasShadow="True"
-                             CornerRadius="10" Margin="5,0,5,10" Padding="10,10,13,10" BorderColor="#848484" IsClippedToBounds="True" >
-
+                           
                                 <StackLayout Orientation="Vertical"  >
                                     <Grid >
                                         <Grid.ColumnDefinitions>
@@ -75,12 +73,8 @@
                                     </Grid>
 
                                 </StackLayout>
-                                <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.IrRequerimientocommand,Source={x:Reference thispage}}"
-                                CommandParameter="{Binding .}"
-                                />
-                                </Frame.GestureRecognizers>
-                            </Frame>
+                               
+                            
 
                         </SwipeView>
 
