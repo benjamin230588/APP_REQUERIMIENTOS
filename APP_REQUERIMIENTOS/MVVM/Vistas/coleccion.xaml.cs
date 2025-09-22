@@ -19,8 +19,9 @@ public partial class coleccion : ContentPage
 
     }
 
-    private async void SwipeItem_Invoked(object sender, EventArgs e)
+    private async void Button_Clicked(object sender, EventArgs e)
     {
-       await DisplayAlert("Error", "Error de Conexion", "Cancelar");
+        await App.Navigate.PushAsync(new FormRequerimientoView(new RequerimientoDTO(), "Nuevo Averia"));
+
     }
 }
