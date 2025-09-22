@@ -50,7 +50,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
            try
             {
                 flgindicador = true;
-                 await Task.Delay(10000);
+                 //await Task.Delay(10000);
                // Thread.Sleep(10000);
                 if (objrequerimiento.Id==0)
                 {
@@ -84,6 +84,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
 
         }
+      
         public ICommand GuardarRequerimientoComand => new Command(async () => await GuardarRequerimiento());
 
     }

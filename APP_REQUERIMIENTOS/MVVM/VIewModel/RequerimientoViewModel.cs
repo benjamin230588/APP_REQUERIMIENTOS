@@ -124,6 +124,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         }
 
+
         public async Task IrRequerimiento(RequerimientoDTO objeto)
         {
             //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
@@ -144,11 +145,42 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
 
         }
+
+        public async Task EliminarRequerimiento(int idreq)
+        {
+
+            Respuesta res;
+            try
+            {
+                flgindicador = true;
+                //await Task.Delay(10000);
+                // Thread.Sleep(10000);
+               
+                    res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarrequerimiento + "/" + idreq );
+                    if (res.codigo == 1)
+                    {
+                        //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
+                        await RequerimientoViewModel.GetInstance().MostrarLista();
+                       // await App.Navigate.PopAsync();
+
+                    }
+                flgindicador = false;
+
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+
+        }
         public ICommand IrRequerimientocommand => new Command<RequerimientoDTO>(async (p) => await IrRequerimiento(p));
 
         public ICommand CrearRequerimientoComand => new Command(async () => await CrearRequerimiento());
         public ICommand RefreshComand => new Command(async () => await MostrarListaRefrsh());
         public ICommand seleccionadoComand => new Command(async () => await MostrarListaRefrsh());
+        public ICommand EliminarComand => new Command<int>(async (id) => await EliminarRequerimiento(id));
 
     }
 

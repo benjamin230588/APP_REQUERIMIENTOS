@@ -52,9 +52,9 @@
                            FontAttributes="Bold" HorizontalTextAlignment="End" />
 
 
-                                        <Button Text="DALE" Clicked="Button_Clicked"  Grid.Column="0" Grid.Row="3"  FontAttributes="Bold" />
-                                        <Label Text="12 pm"  Grid.Column="1" Grid.Row="3" FontAttributes="Bold"/>
-                                        <Frame Grid.Column="2" Grid.Row="3"  Padding="0" CornerRadius="10">
+                                    <ImageButton Source="ic_delete.png" HorizontalOptions="Start" HeightRequest="50" Grid.Column="0" Grid.Row="2"  Command="{Binding Path=BindingContext.EliminarComand,Source={x:Reference thispage}}" CommandParameter="{Binding Id}" />
+                                        <Label Text="12 pm"  Grid.Column="1" Grid.Row="2" FontAttributes="Bold"/>
+                                        <Frame Grid.Column="2" Grid.Row="2"  Padding="0" CornerRadius="10">
                                             <Label Text="{Binding NommbreEstado}"  TextColor="White"  BackgroundColor="{Binding Estado,Converter={StaticResource StringToColorConverter}}"  HorizontalTextAlignment="Center"/>
                                         </Frame>
 

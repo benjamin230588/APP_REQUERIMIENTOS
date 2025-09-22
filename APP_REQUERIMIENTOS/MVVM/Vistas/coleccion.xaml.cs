@@ -24,4 +24,6 @@ public partial class coleccion : ContentPage
         await App.Navigate.PushAsync(new FormRequerimientoView(new RequerimientoDTO(), "Nuevo Averia"));
 
     }
+
+    
 }
