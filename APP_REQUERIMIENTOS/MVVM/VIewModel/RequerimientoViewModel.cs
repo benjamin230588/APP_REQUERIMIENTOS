@@ -158,10 +158,10 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         // flgindicador = true;
         //await Task.Delay(10000);
         // Thread.Sleep(10000);
-             bool respuest = await Application.Current.MainPage.DisplayAlert("Confirmacion", "Desea Eliminar?", "Si", "NO");
+                bool respuest = await Application.Current.MainPage.DisplayAlert("Confirmacion", "Desea Eliminar?", "Si", "NO");
                 if (respuest == true)
                 {
-
+                    flgindicador = true;
                     res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarrequerimiento + "/" + idreq);
                     if (res.codigo == 1)
                     {

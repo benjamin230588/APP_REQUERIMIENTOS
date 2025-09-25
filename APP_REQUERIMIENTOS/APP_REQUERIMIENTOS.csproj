@@ -70,6 +70,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Alertas\alertaperson.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Vistas\coleccion.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
