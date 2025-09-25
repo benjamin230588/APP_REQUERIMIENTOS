@@ -15,7 +15,7 @@
         <RefreshView RefreshColor="Red" IsRefreshing="{Binding flgrefresh}" Command="{Binding RefreshComand}">
         
         <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}" 
-                        SelectionMode="Single" SelectionChanged="lstCategoria12_SelectionChanged"  SelectionChangedCommand="{Binding seleccionadoComand}"> 
+                        SelectionMode="None" SelectionChanged="lstCategoria12_SelectionChanged"  SelectionChangedCommand="{Binding seleccionadoComand}"> 
             <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10">
                     </LinearItemsLayout>
@@ -28,10 +28,21 @@
                 </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                   
+                                     IconImageSource="ic_delete.png"
+                                     BackgroundColor="White" 
+                                     Command="{Binding Path=BindingContext.EliminarComand, Source={x:Reference thispage }}"
+                                     CommandParameter="{Binding Id}"
+                                    />
+                                </SwipeItems>
+                            </SwipeView.RightItems>         
+                            <Border Stroke="Gray" StrokeThickness="1" StrokeShape="RoundRectangle 10" Padding="10">
 
-                        <Border Stroke="Gray" StrokeThickness="1" StrokeShape="RoundRectangle 10" Padding="10">
-
-                            <StackLayout Orientation="Vertical"  >
+                                <StackLayout Orientation="Vertical">
                                     <Grid >
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
@@ -50,27 +61,23 @@
                           FontAttributes="Bold"  />
                                         <Label Text="{Binding CodigoCliente,StringFormat='N°{0}'}" Grid.Column="2" Grid.Row="1"
                            FontAttributes="Bold" HorizontalTextAlignment="End" />
-
-
-                                    <ImageButton Source="ic_delete.png" HorizontalOptions="Start" HeightRequest="50" Grid.Column="0" Grid.Row="2"  Command="{Binding Path=BindingContext.EliminarComand,Source={x:Reference thispage}}" CommandParameter="{Binding Id}" />
-                                        <Label Text="12 pm"  Grid.Column="1" Grid.Row="2" FontAttributes="Bold"/>
-                                        <Frame Grid.Column="2" Grid.Row="2"  Padding="0" CornerRadius="10">
+                                    <Button Text="DALE"  InputTransparent="True"  Grid.Column="0" Grid.Row="3" FontAttributes="Bold" />
+                                    <Label  Text="12 pm"  Grid.Column="1" Grid.Row="2" FontAttributes="Bold"/>
+                                    <Frame InputTransparent="True" Grid.Column="2" Grid.Row="2"  Padding="0" CornerRadius="10">
                                             <Label Text="{Binding NommbreEstado}"  TextColor="White"  BackgroundColor="{Binding Estado,Converter={StaticResource StringToColorConverter}}"  HorizontalTextAlignment="Center"/>
                                         </Frame>
 
                                     </Grid>
 
                                 </StackLayout>
-
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding Path=BindingContext.IrRequerimientocommand,Source={x:Reference thispage}}"
-  CommandParameter="{Binding .}"
-  />
+                                CommandParameter="{Binding .}"
+                                />              
                             </Border.GestureRecognizers>
 
                         </Border>
-
-                      
+                      </SwipeView>
 
                     </DataTemplate>
             </CollectionView.ItemTemplate>

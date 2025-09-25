@@ -21,9 +21,12 @@ public partial class coleccion : ContentPage
 
     private async void Button_Clicked(object sender, EventArgs e)
     {
-        await App.Navigate.PushAsync(new FormRequerimientoView(new RequerimientoDTO(), "Nuevo Averia"));
-
+       // await App.Navigate.PushAsync(new FormRequerimientoView(new RequerimientoDTO(), "Nuevo Averia"));
+        await DisplayAlert("Error", "Error de Conexion", "Cancelar");
     }
 
-    
+    private async void SwipeItem_Invoked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Error", "Error de Conexion", "Cancelar");
+    }
 }

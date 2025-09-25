@@ -109,15 +109,18 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             try
             {
 
+              
+                   
+                    await App.Navigate.PushAsync(new FormRequerimientoView(new RequerimientoDTO(), "Nuevo Requerimiento"));
+                    
+                
 
-
-                await App.Navigate.PushAsync(new FormRequerimientoView(new RequerimientoDTO(), "Nuevo Averia"));
 
 
             }
             catch (Exception ex)
             {
-                flgindicador = false;
+                //flgindicador = false;
                 await DisplayAlert("Error", "Error de Conexion", "Cancelar");
 
             }
@@ -133,7 +136,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
 
 
-                await App.Navigate.PushAsync(new FormRequerimientoView(objeto, "Edicion Averia"));
+                await App.Navigate.PushAsync(new FormRequerimientoView(objeto, "Edicion Requerimiento"));
 
 
             }
@@ -152,19 +155,25 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             Respuesta res;
             try
             {
-                flgindicador = true;
-                //await Task.Delay(10000);
-                // Thread.Sleep(10000);
-               
-                    res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarrequerimiento + "/" + idreq );
+        // flgindicador = true;
+        //await Task.Delay(10000);
+        // Thread.Sleep(10000);
+             bool respuest = await Application.Current.MainPage.DisplayAlert("Confirmacion", "Desea Eliminar?", "Si", "NO");
+                if (respuest == true)
+                {
+
+                    res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarrequerimiento + "/" + idreq);
                     if (res.codigo == 1)
                     {
                         //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
                         await RequerimientoViewModel.GetInstance().MostrarLista();
-                       // await App.Navigate.PopAsync();
+                        // await App.Navigate.PopAsync();
 
                     }
-                flgindicador = false;
+                    flgindicador = false;
+
+                }
+                   
 
 
             }
