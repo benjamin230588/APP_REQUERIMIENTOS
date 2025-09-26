@@ -1,6 +1,7 @@
 ﻿using APP_REQUERIMIENTOS.Handlers;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace APP_REQUERIMIENTOS
 {
@@ -9,7 +10,7 @@ namespace APP_REQUERIMIENTOS
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
-            builder.UseMauiApp<App>().UseMauiCommunityToolkit();
+            builder.UseMauiApp<App>().UseMauiCommunityToolkit().UseSkiaSharp();
 
             builder
                 .UseMauiApp<App>()

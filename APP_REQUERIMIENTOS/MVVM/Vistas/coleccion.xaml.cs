@@ -44,14 +44,15 @@ public partial class coleccion : ContentPage
         //await toast.Show(); // ?? muestra el toast
         var popup = new alertaperson();
         var result = await this.ShowPopupAsync(popup);
-
+        
         if (result is bool confirmado && confirmado)
         {
             await DisplayAlert("Resultado", "Has confirmado con SÍ", "OK");
         }
+        /*
         else
         {
             await DisplayAlert("Resultado", "Has elegido NO", "OK");
-        }
+        }*/
     }
 }

@@ -23,7 +23,7 @@
                 <CollectionView.EmptyView>
                     <StackLayout VerticalOptions="Center">
                         <Image Source="gata.png"/>
-                        <Label Text="No Hay Data"/>
+                        <Label Text="Ningun Registro Ingresado"/>
                     </StackLayout>
                 </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>

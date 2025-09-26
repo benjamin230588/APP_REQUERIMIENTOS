@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.ANIMACION"
+             xmlns:lotie="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+             Title="ANIMACION">
+    <Grid>
+        <lotie:SKLottieView x:Name="biciAnim" Source="bici.json"
+                            RepeatMode="Restart"
+                            RepeatCount="1"
+                           >
+            
+            
+        </lotie:SKLottieView>
+    </Grid>
+</ContentPage>
