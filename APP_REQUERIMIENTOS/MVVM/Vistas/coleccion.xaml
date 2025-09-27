@@ -14,7 +14,7 @@
     <Grid Padding="5">
         
         <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}" 
-                        SelectionMode="None"  RemainingItemsThreshold="2" RemainingItemsThresholdReachedCommand="{Binding RefreshComand}"> 
+                        SelectionMode="None"  RemainingItemsThreshold="1" RemainingItemsThresholdReachedCommand="{Binding RefreshComand}"> 
             <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10">
                     </LinearItemsLayout>
@@ -22,7 +22,7 @@
                 <CollectionView.EmptyView>
                     <StackLayout VerticalOptions="Center">
                         
-                        <Label Text="Ningun Registro Ingresado"/>
+                        <Label Text="Ningun Registro Ingresado" HorizontalTextAlignment="Center"/>
                     </StackLayout>
                 </CollectionView.EmptyView>
             <CollectionView.ItemTemplate>

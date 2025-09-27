@@ -77,7 +77,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 // listarequerimiento = objres;
                 for (int i = 0; i < objres.lista.Count; i++)
                 {
-                    listarequerimiento.Add(objres.lista[i]);
+                    bool valida = listarequerimiento.Where(x => x.Id == objres.lista[i].Id).Any();
+                    if (!valida)
+                    {
+                        listarequerimiento.Add(objres.lista[i]);
+                    }
+                        
                 }
                 flgindicador = false;
             }
@@ -90,7 +95,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         }
         public async Task MostrarListaRefrsh()
         {
-            await MostrarLista(listarequerimiento.Count());
+            await MostrarLista(listarequerimiento.Count);
 
         }
 
