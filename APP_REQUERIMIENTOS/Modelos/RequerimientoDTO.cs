@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,5 +21,17 @@ namespace APP_REQUERIMIENTOS.Modelos
 
         public string NombreCliente { get; set; }
         public string CodigoCliente { get; set; }
+    }
+
+    public class ResulLista<T>
+    {
+        public int cantidadregistro { get; set; }
+        public ObservableCollection<T> lista { get; set; }
+    }
+    public class Paginacion
+    {
+        public int pagine { get; set; }
+
+        public int skip { get; set; }
     }
 }

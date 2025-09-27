@@ -7,6 +7,7 @@ using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         
         private bool _flgindicador;
         private bool _flgrefresh;
-        private List<RequerimientoDTO> _listarequerimiento;
+        private ObservableCollection<RequerimientoDTO> _listarequerimiento;
         public static RequerimientoViewModel instance;
         public static RequerimientoViewModel GetInstance()
         {
@@ -35,6 +36,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         {
             instance = this;
             Navigation = navigation;
+            listarequerimiento = new ObservableCollection<RequerimientoDTO>();
             MostrarLista();
         }
 
@@ -49,27 +51,34 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             set { SetValue(ref _flgindicador, value); }
         }
 
-        public  List<RequerimientoDTO> listarequerimiento
+        public ObservableCollection<RequerimientoDTO> listarequerimiento
         {
             get { return _listarequerimiento; }
             set { SetValue(ref _listarequerimiento, value); }
         }
        
 
-        public async Task MostrarLista()
+        public async Task MostrarLista(int skip=0)
         {
             Respuesta res;
             try
             {
-                List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
+                var objeto = new Paginacion { pagine = 10, skip = skip};
+                ResulLista<RequerimientoDTO> objres = new ResulLista<RequerimientoDTO>();
+
+                //List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
                 flgindicador = true;
-                res = await GenericLH.GetAll(Constantes.url + Constantes.api_getlistarequerimiento);
+                res = await GenericLH.GetAll<Paginacion>(Constantes.url + Constantes.api_getlistarequerimiento,objeto);
                 if (res.codigo == 1)
                 {
-                    objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
+                    objres = JsonConvert.DeserializeObject<ResulLista<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
 
                 }
-                listarequerimiento = objres;
+                // listarequerimiento = objres;
+                for (int i = 0; i < objres.lista.Count; i++)
+                {
+                    listarequerimiento.Add(objres.lista[i]);
+                }
                 flgindicador = false;
             }
             catch (Exception ex)
@@ -81,25 +90,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         }
         public async Task MostrarListaRefrsh()
         {
-            Respuesta res;
-            try
-            {
-                List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
-                flgrefresh = true;
-                res = await GenericLH.GetAll(Constantes.url + Constantes.api_getlistarequerimiento);
-                if (res.codigo == 1)
-                {
-                    objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
-
-                }
-                listarequerimiento = objres;
-                flgrefresh = false;
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
-            }
-
+            await MostrarLista(listarequerimiento.Count());
 
         }
 
@@ -188,7 +179,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         public ICommand CrearRequerimientoComand => new Command(async () => await CrearRequerimiento());
         public ICommand RefreshComand => new Command(async () => await MostrarListaRefrsh());
-        public ICommand seleccionadoComand => new Command(async () => await MostrarListaRefrsh());
+        //public ICommand seleccionadoComand => new Command(async () => await MostrarListaRefrsh());
         public ICommand EliminarComand => new Command<int>(async (id) => await EliminarRequerimiento(id));
 
     }

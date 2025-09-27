@@ -30,6 +30,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             usuario = "admin";
             pasword = "123456";
         }
+
         public Microsoft.Maui.Graphics.Color colorSwitch
         {
             get { return _colorSwitch; }

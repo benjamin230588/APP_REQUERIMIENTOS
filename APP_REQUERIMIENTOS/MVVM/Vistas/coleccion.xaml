@@ -12,17 +12,16 @@
 
     </ContentPage.Resources>
     <Grid Padding="5">
-        <RefreshView RefreshColor="Red" IsRefreshing="{Binding flgrefresh}" Command="{Binding RefreshComand}">
         
         <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}" 
-                        SelectionMode="None" SelectionChanged="lstCategoria12_SelectionChanged"  SelectionChangedCommand="{Binding seleccionadoComand}"> 
+                        SelectionMode="None"  RemainingItemsThreshold="2" RemainingItemsThresholdReachedCommand="{Binding RefreshComand}"> 
             <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="10">
                     </LinearItemsLayout>
                 </CollectionView.ItemsLayout>
                 <CollectionView.EmptyView>
                     <StackLayout VerticalOptions="Center">
-                        <Image Source="gata.png"/>
+                        
                         <Label Text="Ningun Registro Ingresado"/>
                     </StackLayout>
                 </CollectionView.EmptyView>
@@ -61,9 +60,9 @@
                           FontAttributes="Bold"  />
                                         <Label Text="{Binding CodigoCliente,StringFormat='N°{0}'}" Grid.Column="2" Grid.Row="1"
                            FontAttributes="Bold" HorizontalTextAlignment="End" />
-                                    <Button Text="DALE"  Clicked="Button_Clicked_1" Grid.Column="0" Grid.Row="3" FontAttributes="Bold" />
-                                    <Label  Text="12 pm"  Grid.Column="1" Grid.Row="2" FontAttributes="Bold"/>
-                                    <Frame InputTransparent="True" Grid.Column="2" Grid.Row="2"  Padding="0" CornerRadius="10">
+                                        <Label Text="{Binding FechaProgramada,StringFormat='{00:dd/MM/yyyy}'}"  Grid.Column="0" Grid.Row="2"  FontAttributes="Bold" />
+                                        <Label  Text="12 pm"  Grid.Column="1" Grid.Row="2" FontAttributes="Bold"/>
+                                        <Frame InputTransparent="True" Grid.Column="2" Grid.Row="2"  Padding="0" CornerRadius="10">
                                             <Label Text="{Binding NommbreEstado}"  TextColor="White"  BackgroundColor="{Binding Estado,Converter={StaticResource StringToColorConverter}}"  HorizontalTextAlignment="Center"/>
                                         </Frame>
 
@@ -83,7 +82,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
             
-       </RefreshView>
+     
         <Button Grid.Row="0" Text="Nuevo" BorderColor="#2b3c3c" BorderWidth="0" FontAttributes="Bold" 
                     BackgroundColor="#FFC733"
                     TextColor="Black" HorizontalOptions="End" WidthRequest="100" CornerRadius="70"
