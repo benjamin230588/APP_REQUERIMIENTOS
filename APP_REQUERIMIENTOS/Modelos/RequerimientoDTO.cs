@@ -34,4 +34,9 @@ namespace APP_REQUERIMIENTOS.Modelos
 
         public int skip { get; set; }
     }
+    public class ParametrosNavegacion
+    {
+        public int? Id { get; set; }
+        public Page Page { get; set; }
+    }
 }

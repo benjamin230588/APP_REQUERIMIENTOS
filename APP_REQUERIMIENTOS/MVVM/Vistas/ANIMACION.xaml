@@ -6,8 +6,8 @@
              Title="ANIMACION">
     <Grid>
         <lotie:SKLottieView x:Name="biciAnim" Source="bici.json"
-                            RepeatMode="Restart"
-                            RepeatCount="1"
+                            RepeatMode="Reverse"
+                            RepeatCount="50"
                            >
             
             

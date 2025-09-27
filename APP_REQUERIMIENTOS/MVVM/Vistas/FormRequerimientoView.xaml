@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.FormRequerimientoView"
+              x:Name="thispage"
              Title="{Binding titulo}">
     <Grid>
         <StackLayout x:Name="contenido" >
@@ -37,6 +38,7 @@
                             x:Name="btnVolverLogin"  TextColor="White" HorizontalOptions="FillAndExpand" CornerRadius="15"/>
                 <Button Text="Grabar" Background="Green" TextColor="White" 
                             x:Name="btnRegistrarUsuario" Command="{Binding GuardarRequerimientoComand}"
+                            CommandParameter="{x:Reference Name=thispage}"
                             CornerRadius="15"  HorizontalOptions="FillAndExpand"/>
 
 

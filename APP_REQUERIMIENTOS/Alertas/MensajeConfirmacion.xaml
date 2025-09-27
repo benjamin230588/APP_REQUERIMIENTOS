@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="APP_REQUERIMIENTOS.Alertas.MensajeConfirmacion"
+    xmlns:lotie="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+    CanBeDismissedByTappingOutsideOfPopup="False"
+    >
+
+    <Grid BackgroundColor="#80000000"
+          VerticalOptions="FillAndExpand"
+          HorizontalOptions="FillAndExpand">
+
+        <!-- Contenedor del popup -->
+        <Frame x:Name="PopupFrame"
+               BackgroundColor="White"
+             
+               CornerRadius="16"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               HasShadow="True"
+               Opacity="0"
+               Scale="0.7">
+
+            <VerticalStackLayout Spacing="16" Padding="20" VerticalOptions="Center">
+
+                <lotie:SKLottieView Source="exito23.json"
+                     RepeatMode="Restart"
+                     RepeatCount="50"
+                     WidthRequest="200"
+                     HeightRequest="200"
+                                    />
+
+                <Label Text="Registro guardado con éxito"
+                       FontSize="18"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+                <Button Text="OK"
+                        WidthRequest="150"
+                        HeightRequest="48"
+                        Clicked="OnOkClicked"/>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</toolkit:Popup>

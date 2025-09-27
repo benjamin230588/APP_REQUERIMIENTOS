@@ -1,7 +1,9 @@
-﻿using APP_REQUERIMIENTOS.ClienteHttp;
+﻿using APP_REQUERIMIENTOS.Alertas;
+using APP_REQUERIMIENTOS.ClienteHttp;
 using APP_REQUERIMIENTOS.Helpers;
 using APP_REQUERIMIENTOS.Modelos;
 using APP_REQUERIMIENTOS.MVVM.Modelo;
+using CommunityToolkit.Maui.Views;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
@@ -43,7 +45,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             get { return _objrequerimiento; }
             set { SetValue(ref _objrequerimiento, value); }
         }
-        public async Task GuardarRequerimiento()
+        public async Task GuardarRequerimiento(Page page)
         {
             
            Respuesta res;
@@ -58,6 +60,9 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                     if (res.codigo == 1)
                     {
                         //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
+                        var popup = new MensajeConfirmacion();
+                        var result = await page.ShowPopupAsync(popup);
+
                         await RequerimientoViewModel.GetInstance().MostrarLista();
                         await App.Navigate.PopAsync();
 
@@ -69,6 +74,8 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                     if (res.codigo == 1)
                     {
                         //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
+                        var popup = new MensajeConfirmacion();
+                        var result = await page.ShowPopupAsync(popup);
                         await RequerimientoViewModel.GetInstance().MostrarLista();
                         await App.Navigate.PopAsync();
 
@@ -85,7 +92,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         }
       
-        public ICommand GuardarRequerimientoComand => new Command(async () => await GuardarRequerimiento());
+        public ICommand GuardarRequerimientoComand => new Command<Page>(async (p) => await GuardarRequerimiento(p));
 
     }
 }

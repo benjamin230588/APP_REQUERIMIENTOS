@@ -1,8 +1,10 @@
-﻿using APP_REQUERIMIENTOS.ClienteHttp;
+﻿using APP_REQUERIMIENTOS.Alertas;
+using APP_REQUERIMIENTOS.ClienteHttp;
 using APP_REQUERIMIENTOS.Helpers;
 using APP_REQUERIMIENTOS.Modelos;
 using APP_REQUERIMIENTOS.MVVM.Modelo;
 using APP_REQUERIMIENTOS.MVVM.Vistas;
+using CommunityToolkit.Maui.Views;
 using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
@@ -58,12 +60,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         }
        
 
-        public async Task MostrarLista(int skip=0)
+        public async Task MostrarLista(int skip=0,int tipo=0)
         {
             Respuesta res;
             try
             {
-                var objeto = new Paginacion { pagine = 10, skip = skip};
+                var objeto = new Paginacion { pagine = 20, skip = skip};
                 ResulLista<RequerimientoDTO> objres = new ResulLista<RequerimientoDTO>();
 
                 //List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
@@ -75,6 +77,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
                 }
                 // listarequerimiento = objres;
+                if (tipo == 0)
+                {
+                    listarequerimiento.Clear();
+                    flgrefresh = false;
+                }
+                
                 for (int i = 0; i < objres.lista.Count; i++)
                 {
                     bool valida = listarequerimiento.Where(x => x.Id == objres.lista[i].Id).Any();
@@ -88,6 +96,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
             catch (Exception ex)
             {
+                flgindicador = false;
                 await DisplayAlert("Error", "Error de Conexion", "Cancelar");
             }
 
@@ -95,7 +104,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         }
         public async Task MostrarListaRefrsh()
         {
-            await MostrarLista(listarequerimiento.Count);
+            await MostrarLista(listarequerimiento.Count,1);
 
         }
 
@@ -145,20 +154,25 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         }
 
-        public async Task EliminarRequerimiento(int idreq)
+        public async Task EliminarRequerimiento(ParametrosNavegacion objeto)
         {
 
             Respuesta res;
             try
             {
-        // flgindicador = true;
-        //await Task.Delay(10000);
-        // Thread.Sleep(10000);
-                bool respuest = await Application.Current.MainPage.DisplayAlert("Confirmacion", "Desea Eliminar?", "Si", "NO");
-                if (respuest == true)
+                // flgindicador = true;
+                //await Task.Delay(10000);
+                // Thread.Sleep(10000);
+
+                var popup = new MensajeConfirmacion();
+                var respuest = await objeto.Page.ShowPopupAsync(popup);
+               // bool respuest = await Application.Current.MainPage.DisplayAlert("Confirmacion", "Desea Eliminar?", "Si", "NO");
+                if (respuest is bool confirmado && confirmado)
                 {
                     flgindicador = true;
-                    res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarrequerimiento + "/" + idreq);
+
+
+                    res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarrequerimiento + "/" + objeto.Id);
                     if (res.codigo == 1)
                     {
                         //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
@@ -183,9 +197,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         public ICommand IrRequerimientocommand => new Command<RequerimientoDTO>(async (p) => await IrRequerimiento(p));
 
         public ICommand CrearRequerimientoComand => new Command(async () => await CrearRequerimiento());
-        public ICommand RefreshComand => new Command(async () => await MostrarListaRefrsh());
+        public ICommand RefreshComand => new Command(async () => await MostrarLista());
+        public ICommand RefreshIncrementComand => new Command(async () => await MostrarListaRefrsh());
+
+        
         //public ICommand seleccionadoComand => new Command(async () => await MostrarListaRefrsh());
-        public ICommand EliminarComand => new Command<int>(async (id) => await EliminarRequerimiento(id));
+        public ICommand EliminarComand => new Command<ParametrosNavegacion>(async (p) => await EliminarRequerimiento(p));
 
     }
 

@@ -74,6 +74,12 @@
 	  <MauiXaml Update="Alertas\alertaperson.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Alertas\MensajeConfirmacion.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Alertas\MensajeDelete.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Vistas\ANIMACION.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
