@@ -24,9 +24,12 @@ public partial class Inicio : ContentPage
        // await Navigation.PushAsync(new NotaView());
     }
 
-    private async void btndale_Clicked(object sender, EventArgs e)
+    private  void btndale_Clicked(object sender, EventArgs e)
     {
-       // await App.Navigate.PushAsync(new FormRequerimientoView("Nuevo Averia"));
+
+        DisplayAlert("titulo", "Mensaje de hoy", "cancel");
+        string cadena = "delia";
+
 
     }
 }

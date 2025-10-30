@@ -39,7 +39,10 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             instance = this;
             Navigation = navigation;
             listarequerimiento = new ObservableCollection<RequerimientoDTO>();
-            MostrarLista();
+            Task.Run(async () => await MostrarLista());
+
+
+           
         }
 
         public bool flgrefresh
@@ -114,13 +117,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             try
             {
 
-              
-                   
-                    await App.Navigate.PushAsync(new FormRequerimientoView(new RequerimientoDTO(), "Nuevo Requerimiento"));
-                    
-                
-
-
+                    await App.Navigate.PushAsync(new FormRequerimientoView(new RequerimientoDTO(), "Nuevo Requerimiento"));                    
 
             }
             catch (Exception ex)
@@ -147,14 +144,14 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
             catch (Exception ex)
             {
-                flgindicador = false;
+                //flgindicador = false;
                 await DisplayAlert("Error", "Error de Conexion", "Cancelar");
 
             }
 
         }
 
-        public async Task EliminarRequerimiento(ParametrosNavegacion objeto)
+        public async Task EliminarRequerimiento(int id)
         {
 
             Respuesta res;
@@ -163,18 +160,21 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 // flgindicador = true;
                 //await Task.Delay(10000);
                 // Thread.Sleep(10000);
-
-                var popup = new MensajeConfirmacion();
-                var respuest = await objeto.Page.ShowPopupAsync(popup);
-               // bool respuest = await Application.Current.MainPage.DisplayAlert("Confirmacion", "Desea Eliminar?", "Si", "NO");
+                var popup23 = new MensajeDelete();
+                //page.ShowPopupAsync(popup);
+                var respuest = await Application.Current.MainPage.ShowPopupAsync(popup23);
+                //var popup = new MensajeConfirmacion();
+                // var respuest = await objeto.Page.ShowPopupAsync(popup);
+                // bool respuest = await Application.Current.MainPage.DisplayAlert("Confirmacion", "Desea Eliminar?", "Si", "NO");
                 if (respuest is bool confirmado && confirmado)
                 {
                     flgindicador = true;
 
 
-                    res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarrequerimiento + "/" + objeto.Id);
+                    res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarrequerimiento + "/" + id);
                     if (res.codigo == 1)
                     {
+                        
                         //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
                         await RequerimientoViewModel.GetInstance().MostrarLista();
                         // await App.Navigate.PopAsync();
@@ -190,6 +190,8 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             catch (Exception ex)
             {
 
+                flgindicador = false;
+                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
 
             }
 
@@ -202,7 +204,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         
         //public ICommand seleccionadoComand => new Command(async () => await MostrarListaRefrsh());
-        public ICommand EliminarComand => new Command<ParametrosNavegacion>(async (p) => await EliminarRequerimiento(p));
+        public ICommand EliminarComand => new Command<int>(async (p) => await EliminarRequerimiento(p));
 
     }
 

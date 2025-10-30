@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.ANIMACION"
              xmlns:lotie="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
-             Title="ANIMACION">
+             Title="ANIMACION"
+             NavigationPage.HasNavigationBar="False">
     <Grid>
         <lotie:SKLottieView x:Name="biciAnim" Source="bici.json"
                             RepeatMode="Reverse"

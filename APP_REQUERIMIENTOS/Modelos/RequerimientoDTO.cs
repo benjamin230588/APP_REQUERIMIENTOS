@@ -21,6 +21,11 @@ namespace APP_REQUERIMIENTOS.Modelos
 
         public string NombreCliente { get; set; }
         public string CodigoCliente { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 
     public class ResulLista<T>

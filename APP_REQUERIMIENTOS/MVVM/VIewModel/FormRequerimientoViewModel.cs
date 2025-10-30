@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 {
@@ -26,7 +27,8 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         {
             Navigation = navigation;
             this.titulo = titulo;
-            objrequerimiento = model;
+            objrequerimiento = (RequerimientoDTO)model.Clone();
+           
             
         }
 
@@ -86,13 +88,19 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
             catch (Exception ex)
             {
-               
+                flgindicador = false;
+                await Application.Current.MainPage.DisplayAlert("Error", "Error de Conexion", "Cancelar");
 
             }
 
         }
-      
+        public async Task VolverRequerimiento()
+        {
+            await App.Navigate.PopAsync();
+        }
+
         public ICommand GuardarRequerimientoComand => new Command<Page>(async (p) => await GuardarRequerimiento(p));
+        public ICommand VolverRequerimientocommand => new Command(async () => await VolverRequerimiento());
 
     }
 }

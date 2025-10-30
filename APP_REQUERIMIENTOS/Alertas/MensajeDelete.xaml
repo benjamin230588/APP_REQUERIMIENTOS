@@ -25,28 +25,31 @@
 
             <VerticalStackLayout Spacing="16" Padding="20" VerticalOptions="Center">
 
-                <lotie:SKLottieView Source="exito23.json"
+                <lotie:SKLottieView Source="delete23.json"
                      RepeatMode="Restart"
                      RepeatCount="50"
-                     WidthRequest="200"
-                     HeightRequest="200"
+                     WidthRequest="100"
+                     HeightRequest="100"
                                     />
+                <StackLayout></StackLayout>
 
                 <Label Text="Seguro de Emiminar?"
                        FontSize="18"
                        HorizontalOptions="Center"
                        TextColor="Black"/>
-                <StackLayout Orientation="Horizontal"> 
+                <StackLayout Orientation="Horizontal" Spacing="15" HorizontalOptions="CenterAndExpand"> 
                 <Button Text="NO"
-                        WidthRequest="150"
-                        HeightRequest="48"
+                        WidthRequest="70"
+                        BackgroundColor="Red"
                         Clicked="OnOkClickedNO"/>
 
                 <Button Text="SI"
-                        WidthRequest="150"
-                        HeightRequest="48"
+                        BackgroundColor="Blue"
+                        WidthRequest="70"
+                       
                         Clicked="OnOkClickedSI"/>
                 </StackLayout>
+                <StackLayout></StackLayout>
             </VerticalStackLayout>
         </Frame>
     </Grid>

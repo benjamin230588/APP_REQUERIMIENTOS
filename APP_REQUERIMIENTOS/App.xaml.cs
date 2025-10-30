@@ -9,7 +9,12 @@ namespace APP_REQUERIMIENTOS
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new LoginView());
+            MainPage = new HILOSECUNDARIO();
+                //new NavigationPage(new LoginView());
+        //    {
+        //BarTextColor = Colors.White        // Texto + íconos (incluye los 3 puntos)
+        //    };
+           
             //new NavigationPage(new LoginView());
             // MainPage = new LoginView();
             //MainPage = new Pagetabe();

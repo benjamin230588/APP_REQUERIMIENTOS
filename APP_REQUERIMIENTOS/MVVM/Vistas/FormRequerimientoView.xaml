@@ -34,7 +34,7 @@
 
             </ScrollView>
             <StackLayout Orientation="Horizontal" Spacing="15" Margin="10,30,10,10">
-                <Button Text="Volver" BackgroundColor="Red"
+                <Button Text="Volver" BackgroundColor="Red" Command="{Binding VolverRequerimientocommand}"
                             x:Name="btnVolverLogin"  TextColor="White" HorizontalOptions="FillAndExpand" CornerRadius="15"/>
                 <Button Text="Grabar" Background="Green" TextColor="White" 
                             x:Name="btnRegistrarUsuario" Command="{Binding GuardarRequerimientoComand}"

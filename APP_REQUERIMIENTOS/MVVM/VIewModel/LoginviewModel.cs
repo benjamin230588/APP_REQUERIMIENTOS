@@ -86,9 +86,9 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             {
                 flgindicador = false;
                 await DisplayAlert("Error", "Error de Conexion", "Cancelar");
-
+                
             }
-           
+
         }
         public void changeColorSwitch()
         {

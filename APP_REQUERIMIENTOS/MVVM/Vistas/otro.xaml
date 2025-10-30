@@ -9,6 +9,8 @@
             <BoxView Color="LightBlue" HeightRequest="400"/>
             <BoxView Color="LightGreen" HeightRequest="400"/>
             <BoxView Color="LightPink" HeightRequest="400"/>
-        </StackLayout>
+            <Entry x:Name="txtotro"></Entry>
+            <Button Text="dale" Clicked="Button_Clicked" ></Button>
+        </StackLayout>  
  
 </ContentPage>

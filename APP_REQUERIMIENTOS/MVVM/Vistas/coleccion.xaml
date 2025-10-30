@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.coleccion"
              xmlns:custom="clr-namespace:APP_REQUERIMIENTOS.Convertidores"
-             xmlns:local="clr-namespace:APP_REQUERIMIENTOS.Modelos"
+            
              Title="Agenda"
              x:Name="thispage">
     <ContentPage.Resources>
@@ -12,6 +12,29 @@
         </ResourceDictionary>
 
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Guardar"
+                     IconImageSource="ic_add.png"
+                     Order="Primary"
+                     Priority="0" 
+                     Command="{Binding CrearRequerimientoComand}"/>
+        
+
+
+        <ToolbarItem Text="Nuevo"
+                     IconImageSource="ic_delete.png"
+                     Order="Secondary"
+                     Priority="1"
+                     Command="{Binding CrearRequerimientoComand}" />
+        <ToolbarItem Text="Edicion"
+                 IconImageSource="ic_delete.png"
+                 Order="Secondary"
+                 Priority="1"/>
+        <ToolbarItem Text="Estado"
+                 IconImageSource="ic_delete.png"
+                 Order="Secondary"
+                 Priority="1"/>
+    </ContentPage.ToolbarItems>
     <Grid Padding="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -27,23 +50,26 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="10">
                         </LinearItemsLayout>
                     </CollectionView.ItemsLayout>
-                    
-                    <CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <StackLayout VerticalOptions="Center">
+
+                        <Label Text="Ningun Registro Ingresado" HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <SwipeView>
                                 <SwipeView.RightItems>
-                                    <SwipeItems>
-                                        <SwipeItem
-                                  IconImageSource="ic_delete.png"
-                                  BackgroundColor="White" 
-                                  Command="{Binding Path=BindingContext.EliminarComand, Source={x:Reference thispage }}" >
-                                        <SwipeItem.CommandParameter>
-                                            <local:ParametrosNavegacion  Id="{Binding Id}" Page="{x:Reference thispage}" />
-                                        </SwipeItem.CommandParameter>
-
-                                    </SwipeItem>
-                                    </SwipeItems>
-                                </SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                         IconImageSource="ic_delete.png"
+                                         BackgroundColor="White" 
+                                         Command="{Binding Path=BindingContext.EliminarComand, Source={x:Reference thispage }}"
+                                         CommandParameter="{Binding Id}"
+                                        />  
+                                </SwipeItems>
+                            </SwipeView.RightItems>
                                 <Frame BackgroundColor="#FAFAFA"  HasShadow="True"
                         CornerRadius="10" Margin="5,0,5,10" Padding="10,10,13,10" BorderColor="#848484" IsClippedToBounds="True" >
 

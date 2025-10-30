@@ -18,7 +18,9 @@ public partial class coleccion : ContentPage
         BindingContext = new RequerimientoViewModel(App.Navigate);
     }
 
-    
+  
+
+
 
     //private async void Button_Clicked(object sender, EventArgs e)
     //{
@@ -41,7 +43,7 @@ public partial class coleccion : ContentPage
     //    //await toast.Show(); // ?? muestra el toast
     //    var popup = new alertaperson();
     //    var result = await this.ShowPopupAsync(popup);
-        
+
     //    if (result is bool confirmado && confirmado)
     //    {
     //        await DisplayAlert("Resultado", "Has confirmado con SÍ", "OK");
