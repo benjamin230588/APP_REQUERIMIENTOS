@@ -68,7 +68,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             Respuesta res;
             try
             {
-                var objeto = new Paginacion { pagine = 20, skip = skip};
+                var objeto = new Paginacion { pagine = 40, skip = skip};
                 ResulLista<RequerimientoDTO> objres = new ResulLista<RequerimientoDTO>();
 
                 //List<RequerimientoDTO> objres = new List<RequerimientoDTO>();

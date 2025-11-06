@@ -42,15 +42,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <RefreshView RefreshColor="Red" IsRefreshing="{Binding flgrefresh}" Command="{Binding RefreshComand}">
-           
-                <CollectionView Margin="5"  x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}"
-                        SelectionMode="None"  RemainingItemsThreshold="1" RemainingItemsThresholdReachedCommand="{Binding RefreshIncrementComand}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="10">
-                        </LinearItemsLayout>
-                    </CollectionView.ItemsLayout>
-                <CollectionView.EmptyView>
+        <CollectionView x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}"
+                        SelectionMode="None" ItemsLayout="VerticalList" >
+            
+            <CollectionView.EmptyView>
                     <StackLayout VerticalOptions="Center">
 
                         <Label Text="Ningun Registro Ingresado" HorizontalTextAlignment="Center"/>
@@ -114,7 +109,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
            
-        </RefreshView>
+       
 
         <Button Grid.Row="0" Text="Nuevo" BorderColor="#2b3c3c" BorderWidth="0" FontAttributes="Bold" 
                     BackgroundColor="#FFC733"

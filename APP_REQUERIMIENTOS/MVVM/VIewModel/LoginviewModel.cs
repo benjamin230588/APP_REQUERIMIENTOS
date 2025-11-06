@@ -71,6 +71,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 if (res.codigo == 1)
                 {
                     //await Navigation.PushAsync(new PrincipalView());
+                    //Application.Current.MainPage = new PrincipalView();
                     Application.Current.MainPage = new PrincipalMasterView();
                 }
                 else
