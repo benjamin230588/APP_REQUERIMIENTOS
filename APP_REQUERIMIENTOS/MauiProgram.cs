@@ -74,7 +74,7 @@ namespace APP_REQUERIMIENTOS
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
-           //FormHandler.RemoveBorders();
+           FormHandler.RemoveBorders();
             //handlers.AddHandler<NoSwipeTabbedPage, Platforms.Android.NoSwipeTabbedPageHandler>();
             return builder.Build();
         }

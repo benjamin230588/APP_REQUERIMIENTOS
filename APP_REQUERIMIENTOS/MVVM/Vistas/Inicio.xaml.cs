@@ -1,11 +1,18 @@
+using APP_REQUERIMIENTOS.MVVM.Modelo;
+
 namespace APP_REQUERIMIENTOS.MVVM.Vistas;
 
 public partial class Inicio : ContentPage
 {
-	public Inicio()
+    public Login listamenu { get; set; }
+    public Inicio()
 	{
 		InitializeComponent();
-	}
+        listamenu = new Login();
+        BindingContext = this;
+        //listamenu.usuario = "GABY";
+        listamenu = new Login { usuario = "LUNA", pasword = "EEE" };
+    }
 
     private  void Button_Clicked(object sender, EventArgs e)
     {
@@ -26,9 +33,10 @@ public partial class Inicio : ContentPage
 
     private  void btndale_Clicked(object sender, EventArgs e)
     {
-
-        DisplayAlert("titulo", "Mensaje de hoy", "cancel");
-        string cadena = "delia";
+         listamenu = new Login { usuario = "FIORELLA", pasword = "EEE" };
+        //BindingContext = otro;
+        //DisplayAlert("titulo", "Mensaje de hoy", "cancel");
+        //string cadena = "delia";
 
 
     }

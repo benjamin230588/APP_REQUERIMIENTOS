@@ -33,10 +33,10 @@
                 <RowDefinition  />
             </Grid.RowDefinitions>
 
-            <Label Text="Fila 88 (Auto)" BackgroundColor="LightBlue" />
-            <BoxView Grid.Row="1" Color="LightGreen" HeightRequest="4"/>
-            <BoxView Grid.Row="2" Color="LightPink" HeightRequest="4"/>
-            <Button Text="dale" x:Name="btndale" Clicked="btndale_Clicked"></Button>
+
+
+            <Button Text="dale222" x:Name="btndale" Clicked="btndale_Clicked" Grid.Column="0" Grid.Row="1"></Button>
+            <Label Text="{Binding listamenu.usuario}" Grid.Column="0" Grid.Row="2" />
         </Grid>
 
        

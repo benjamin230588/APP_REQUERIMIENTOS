@@ -5,12 +5,7 @@
              xmlns:pagina="clr-namespace:APP_REQUERIMIENTOS.MVVM.Vistas"
              Title="PrincipalMasterView">
     <FlyoutPage.Flyout>
-        <ContentPage Title="Menú" BackgroundColor="LightGray">
-            <StackLayout Padding="20">
-                <Label Text="Menú principal" FontSize="24"/>
-               
-            </StackLayout>
-        </ContentPage>
+        <pagina:MenuView></pagina:MenuView>
     </FlyoutPage.Flyout>
 
     <!-- Contenido principal -->
