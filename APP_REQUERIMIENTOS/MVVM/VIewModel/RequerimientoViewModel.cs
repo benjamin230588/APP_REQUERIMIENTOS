@@ -151,7 +151,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         }
 
-        public async Task EliminarRequerimiento(int id)
+        public async Task EliminarRequerimiento(int id=0)
         {
 
             Respuesta res;

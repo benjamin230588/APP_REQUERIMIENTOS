@@ -48,14 +48,15 @@
                 <DataTemplate>
                     <SwipeView>
                         <SwipeView.RightItems>
-                            <SwipeItems >
-                                
-
-                                <SwipeItemView BackgroundColor="Transparent">
-                                    <Grid Padding="10">
-                                        <Image Source="gata.png" WidthRequest="30" HeightRequest="30" Aspect="AspectFit"/>
-                                    </Grid>
-                                </SwipeItemView>
+                            <SwipeItems Mode="Reveal">
+                                <SwipeItem
+                                   IconImageSource="ic_eliminar.png"
+                                   
+                                   BackgroundColor="Red"
+                                   Command="{Binding Path=BindingContext.EliminarComand, Source={x:Reference thispage }}"
+                                   CommandParameter="{Binding Id}" >
+                                   
+                                </SwipeItem>
                             </SwipeItems>
                         </SwipeView.RightItems>
                         <Frame BackgroundColor="#FAFAFA"  HasShadow="True"
