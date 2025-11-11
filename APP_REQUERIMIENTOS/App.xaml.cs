@@ -1,13 +1,26 @@
-﻿using APP_REQUERIMIENTOS.MVVM.Vistas;
+﻿using APP_REQUERIMIENTOS.Helpers;
+using APP_REQUERIMIENTOS.MVVM.Vistas;
+using Microsoft.Maui.Storage;
 
 namespace APP_REQUERIMIENTOS
 {
     public partial class App : Application
     {
         public static INavigation Navigate { get; internal set; }
+        public static PrincipalMasterView MenuApp { get; internal set; }
         public App()
         {
             InitializeComponent();
+
+            //   change
+            if (Preferences.Get(Constantes.RecordarContra, false) == true)
+            {
+                Application.Current.MainPage = new PrincipalMasterView();
+            }
+            else
+            {
+                MainPage = new NavigationPage(new LoginView());
+            }
 
             //MainPage = new HILOSECUNDARIO();
             //new NavigationPage(new LoginView());
@@ -16,7 +29,7 @@ namespace APP_REQUERIMIENTOS
             //    };
 
             //new NavigationPage(new LoginView());
-             MainPage = new NavigationPage(new LoginView());
+           // MainPage = new NavigationPage(new LoginView());
             //MainPage = new Pagetabe();
             //new NavigationPage(new Login());
         }

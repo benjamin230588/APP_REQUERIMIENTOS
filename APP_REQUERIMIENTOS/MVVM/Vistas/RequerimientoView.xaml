@@ -2,21 +2,121 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.RequerimientoView"
-             Title="RequerimientoView"
-             BackgroundColor="Red">
-    <Grid>
+             Title="Requerimientos"
+             xmlns:custom="clr-namespace:APP_REQUERIMIENTOS.Convertidores"
+             x:Name="thispage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <custom:Convertcolores x:Key="StringToColorConverter"/>
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem Text="Nuevo"
+                  IconImageSource="ic_delete.png"
+                  Order="Secondary"
+                  Priority="1"
+                  Command="{Binding CrearRequerimientoComand}" />
+        <ToolbarItem Text="Edicion"
+              IconImageSource="ic_delete.png"
+              Order="Secondary"
+              Priority="1"/>
+        <ToolbarItem Text="Estado"
+              IconImageSource="ic_delete.png"
+              Order="Secondary"
+              Priority="1"/>
+    </ContentPage.ToolbarItems>
+    <Grid Padding="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <CollectionView x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}"
+                     SelectionMode="None" ItemsLayout="VerticalList" >
 
-        <Button BackgroundColor="#E6287A" Grid.Row="0" Grid.Column="0" Text="Button 0,0" TextColor="White" />
+            <CollectionView.EmptyView>
+                <StackLayout VerticalOptions="Center">
 
-        <Button BackgroundColor="#E6287A" Grid.Row="0" Grid.Column="1" Text="Button 0,1" TextColor="White" />
+                    <Label Text="Ningun Registro Ingresado" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
 
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                
+                                
+                                <SwipeItem
+                                      IconImageSource="gata.png"
+                                      BackgroundColor="White"
+                                      Command="{Binding Path=BindingContext.EliminarComand, Source={x:Reference thispage }}"
+                                      CommandParameter="{Binding Id}"
+                                     />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Frame BackgroundColor="#FAFAFA"  HasShadow="True"
+                     CornerRadius="10" Margin="5,0,5,10" Padding="10,10,13,10" BorderColor="#848484" IsClippedToBounds="True" >
+
+                            <StackLayout Orientation="Vertical">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding Titulo}" Grid.Column="0" Grid.Row="0"  TextColor="#2E64FE"   Grid.ColumnSpan="3" FontSize="18"/>
+                                    <Label Text="{Binding NombreCliente}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                       FontAttributes="Bold"  />
+                                    <Label Text="{Binding CodigoCliente,StringFormat='N°{0}'}" Grid.Column="2" Grid.Row="1"
+                        FontAttributes="Bold" HorizontalTextAlignment="End" />
+                                    <Label Text="{Binding FechaProgramada,StringFormat='{00:dd/MM/yyyy}'}"  Grid.Column="0" Grid.Row="2"  FontAttributes="Bold" />
+                                    <Label  Text="12 pm"  Grid.Column="1" Grid.Row="2" FontAttributes="Bold"/>
+                                    <Frame InputTransparent="True" Grid.Column="2" Grid.Row="2"  Padding="0" CornerRadius="10">
+                                        <Label Text="{Binding NommbreEstado}"  TextColor="White"  BackgroundColor="{Binding Estado,Converter={StaticResource StringToColorConverter}}"  HorizontalTextAlignment="Center"/>
+                                    </Frame>
+
+                                </Grid>
+
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Path=BindingContext.IrRequerimientocommand,Source={x:Reference thispage}}"
+                             CommandParameter="{Binding .}"
+                             />
+                            </Frame.GestureRecognizers>
+
+                        </Frame>
+                    </SwipeView>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+
+        <Button Grid.Row="0" Text="Nuevo" BorderColor="#2b3c3c" BorderWidth="0" FontAttributes="Bold" 
+                 BackgroundColor="#FFC733"
+                 TextColor="Black" HorizontalOptions="End" WidthRequest="100" CornerRadius="70"
+                 HeightRequest="50" Margin="0,0,10,10" VerticalOptions="End" Command="{Binding CrearRequerimientoComand}"/>
+
+        <Grid  x:Name="gridcontenido"  BackgroundColor="#FAFAFA" Opacity=".8" IsVisible="{Binding flgindicador}">
+            <ActivityIndicator
+                 HorizontalOptions="Center"
+                 IsRunning="{Binding flgindicador}"
+                 Color="#DF013A"
+                 />
+        </Grid>
     </Grid>
 
 </ContentPage>

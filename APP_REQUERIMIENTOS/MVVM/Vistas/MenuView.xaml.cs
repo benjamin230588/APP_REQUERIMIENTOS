@@ -42,4 +42,27 @@ public partial class MenuView : ContentPage
         }
 
     }
+
+    private void lstMenu_ItemTapped(object sender, ItemTappedEventArgs e)
+    {
+        Menu omenuCLS = (Menu)e.Item;
+        switch (omenuCLS.nombreitem)
+        {
+            case "Agenda":
+                App.Navigate.PushAsync(new dale()); break;
+            case "Pedidos":
+                App.Navigate.PushAsync(new HILOSECUNDARIO()); break;
+            case "Ventas":
+                App.Navigate.PushAsync(new RequerimientoView()); break;
+            case "Clientes":
+                App.Navigate.PushAsync(new coleccion()); break;
+            case "Salir":
+                App.Current.MainPage = new NavigationPage(new LoginView());
+                //Setings.RecordarContra = false;
+                Preferences.Set(Constantes.RecordarContra, false);
+
+                break;
+        }
+        App.MenuApp.IsPresented = false;
+    }
 }

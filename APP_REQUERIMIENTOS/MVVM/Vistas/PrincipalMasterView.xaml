@@ -12,7 +12,7 @@
     <FlyoutPage.Detail>
         <NavigationPage x:Name="Navigacion">
             <x:Arguments>
-                <pagina:coleccion></pagina:coleccion>
+                <pagina:RequerimientoView></pagina:RequerimientoView>
 
             </x:Arguments>
         </NavigationPage>

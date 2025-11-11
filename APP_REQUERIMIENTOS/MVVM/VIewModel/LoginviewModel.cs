@@ -31,7 +31,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         {
             colorSwitch = Microsoft.Maui.Graphics.Color.FromArgb("#FF0000");
             estadoSwitch = true;
-            usuario = "admin23";
+            usuario = "admin";
             pasword = "123456";
         }
 

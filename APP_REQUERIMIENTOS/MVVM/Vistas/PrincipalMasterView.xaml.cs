@@ -8,6 +8,7 @@ public partial class PrincipalMasterView : FlyoutPage
     {
 		InitializeComponent();
         App.Navigate = Navigacion.Navigation;
+        App.MenuApp = this;
 
     }
 }
