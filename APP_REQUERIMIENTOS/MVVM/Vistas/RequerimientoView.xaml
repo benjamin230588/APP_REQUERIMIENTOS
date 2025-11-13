@@ -50,12 +50,12 @@
                         <SwipeView.RightItems>
                             <SwipeItems Mode="Reveal">
                                 <SwipeItem
-                                   IconImageSource="ic_eliminar.png"
-                                   
-                                   BackgroundColor="Red"
-                                   Command="{Binding Path=BindingContext.EliminarComand, Source={x:Reference thispage }}"
-                                   CommandParameter="{Binding Id}" >
-                                   
+                                IconImageSource="ic_eliminar.png"
+    
+                                BackgroundColor="White"
+                                Command="{Binding Path=BindingContext.EliminarComand, Source={x:Reference thispage }}"
+                                CommandParameter="{Binding Id}" >
+
                                 </SwipeItem>
                             </SwipeItems>
                         </SwipeView.RightItems>
