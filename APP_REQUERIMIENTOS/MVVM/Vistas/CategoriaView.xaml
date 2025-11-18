@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.CategoriaView"
-             Title="Categorias">
+             Title="Categorias"
+              x:Name="thispage">
     <Grid Padding="4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -14,7 +15,7 @@
         <SearchBar Grid.Row="0" Placeholder="ingrese Categoria" x:Name="searchcliente"     />
 
         <CollectionView Grid.Row="1" x:Name="lstCategoria"   ItemsSource="{Binding listacategoria}"
-                      SelectionMode="Single" ItemsLayout="VerticalList"  >
+                      SelectionMode="None" ItemsLayout="VerticalList"  >
 
             <CollectionView.EmptyView>
                 <StackLayout VerticalOptions="Center">
@@ -52,8 +53,8 @@
                                         
 
                                     </Grid.RowDefinitions>
-                                    <Label Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"  TextColor="#2E64FE"    FontSize="18"/>
-                                    <Label Text="{Binding Descripcion}" Grid.Column="0" Grid.Row="1" FontAttributes="Bold"  />
+                                    <Label Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"  TextColor="#2E64FE"    FontSize="Large"/>
+                                    <Label Text="{Binding Descripcion}" Grid.Column="0" Grid.Row="1" FontAttributes="Bold" FontSize="Medium" />
                                     
 
                                 </Grid>
@@ -79,7 +80,13 @@
                   TextColor="Black" HorizontalOptions="End" WidthRequest="100" CornerRadius="70"
                   HeightRequest="50" Margin="0,0,10,10" VerticalOptions="End" Command="{Binding CrearCategoriaComand}"/>
 
-        <Grid  Grid.Row="1" x:Name="gridcontenido"  BackgroundColor="#FAFAFA" Opacity=".8" IsVisible="{Binding flgindicador}">
+        <Grid  Grid.Row="1" x:Name="gridcontenido"   Opacity=".8" 
+               IsVisible="{Binding flgindicador}" InputTransparent="False"  BackgroundColor="#FAFAFA">
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer />
+            </Grid.GestureRecognizers>
+
             <ActivityIndicator
                   HorizontalOptions="Center"
                   IsRunning="{Binding flgindicador}"

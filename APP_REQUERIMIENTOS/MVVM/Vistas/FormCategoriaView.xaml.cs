@@ -8,7 +8,7 @@ namespace APP_REQUERIMIENTOS.MVVM.Vistas;
 public partial class FormCategoriaView : ContentPage
 {
     byte[] objetoimagen;
-    public FormCategoriaView(Categoria model, string titulo)
+    public FormCategoriaView(CategoriaDTO model, string titulo)
 	{
 		InitializeComponent();
         BindingContext = new FormCategoriaViewModel(Navigation, model, titulo);
@@ -53,7 +53,7 @@ public partial class FormCategoriaView : ContentPage
         using var content = new MultipartFormDataContent();
 
         // Agregar JSON
-        string json = JsonConvert.SerializeObject(new Categoria { Nombre="name", Descripcion="dato", FecCreacion = DateTime.Now ,UsuCreacion=1});
+        string json = JsonConvert.SerializeObject(new CategoriaDTO { Nombre="name", Descripcion="dato", FecCreacion = DateTime.Now ,UsuCreacion=1});
         content.Add(new StringContent(json, Encoding.UTF8, "application/json"), "objetojson");
 
         //content.Add(new StringContent("dale"), "Nombre");
@@ -77,6 +77,11 @@ public partial class FormCategoriaView : ContentPage
         {
             Console.WriteLine($"Error al enviar: {ex.Message}");
         }
+
+    }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
 
     }
 }

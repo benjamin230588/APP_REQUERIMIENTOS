@@ -20,7 +20,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
     {
         private bool _flgindicador;
         private bool _flgrefresh;
-        private ObservableCollection<Categoria> _listacategoria;
+        private ObservableCollection<CategoriaDTO> _listacategoria;
         public static CategoriaViewModel instance;
         public static CategoriaViewModel GetInstance()
         {
@@ -36,7 +36,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         {
             instance = this;
             Navigation = navigation;
-            listacategoria = new ObservableCollection<Categoria>();
+            listacategoria = new ObservableCollection<CategoriaDTO>();
             Task.Run(async () => await MostrarLista());
 
 
@@ -54,7 +54,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             set { SetValue(ref _flgindicador, value); }
         }
 
-        public ObservableCollection<Categoria> listacategoria
+        public ObservableCollection<CategoriaDTO> listacategoria
         {
             get { return _listacategoria; }
             set { SetValue(ref _listacategoria, value); }
@@ -67,14 +67,14 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             try
             {
                 var objeto = new Paginacion { pagine = 40, skip = skip };
-                ResulLista<Categoria> objres = new ResulLista<Categoria>();
+                ResulLista<CategoriaDTO> objres = new ResulLista<CategoriaDTO>();
 
                 //List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
                 flgindicador = true;
                 res = await GenericLH.GetAll<Paginacion>(Constantes.url + Constantes.api_getlistacategoria, objeto);
                 if (res.codigo == 1)
                 {
-                    objres = JsonConvert.DeserializeObject<ResulLista<Categoria>>(JsonConvert.SerializeObject(res.data));
+                    objres = JsonConvert.DeserializeObject<ResulLista<CategoriaDTO>>(JsonConvert.SerializeObject(res.data));
 
                 }
                 // listarequerimiento = objres;
@@ -115,7 +115,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             try
             {
 
-                await App.Navigate.PushAsync(new FormCategoriaView (new Categoria(), "Nuevo Categoria"));
+                await App.Navigate.PushAsync(new FormCategoriaView (new CategoriaDTO(), "Nuevo Categoria"));
 
             }
             catch (Exception ex)
@@ -128,7 +128,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         }
 
 
-        public async Task IrCategoria(Categoria objeto)
+        public async Task IrCategoria(CategoriaDTO objeto)
         {
             //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
             try
@@ -194,7 +194,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
 
         }
-        public ICommand IrCategoriacommand => new Command<Categoria>(async (p) => await IrCategoria(p));
+        public ICommand IrCategoriacommand => new Command<CategoriaDTO>(async (p) => await IrCategoria(p));
 
         public ICommand CrearCategoriaComand => new Command(async () => await CrearCategoria());
         public ICommand RefreshComand => new Command(async () => await MostrarLista());

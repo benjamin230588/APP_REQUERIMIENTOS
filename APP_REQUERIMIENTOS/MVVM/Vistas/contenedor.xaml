@@ -3,54 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.contenedor"
              Title="contenedor">
-    <Grid>
+    <Grid RowDefinitions="*">
         <CollectionView ItemsSource="{Binding Categorias}"
-                SelectionMode="Single"      
+                    
                 SelectionChanged="CollectionView_SelectionChanged" 
-                Margin="10">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical"
-                         Span="2"
-                         VerticalItemSpacing="15"
-                         HorizontalItemSpacing="15"/>
-            </CollectionView.ItemsLayout>
+                Margin="10"
+                ItemSizingStrategy="MeasureFirstItem"
+                ItemsLayout="VerticalGrid,2"
+                VerticalScrollBarVisibility="Never"
+               >
+            
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                   
-                        <Frame HasShadow="True"
-                                CornerRadius="12"
+                        <Border 
+                                StrokeShape="RoundRectangle 30"
                                 BackgroundColor="White"
                                 Padding="10"
+                                Margin="6"
                                 HeightRequest="200" InputTransparent="True">
 
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup Name="CommonStates">
-                                <VisualState Name="Normal">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="Transparent"/>
-                                    </VisualState.Setters>
-                                </VisualState>
+                        
 
-                                <VisualState Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#E0E0E0"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-
-                        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
-                            <Image Source="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg"
-                                        HeightRequest="90"
-                                        WidthRequest="90"
-                                        Aspect="AspectFit"/>
-                                       <Label Text="{Binding Nombre}"
+                        <StackLayout Orientation="Vertical" Spacing="10" HorizontalOptions="Center">
+                            <Image  Source="https://www.gatitasmegaplaza.pe/wp-content/uploads/2024/08/photo_2024-08-19_23-03-56-5.jpg"
+                                 HeightRequest="90"
+                                 WidthRequest="90"
+                                 Aspect="AspectFit"/>
+                                           
+                            <Label Text="{Binding Nombre}"
                                         FontSize="Medium"
                                         HorizontalTextAlignment="Center"/>
-                                </VerticalStackLayout>
-                           
-                        </Frame>
+                                </StackLayout>
+
+                    </Border>
                       
 
                   

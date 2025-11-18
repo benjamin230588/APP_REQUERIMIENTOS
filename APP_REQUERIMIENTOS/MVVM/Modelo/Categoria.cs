@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace APP_REQUERIMIENTOS.MVVM.Modelo
 {
-    public class Categoria
+    public class CategoriaDTO
     {
         public int Id { get; set; }
 
@@ -31,5 +31,10 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
 
         public DateTime? FecActualizacion { get; set; }
 
+        public string rutaarchivo { get; set; }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }
