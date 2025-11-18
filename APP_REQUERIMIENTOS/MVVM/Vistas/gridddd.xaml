@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.gridddd"
+             Title="gridddd">
+    
+        
+    
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,
+          Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,
+           Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                     >
+
+        <!-- 29 elementos normales -->
+        <Button Grid.Row="1" Text="dd"></Button>
+        <Button Grid.Row="2" Text="dd"></Button>
+
+        <Button Grid.Row="3" Text="dd"></Button>
+        <Button Grid.Row="4" Text="dd"></Button>
+        <Button Grid.Row="5" Text="dd"></Button>
+        <Button Grid.Row="6" Text="dd"></Button>
+        <Button Grid.Row="7" Text="dd"></Button>
+        <Button Grid.Row="8" Text="dd"></Button>
+        <Button Grid.Row="9" Text="dd"></Button>
+        <Button Grid.Row="10" Text="dd"></Button>
+
+        <Button Grid.Row="11" Text="dd"></Button>
+        <Button Grid.Row="12" Text="dd"></Button>
+
+        <Button Grid.Row="13" Text="dd"></Button>
+        <Button Grid.Row="14" Text="dd"></Button>
+        <Button Grid.Row="15" Text="dd"></Button>
+        <Button Grid.Row="16" Text="dd"></Button>
+        <Button Grid.Row="17" Text="dd"></Button>
+        <Button Grid.Row="18" Text="dd"></Button>
+        <Button Grid.Row="19" Text="dd"></Button>
+        <Button Grid.Row="20" Text="dd"></Button>
+
+        <Button Grid.Row="21" Text="dd"></Button>
+        <Button Grid.Row="22" Text="dd"></Button>
+
+        <Button Grid.Row="23" Text="dd"></Button>
+        <Button Grid.Row="24" Text="dd"></Button>
+        <Button Grid.Row="25" Text="dd"></Button>
+        <Button Grid.Row="26" Text="dd"></Button>
+        <Button Grid.Row="27" Text="dd"></Button>
+        <Button Grid.Row="28" Text="dd"></Button>
+        <Button Grid.Row="29" Text="dd"></Button>
+        <Button Grid.Row="30" Text="dd"></Button>
+
+        <!-- Último: el doble -->
+        
+    </Grid>
+   
+</ContentPage>

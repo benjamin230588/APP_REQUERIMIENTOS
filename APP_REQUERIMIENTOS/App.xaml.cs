@@ -29,7 +29,7 @@ namespace APP_REQUERIMIENTOS
             //    };
 
             //new NavigationPage(new LoginView());
-           // MainPage = new NavigationPage(new LoginView());
+            // MainPage = new NavigationPage(new LoginView());
             //MainPage = new Pagetabe();
             //new NavigationPage(new Login());
         }

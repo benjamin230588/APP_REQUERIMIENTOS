@@ -8,8 +8,11 @@ namespace APP_REQUERIMIENTOS.Helpers
 {
     public class Constantes
     {
-       
-        public const string url = "http://fibrasurperu-001-site6.mtempurl.com";
+
+        //public const string url = "http://fibrasurperu-001-site6.mtempurl.com";
+        public const string url = "https://fibrasurperu-001-site4.etempurl.com";
+
+        
         //public const string url = "http://192.168.1.92:45470";
 
         //ttp://localhost:5045/swagger/index.html
@@ -19,6 +22,7 @@ namespace APP_REQUERIMIENTOS.Helpers
 
         public const string api_login = "/api/login/Ingreso";
         public const string api_getlistarequerimiento = "/api/Requerimiento/Lista";
+        public const string api_getlistacategoria = "/api/Categoria/Lista";
         public const string api_getgrabarequerimiento = "/api/Requerimiento/Grabar";
         public const string api_geteliminarrequerimiento = "/api/Requerimiento/delete";
         public const string api_getmodificarequerimiento = "/api/Requerimiento/Modificar";

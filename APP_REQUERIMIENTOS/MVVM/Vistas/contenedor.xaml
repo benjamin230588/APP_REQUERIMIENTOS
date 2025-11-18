@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.contenedor"
+             Title="contenedor">
+    <Grid>
+        <CollectionView ItemsSource="{Binding Categorias}"
+                SelectionMode="Single"      
+                SelectionChanged="CollectionView_SelectionChanged" 
+                Margin="10">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                         Span="2"
+                         VerticalItemSpacing="15"
+                         HorizontalItemSpacing="15"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                  
+                        <Frame HasShadow="True"
+                                CornerRadius="12"
+                                BackgroundColor="White"
+                                Padding="10"
+                                HeightRequest="200" InputTransparent="True">
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="Transparent"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#E0E0E0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+                            <Image Source="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg"
+                                        HeightRequest="90"
+                                        WidthRequest="90"
+                                        Aspect="AspectFit"/>
+                                       <Label Text="{Binding Nombre}"
+                                        FontSize="Medium"
+                                        HorizontalTextAlignment="Center"/>
+                                </VerticalStackLayout>
+                           
+                        </Frame>
+                      
+
+                  
+                   
+                    
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

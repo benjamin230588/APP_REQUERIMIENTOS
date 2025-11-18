@@ -24,17 +24,20 @@ public partial class MenuView : ContentPage
         int idtipousuario = Preferences.Get(Constantes.IdTipoUsuario, 0);
         if (idtipousuario == 1)
         {
-            listamenu.Add(new Menu { nombreicono = "gata", nombreitem = "Agenda" });
-            listamenu.Add(new Menu { nombreicono = "dotnet_bot", nombreitem = "Pedidos" });
-            listamenu.Add(new Menu { nombreicono = "lola111", nombreitem = "Ventas" });
-            listamenu.Add(new Menu { nombreicono = "lola111", nombreitem = "Clientes" });
-            listamenu.Add(new Menu { nombreicono = "ic_cerrar", nombreitem = "Salir" });
+            //listamenu.Add(new Menu { nombreicono = "gata", nombreitem = "Agenda Cita" });
+            listamenu.Add(new Menu { nombreicono = "realizarpedido", nombreitem = "Realizar Pedido" });
+            listamenu.Add(new Menu { nombreicono = "buscarpedidos", nombreitem = "Mis Pedidos" });
+            listamenu.Add(new Menu { nombreicono = "categoria", nombreitem = "Categoria" });
+            listamenu.Add(new Menu { nombreicono = "productos", nombreitem = "Productos" });
+            listamenu.Add(new Menu { nombreicono = "usuarios", nombreitem = "Usuarios" });
+            listamenu.Add(new Menu { nombreicono = "notificacion", nombreitem = "Notificaciones" });
+            listamenu.Add(new Menu { nombreicono = "cerrar", nombreitem = "Salir" });
 
         }
         else
         {
 
-            listamenu.Add(new Menu { nombreicono = "gata", nombreitem = "Agenda" });
+            //listamenu.Add(new Menu { nombreicono = "gata", nombreitem = "Agenda" });
             listamenu.Add(new Menu { nombreicono = "dotnet_bot", nombreitem = "Pedidos" });
             listamenu.Add(new Menu { nombreicono = "lola111", nombreitem = "Ventas" });
             listamenu.Add(new Menu { nombreicono = "lola111", nombreitem = "Clientes" });
@@ -43,18 +46,20 @@ public partial class MenuView : ContentPage
 
     }
 
-    private void lstMenu_ItemTapped(object sender, ItemTappedEventArgs e)
+    private void cvMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        Menu omenuCLS = (Menu)e.Item;
-        switch (omenuCLS.nombreitem)
+        var selectedItem = (Menu)e.CurrentSelection.FirstOrDefault(); 
+        switch (selectedItem.nombreitem)
         {
-            case "Agenda":
-                App.Navigate.PushAsync(new dale()); break;
-            case "Pedidos":
-                App.Navigate.PushAsync(new HILOSECUNDARIO()); break;
-            case "Ventas":
+            case "Requerimiento":
                 App.Navigate.PushAsync(new RequerimientoView()); break;
-            case "Clientes":
+            case "Realizar Pedido":
+                App.Navigate.PushAsync(new contenedor()); break;
+            case "Mis Pedidos":
+                App.Navigate.PushAsync(new RequerimientoView()); break;
+            case "Categoria":
+                App.Navigate.PushAsync(new CategoriaView()); break;
+            case "Productos":
                 App.Navigate.PushAsync(new coleccion()); break;
             case "Salir":
                 App.Current.MainPage = new NavigationPage(new LoginView());
@@ -65,4 +70,27 @@ public partial class MenuView : ContentPage
         }
         App.MenuApp.IsPresented = false;
     }
-}
+
+        //private void lstMenu_ItemTapped(object sender, ItemTappedEventArgs e)
+        //{
+        //    Menu omenuCLS = (Menu)e.Item;
+        //    switch (omenuCLS.nombreitem)
+        //    {
+        //        case "Agenda":
+        //            App.Navigate.PushAsync(new dale()); break;
+        //        case "Pedidos":
+        //            App.Navigate.PushAsync(new HILOSECUNDARIO()); break;
+        //        case "Ventas":
+        //            App.Navigate.PushAsync(new RequerimientoView()); break;
+        //        case "Clientes":
+        //            App.Navigate.PushAsync(new coleccion()); break;
+        //        case "Salir":
+        //            App.Current.MainPage = new NavigationPage(new LoginView());
+        //            //Setings.RecordarContra = false;
+        //            Preferences.Set(Constantes.RecordarContra, false);
+
+        //            break;
+        //    }
+        //    App.MenuApp.IsPresented = false;
+        //}
+    }

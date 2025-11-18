@@ -77,6 +77,7 @@
 
                                     </Grid.RowDefinitions>
                                     <Label Text="{Binding Titulo}" Grid.Column="0" Grid.Row="0"  TextColor="#2E64FE"   Grid.ColumnSpan="3" FontSize="18"/>
+
                                     <Label Text="{Binding NombreCliente}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
                        FontAttributes="Bold"  />
                                     <Label Text="{Binding CodigoCliente,StringFormat='N°{0}'}" Grid.Column="2" Grid.Row="1"

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.FormCategoriaView"
+             Title="FormCategoriaView">
+    <Grid>
+        <StackLayout Orientation="Vertical" >
+            <Label 
+                Text="Welcome CATEGORIA FORM!"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+
+        
+
+            <Frame Padding="0"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="Fill"
+                   BackgroundColor="White"
+                   CornerRadius="30" >
+                <Frame.Content>
+                    <Image  x:Name="imgPreview" Aspect="AspectFill" Source="https://fibrasurperu-001-site4.etempurl.com//imagenes/84cab911-5410-426b-b68f-bb4207a2d8ad.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer x:Name="tabPreviewImage" Tapped="tabPreviewImage_Tapped"   />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame.Content>
+            </Frame>
+            <StackLayout Orientation="Horizontal" Spacing="15" Margin="10,30,10,10">
+                <Button Text="Volver" BackgroundColor="Red" 
+                 x:Name="btnVolverLogin"  TextColor="White" HorizontalOptions="FillAndExpand" CornerRadius="15"/>
+                <Button Text="Grabar" Background="Green" TextColor="White" 
+                 x:Name="btnRegistrarUsuario" Clicked="btnRegistrarUsuario_Clicked"  
+                
+                 CornerRadius="15"  HorizontalOptions="FillAndExpand"/>
+
+
+            </StackLayout>
+        </StackLayout>
+
+    </Grid>
+
+
+</ContentPage>

@@ -40,10 +40,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <CollectionView x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}"
-                        SelectionMode="None" ItemsLayout="VerticalList" >
+        <SearchBar Grid.Row="0" Placeholder="ingrese cliente" x:Name="searchcliente"     />
+
+        <CollectionView Grid.Row="1" x:Name="lstCategoria12"   ItemsSource="{Binding listarequerimiento}"
+                        SelectionMode="None" ItemsLayout="VerticalList"  >
             
             <CollectionView.EmptyView>
                     <StackLayout VerticalOptions="Center">
@@ -111,12 +114,12 @@
            
        
 
-        <Button Grid.Row="0" Text="Nuevo" BorderColor="#2b3c3c" BorderWidth="0" FontAttributes="Bold" 
+        <Button Grid.Row="1" Text="Nuevo" BorderColor="#2b3c3c" BorderWidth="0" FontAttributes="Bold" 
                     BackgroundColor="#FFC733"
                     TextColor="Black" HorizontalOptions="End" WidthRequest="100" CornerRadius="70"
                     HeightRequest="50" Margin="0,0,10,10" VerticalOptions="End" Command="{Binding CrearRequerimientoComand}"/>
 
-        <Grid  x:Name="gridcontenido"  BackgroundColor="#FAFAFA" Opacity=".8" IsVisible="{Binding flgindicador}">
+        <Grid  Grid.Row="1" x:Name="gridcontenido"  BackgroundColor="#FAFAFA" Opacity=".8" IsVisible="{Binding flgindicador}">
             <ActivityIndicator
                     HorizontalOptions="Center"
                     IsRunning="{Binding flgindicador}"
