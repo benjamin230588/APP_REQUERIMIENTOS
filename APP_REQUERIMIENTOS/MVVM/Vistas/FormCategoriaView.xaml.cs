@@ -8,6 +8,7 @@ namespace APP_REQUERIMIENTOS.MVVM.Vistas;
 public partial class FormCategoriaView : ContentPage
 {
     byte[] objetoimagen;
+    string extension;
     public FormCategoriaView(CategoriaDTO model, string titulo)
 	{
 		InitializeComponent();
@@ -37,6 +38,7 @@ public partial class FormCategoriaView : ContentPage
                     // Asignamos imagen desde memory (NO se cierra)
                     imgPreview.Source = ImageSource.FromStream(() => memory);
                 }
+                extension = Path.GetExtension(result.FileName);
             }
         }
         catch (Exception ex) { 
@@ -62,13 +64,13 @@ public partial class FormCategoriaView : ContentPage
         //content.Add(new StringContent("2025-01-12"), "FecCreacion");
 
         // Agregar imagen
-        content.Add(new ByteArrayContent(objetoimagen), "Fotobit", "cliente.png");
+        content.Add(new ByteArrayContent(objetoimagen), "fotobit", $"cliente{extension}");
 
         // Enviar al API
         try
         {
             // Si estás usando Android emulador: reemplaza localhost con 10.0.2.2
-            var url = "http://fibrasurperu-001-site6.mtempurl.com/api/categoria/grabar";
+            var url = "https://fibrasurperu-001-site4.etempurl.com/api/categoria/grabar";
             var response = await client.PostAsync(url, content);
             string resultado = await response.Content.ReadAsStringAsync();
             Console.WriteLine($"Respuesta API: {resultado}");
@@ -84,4 +86,6 @@ public partial class FormCategoriaView : ContentPage
     {
 
     }
+
+    
 }

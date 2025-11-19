@@ -41,7 +41,7 @@ public class GenericLH
         }
 
             //Retorne la data
-            public static async Task<Respuesta> GetAll<M>(string url, M obj)
+   public static async Task<Respuesta> GetAll<M>(string url, M obj)
     {
         HttpClient cliente = new HttpClient();
         Respuesta res = new Respuesta();
@@ -112,33 +112,66 @@ public class GenericLH
 
 
 }
-public static async Task<Respuesta> Put<T>(string url, T obj)
-{
-    HttpClient cliente = new HttpClient();
-    Respuesta res = new Respuesta();
-    var cadena = JsonConvert.SerializeObject(obj);
-    var body = new StringContent(cadena, Encoding.UTF8, "application/json");
 
-    try
-    {
-        var response = await cliente.PutAsync(url, body);
-        if (!response.IsSuccessStatusCode) return new Respuesta { codigo = 0 };
-        else
+        public static async Task<Respuesta> PostFile<T>(byte[] imgmedia,string extension, string url,T obj)
         {
-            //int respuesta = int.Parse(await response.Content.ReadAsStringAsync());
-            var result = await response.Content.ReadAsStringAsync();
-            res = JsonConvert.DeserializeObject<Respuesta>(result);
+            HttpClient cliente = new HttpClient();
+            Respuesta res = new Respuesta();
+            var content = new MultipartFormDataContent();
+
+            var cadena = JsonConvert.SerializeObject(obj);
+            content.Add(new StringContent(cadena, Encoding.UTF8, "application/json"), "objetojson");
+            content.Add(new ByteArrayContent(imgmedia), "fotobit", $"cliente{extension}");
+
+            //var body = new StringContent(cadena, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await cliente.PostAsync(url, content);
+                if (!response.IsSuccessStatusCode) return new Respuesta { codigo = 0 };
+                else
+                {
+                    
+                   
+                    var result = await response.Content.ReadAsStringAsync();
+                    res = JsonConvert.DeserializeObject<Respuesta>(result);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return res;
 
         }
-    }
-    catch (Exception ex)
-    {
-        throw new Exception(ex.Message);
-    }
-    return res;
+        public static async Task<Respuesta> Put<T>(string url, T obj)
+       {
+            HttpClient cliente = new HttpClient();
+            Respuesta res = new Respuesta();
+            var cadena = JsonConvert.SerializeObject(obj);
+            var body = new StringContent(cadena, Encoding.UTF8, "application/json");
+
+            try
+            {
+                var response = await cliente.PutAsync(url, body);
+                if (!response.IsSuccessStatusCode) return new Respuesta { codigo = 0 };
+                else
+                {
+                    //int respuesta = int.Parse(await response.Content.ReadAsStringAsync());
+                    var result = await response.Content.ReadAsStringAsync();
+                    res = JsonConvert.DeserializeObject<Respuesta>(result);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return res;
 
 
-}
+     }
 
 
 

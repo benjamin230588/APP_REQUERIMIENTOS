@@ -17,6 +17,9 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         private string _titulo;
         private CategoriaDTO _objcategoria;
         private bool _flgindicador;
+        private byte[] _imgmedia;
+        public string extension { get; set; }
+
 
         public FormCategoriaViewModel(INavigation navigation, CategoriaDTO model, string titulo)
         {
@@ -43,8 +46,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             get { return _objcategoria; }
             set { SetValue(ref _objcategoria, value); }
         }
-
-        public async Task GuardarRequerimiento()
+        public byte[] imgmedia
+        {
+            get { return _imgmedia; }
+            set { SetValue(ref _imgmedia, value); }
+        }
+        public async Task GuardarCategoria()
         {
 
             Respuesta res;
@@ -55,7 +62,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 // Thread.Sleep(10000);
                 if (objcategoria.Id == 0)
                 {
-                    res = await GenericLH.Post<CategoriaDTO>(Constantes.url + Constantes.api_getgrabarequerimiento, objcategoria);
+                    res = await GenericLH.PostFile<CategoriaDTO>(imgmedia,extension, Constantes.url + Constantes.api_getgrabarcategoria, objcategoria);
                     if (res.codigo == 1)
                     {
                         //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
@@ -96,9 +103,15 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             await App.Navigate.PopAsync();
         }
 
-        public ICommand GuardarRequerimientoComand => new Command(async () => await GuardarRequerimiento());
+        
+
+        public ICommand GuardarRequerimientoComand => new Command(async () => await GuardarCategoria());
         public ICommand VolverRequerimientocommand => new Command(async () => await VolverRequerimiento());
 
+        //public ICommand CargarImagenocommand => new Command(async () => await CargarImagen());
+
+
+        
     }
 }
 

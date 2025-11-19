@@ -27,6 +27,9 @@ namespace APP_REQUERIMIENTOS.Helpers
         public const string api_geteliminarrequerimiento = "/api/Requerimiento/delete";
         public const string api_getmodificarequerimiento = "/api/Requerimiento/Modificar";
 
+
+
+        public const string api_getgrabarcategoria = "/api/categoria/grabar";
         public const string api_getaveria = "/Averias/Index";
 
         public const string IdUsuario = "IdUsuario";
