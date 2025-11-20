@@ -12,7 +12,7 @@
         <CollectionView x:Name="cvMenu" Margin="0,10"
                     ItemsSource="{Binding listamenu}"
                     SelectionMode="Single" ItemsLayout="VerticalList"
-                    SelectionChanged="cvMenu_SelectionChanged" >
+                   >
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -23,6 +23,23 @@
                       ColumnDefinitions="Auto,*"
                       RowDefinitions="*"
                       BackgroundColor="Transparent">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </Grid.GestureRecognizers>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="Transparent" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#E0E0E0" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
 
                         <Image Source="{Binding nombreicono}"
                            WidthRequest="50"
@@ -39,20 +56,7 @@
                            Margin="10,0,0,0" />
 
                         <!-- Visual states para cambiar fondo y texto al seleccionar -->
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup Name="CommonStates">
-                                <VisualState Name="Normal">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="Transparent" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                                <VisualState Name="Selected">
-                                    <VisualState.Setters>
-                                        <Setter Property="BackgroundColor" Value="#E0E0E0" />
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+                      
 
                     </Grid>
                 </DataTemplate>

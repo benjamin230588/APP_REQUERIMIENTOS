@@ -3,12 +3,14 @@ using APP_REQUERIMIENTOS.ClienteHttp;
 using APP_REQUERIMIENTOS.Helpers;
 using APP_REQUERIMIENTOS.MVVM.Modelo;
 using CommunityToolkit.Maui.Views;
+using Microsoft.Maui.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 {
@@ -17,7 +19,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         private string _titulo;
         private CategoriaDTO _objcategoria;
         private bool _flgindicador;
-        private byte[] _imgmedia;
+        public byte[] imgmedia;
         public string extension { get; set; }
 
 
@@ -46,11 +48,11 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             get { return _objcategoria; }
             set { SetValue(ref _objcategoria, value); }
         }
-        public byte[] imgmedia
-        {
-            get { return _imgmedia; }
-            set { SetValue(ref _imgmedia, value); }
-        }
+        //public byte[] imgmedia
+        //{
+        //    get { return _imgmedia; }
+        //    set { SetValue(ref _imgmedia, value); }
+        //}
         public async Task GuardarCategoria()
         {
 
@@ -58,10 +60,16 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             try
             {
                 flgindicador = true;
+               
                 //await Task.Delay(10000);
                 // Thread.Sleep(10000);
                 if (objcategoria.Id == 0)
                 {
+                    objcategoria.UsuCreacion = Preferences.Get(Constantes.IdUsuario, 0);
+
+                    var fecha = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                    objcategoria.FecCreacion = fecha;
+
                     res = await GenericLH.PostFile<CategoriaDTO>(imgmedia,extension, Constantes.url + Constantes.api_getgrabarcategoria, objcategoria);
                     if (res.codigo == 1)
                     {
@@ -69,21 +77,29 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                         var popup = new MensajeConfirmacion();
                         var result = await Application.Current.MainPage.ShowPopupAsync(popup);
 
-                        await RequerimientoViewModel.GetInstance().MostrarLista();
+                       
                         await App.Navigate.PopAsync();
-
+                        await CategoriaViewModel.GetInstance().MostrarLista();
                     }
                 }
                 else
                 {
-                    res = await GenericLH.Put<CategoriaDTO>(Constantes.url + Constantes.api_getmodificarequerimiento, objcategoria);
+                    objcategoria.UsuModificacion = Preferences.Get(Constantes.IdUsuario, 0);
+
+                    var fecha = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                    objcategoria.FecActualizacion = fecha;
+
+
+                    res = await GenericLH.PostFile<CategoriaDTO>(imgmedia, extension,Constantes.url + Constantes.api_getmodificarcategoria, objcategoria);
                     if (res.codigo == 1)
                     {
                         //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
                         var popup = new MensajeConfirmacion();
                         var result = await Application.Current.MainPage.ShowPopupAsync(popup);
-                        await RequerimientoViewModel.GetInstance().MostrarLista();
+                        
                         await App.Navigate.PopAsync();
+                        await CategoriaViewModel.GetInstance().MostrarLista();
+
 
                     }
                 }

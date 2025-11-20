@@ -46,51 +46,60 @@ public partial class MenuView : ContentPage
 
     }
 
-    private void cvMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    //private async void cvMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    //{
+    //    var selectedItem = (Menu)e.CurrentSelection.FirstOrDefault();
+    //    if (selectedItem == null)
+    //        return;
+    //    switch (selectedItem.nombreitem)
+    //    {
+    //        case "Requerimiento":
+    //            App.Navigate.PushAsync(new RequerimientoView()); break;
+    //        case "Realizar Pedido":
+    //            App.Navigate.PushAsync(new contenedor()); break;
+    //        case "Mis Pedidos":
+    //            App.Navigate.PushAsync(new RequerimientoView()); break;
+    //        case "Categoria":
+    //            App.Navigate.PushAsync(new CategoriaView()); break;
+    //        case "Productos":
+    //            App.Navigate.PushAsync(new coleccion()); break;
+    //        case "Salir":
+    //            App.Current.MainPage = new NavigationPage(new LoginView());
+    //            //Setings.RecordarContra = false;
+    //            Preferences.Set(Constantes.RecordarContra, false);
+
+    //            break;
+    //    }
+    //    App.MenuApp.IsPresented = false;
+    //    await Task.Delay(100);
+    //    cvMenu.SelectedItem = null;
+    //}
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        var selectedItem = (Menu)e.CurrentSelection.FirstOrDefault(); 
-        switch (selectedItem.nombreitem)
-        {
-            case "Requerimiento":
-                App.Navigate.PushAsync(new RequerimientoView()); break;
-            case "Realizar Pedido":
-                App.Navigate.PushAsync(new contenedor()); break;
-            case "Mis Pedidos":
-                App.Navigate.PushAsync(new RequerimientoView()); break;
-            case "Categoria":
-                App.Navigate.PushAsync(new CategoriaView()); break;
-            case "Productos":
-                App.Navigate.PushAsync(new coleccion()); break;
-            case "Salir":
-                App.Current.MainPage = new NavigationPage(new LoginView());
-                //Setings.RecordarContra = false;
-                Preferences.Set(Constantes.RecordarContra, false);
-
-                break;
-        }
-        App.MenuApp.IsPresented = false;
+        DisplayAlert("dd","ddd","dd");
     }
 
-        //private void lstMenu_ItemTapped(object sender, ItemTappedEventArgs e)
-        //{
-        //    Menu omenuCLS = (Menu)e.Item;
-        //    switch (omenuCLS.nombreitem)
-        //    {
-        //        case "Agenda":
-        //            App.Navigate.PushAsync(new dale()); break;
-        //        case "Pedidos":
-        //            App.Navigate.PushAsync(new HILOSECUNDARIO()); break;
-        //        case "Ventas":
-        //            App.Navigate.PushAsync(new RequerimientoView()); break;
-        //        case "Clientes":
-        //            App.Navigate.PushAsync(new coleccion()); break;
-        //        case "Salir":
-        //            App.Current.MainPage = new NavigationPage(new LoginView());
-        //            //Setings.RecordarContra = false;
-        //            Preferences.Set(Constantes.RecordarContra, false);
+    //private void lstMenu_ItemTapped(object sender, ItemTappedEventArgs e)
+    //{
+    //    Menu omenuCLS = (Menu)e.Item;
+    //    switch (omenuCLS.nombreitem)
+    //    {
+    //        case "Agenda":
+    //            App.Navigate.PushAsync(new dale()); break;
+    //        case "Pedidos":
+    //            App.Navigate.PushAsync(new HILOSECUNDARIO()); break;
+    //        case "Ventas":
+    //            App.Navigate.PushAsync(new RequerimientoView()); break;
+    //        case "Clientes":
+    //            App.Navigate.PushAsync(new coleccion()); break;
+    //        case "Salir":
+    //            App.Current.MainPage = new NavigationPage(new LoginView());
+    //            //Setings.RecordarContra = false;
+    //            Preferences.Set(Constantes.RecordarContra, false);
 
-        //            break;
-        //    }
-        //    App.MenuApp.IsPresented = false;
-        //}
-    }
+    //            break;
+    //    }
+    //    App.MenuApp.IsPresented = false;
+    //}
+}

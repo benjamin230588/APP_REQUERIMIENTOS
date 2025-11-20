@@ -121,7 +121,11 @@ public class GenericLH
 
             var cadena = JsonConvert.SerializeObject(obj);
             content.Add(new StringContent(cadena, Encoding.UTF8, "application/json"), "objetojson");
-            content.Add(new ByteArrayContent(imgmedia), "fotobit", $"cliente{extension}");
+            if (imgmedia != null)
+            {
+                content.Add(new ByteArrayContent(imgmedia), "fotobit", $"cliente{extension}");
+
+            }
 
             //var body = new StringContent(cadena, Encoding.UTF8, "application/json");
 

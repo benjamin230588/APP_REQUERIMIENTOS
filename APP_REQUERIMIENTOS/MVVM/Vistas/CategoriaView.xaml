@@ -50,12 +50,13 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
-                                        
+                                        <RowDefinition Height="Auto"/>
 
                                     </Grid.RowDefinitions>
                                     <Label Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"  TextColor="#2E64FE"    FontSize="Large"/>
                                     <Label Text="{Binding Descripcion}" Grid.Column="0" Grid.Row="1" FontAttributes="Bold" FontSize="Medium" />
-                                    
+                                    <Label Text="{Binding FecCreacion}" Grid.Column="0" Grid.Row="2" FontAttributes="Bold" FontSize="Medium" />
+
 
                                 </Grid>
 
