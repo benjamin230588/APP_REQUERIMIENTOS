@@ -25,14 +25,21 @@ namespace APP_REQUERIMIENTOS.Helpers
         public const string api_getlistarequerimiento = "/api/Requerimiento/Lista";
         public const string api_getlistacategoria = "/api/Categoria/Lista";
         public const string api_getgrabarequerimiento = "/api/Requerimiento/Grabar";
+        public const string api_geteliminarcategoria = "/api/categoria/delete";
         public const string api_geteliminarrequerimiento = "/api/Requerimiento/delete";
         public const string api_getmodificarequerimiento = "/api/Requerimiento/Modificar";
 
 
+        public const string api_geteliminarproducto = "/api/Producto/delete";
+        public const string api_getlistaproducto = "/api/Producto/Lista";
+
 
         public const string api_getgrabarcategoria = "/api/categoria/grabar";
 
+        public const string api_getgrabarproducto = "/api/Producto/grabar";
+
         public const string api_getmodificarcategoria = "/api/categoria/Modificar";
+        public const string api_getmodificarproducto = "/api/Producto/Modificar";
 
 
         public const string api_getaveria = "/Averias/Index";

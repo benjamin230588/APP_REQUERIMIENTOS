@@ -8,6 +8,7 @@ public partial class MenuView : ContentPage
 {
     public List<Menu> listamenu { get; set; }
     public string Activeusuario { get; set; }
+    private Grid _ultimoSeleccionado;
     public MenuView()
 	{
 		InitializeComponent();
@@ -75,10 +76,64 @@ public partial class MenuView : ContentPage
     //    cvMenu.SelectedItem = null;
     //}
 
-    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-        DisplayAlert("dd","ddd","dd");
+      //  DisplayAlert("dd","ddd","dd");
+        var grid = (Grid)sender;
+        var item = grid.BindingContext;
+        var selectedItem = (Menu)item;
+       // cvMenu.SelectedItem = item;
+        //// await Task.Delay(150);
+        //await Task.Delay(3000);
+        //cvMenu.SelectedItem = item;
+        //await Task.Delay(3000);
+
+        // int index = cvMenu.ItemsSource.Cast<Menu>().ToList().IndexOf(selectedItem);
+        //cvMenu.se = index;
+        switch (selectedItem.nombreitem)
+        {
+            case "Requerimiento":
+              
+                await App.Navigate.PushAsync(new RequerimientoView()); break;
+            case "Realizar Pedido":
+                
+                await App.Navigate.PushAsync(new PedidoCategoriaView()); break;
+            case "Mis Pedidos":
+                await App.Navigate.PushAsync(new RequerimientoView()); break;
+            case "Categoria":
+                await App.Navigate.PushAsync(new CategoriaView()); break;
+            case "Productos":
+                await App.Navigate.PushAsync(new ProductoView()); break;
+            case "Salir":
+                App.Current.MainPage = new NavigationPage(new LoginView());
+                //Setings.RecordarContra = false;
+                Preferences.Set(Constantes.RecordarContra, false);
+
+                break;
+        }
+       // cvMenu.SelectedItem = item;
+       App.MenuApp.IsPresented = false;
+       
     }
+    private void LimpiarSeleccion()
+    {
+        if (cvMenu == null || cvMenu.ItemsSource == null)
+            return;
+
+        foreach (var obj in cvMenu.ItemsSource)
+        {
+            var cell = cvMenu.FindByName<Grid>("root");
+            if (cell != null)
+                VisualStateManager.GoToState(cell, "Normal");
+        }
+    }
+    // Forzar selección manual para que el VisualState cambie
+    // cvMenu.SelectedItem = item;
+    //VisualStateManager.GoToState(grid, "Selected");
+
+    //    // Guardar referencia
+    //    _ultimoSeleccionado = grid;
+
 
     //private void lstMenu_ItemTapped(object sender, ItemTappedEventArgs e)
     //{

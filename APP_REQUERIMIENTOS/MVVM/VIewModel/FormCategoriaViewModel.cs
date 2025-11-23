@@ -27,10 +27,11 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         {
             Navigation = navigation;
             this.titulo = titulo;
+            flgindicador = true;
             // objrequerimiento = (RequerimientoDTO)model.Clone();
             objcategoria = (CategoriaDTO)model.Clone();
 
-
+            flgindicador = false;
         }
         public string titulo
         {

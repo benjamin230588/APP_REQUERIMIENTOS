@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 {
-    public class CategoriaViewModel : BaseViewModel
+    public class PedidoCategoriaViewModel : BaseViewModel
     {
         private bool _flgindicador;
         private bool _flgrefresh;
@@ -32,12 +32,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             else return instance;
         }
 
-        public CategoriaViewModel(INavigation navigation)
+        public PedidoCategoriaViewModel(INavigation navigation)
         {
-            instance = this;
+            //instance = this;
             Navigation = navigation;
             listacategoria = new ObservableCollection<CategoriaDTO>();
-           
+
             Task.Run(async () => await MostrarLista());
 
 
@@ -67,7 +67,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             Respuesta res;
             try
             {
-                var objeto = new Paginacion { pagine = 40, skip = skip };
+                var objeto = new Paginacion { pagine = 90, skip = skip };
                 ResulLista<CategoriaDTO> objres = new ResulLista<CategoriaDTO>();
 
                 //List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
@@ -116,7 +116,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             try
             {
 
-                await App.Navigate.PushAsync(new FormCategoriaView (new CategoriaDTO(), "Nuevo Categoria"));
+                await App.Navigate.PushAsync(new FormCategoriaView(new CategoriaDTO(), "Nuevo Categoria"));
 
             }
             catch (Exception ex)
@@ -206,7 +206,4 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         public ICommand EliminarComand => new Command<int>(async (p) => await EliminarCategoria(p));
 
     }
-
-
 }
-

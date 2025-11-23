@@ -5,6 +5,7 @@ using APP_REQUERIMIENTOS.Modelos;
 using APP_REQUERIMIENTOS.MVVM.Modelo;
 using APP_REQUERIMIENTOS.MVVM.Vistas;
 using CommunityToolkit.Maui.Views;
+using Microsoft.Maui.Controls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,28 +17,27 @@ using System.Windows.Input;
 
 namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 {
-    public class CategoriaViewModel : BaseViewModel
+    public class ProductoViewModel : BaseViewModel
     {
         private bool _flgindicador;
         private bool _flgrefresh;
-        private ObservableCollection<CategoriaDTO> _listacategoria;
-        public static CategoriaViewModel instance;
-        public static CategoriaViewModel GetInstance()
+        private ObservableCollection<ProductoDTO> _listaproducto;
+        public static ProductoViewModel instance;
+        public static ProductoViewModel GetInstance()
         {
             if (instance == null)
             {
-                return new CategoriaViewModel(App.Navigate);
+                return new ProductoViewModel(App.Navigate);
 
             }
             else return instance;
         }
 
-        public CategoriaViewModel(INavigation navigation)
+        public ProductoViewModel(INavigation navigation)
         {
             instance = this;
             Navigation = navigation;
-            listacategoria = new ObservableCollection<CategoriaDTO>();
-           
+            listaproducto = new ObservableCollection<ProductoDTO>();
             Task.Run(async () => await MostrarLista());
 
 
@@ -55,10 +55,10 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             set { SetValue(ref _flgindicador, value); }
         }
 
-        public ObservableCollection<CategoriaDTO> listacategoria
+        public ObservableCollection<ProductoDTO> listaproducto
         {
-            get { return _listacategoria; }
-            set { SetValue(ref _listacategoria, value); }
+            get { return _listaproducto; }
+            set { SetValue(ref _listaproducto, value); }
         }
 
 
@@ -68,29 +68,29 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             try
             {
                 var objeto = new Paginacion { pagine = 40, skip = skip };
-                ResulLista<CategoriaDTO> objres = new ResulLista<CategoriaDTO>();
+                ResulLista<ProductoDTO> objres = new ResulLista<ProductoDTO>();
 
                 //List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
                 flgindicador = true;
-                res = await GenericLH.GetAll<Paginacion>(Constantes.url + Constantes.api_getlistacategoria, objeto);
+                res = await GenericLH.GetAll<Paginacion>(Constantes.url + Constantes.api_getlistaproducto, objeto);
                 if (res.codigo == 1)
                 {
-                    objres = JsonConvert.DeserializeObject<ResulLista<CategoriaDTO>>(JsonConvert.SerializeObject(res.data));
+                    objres = JsonConvert.DeserializeObject<ResulLista<ProductoDTO>>(JsonConvert.SerializeObject(res.data));
 
                 }
                 // listarequerimiento = objres;
                 if (tipo == 0)
                 {
-                    listacategoria.Clear();
+                    listaproducto.Clear();
                     flgrefresh = false;
                 }
 
                 for (int i = 0; i < objres.lista.Count; i++)
                 {
-                    bool valida = listacategoria.Where(x => x.Id == objres.lista[i].Id).Any();
+                    bool valida = listaproducto.Where(x => x.Id == objres.lista[i].Id).Any();
                     if (!valida)
                     {
-                        listacategoria.Add(objres.lista[i]);
+                        listaproducto.Add(objres.lista[i]);
                     }
 
                 }
@@ -106,17 +106,17 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         }
         public async Task MostrarListaRefrsh()
         {
-            await MostrarLista(listacategoria.Count, 1);
+            await MostrarLista(listaproducto.Count, 1);
 
         }
 
-        public async Task CrearCategoria()
+        public async Task CrearProducto()
         {
             //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
             try
             {
 
-                await App.Navigate.PushAsync(new FormCategoriaView (new CategoriaDTO(), "Nuevo Categoria"));
+                await App.Navigate.PushAsync(new FormProductoView(new ProductoDTO(), "Nuevo Producto"));
 
             }
             catch (Exception ex)
@@ -129,7 +129,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         }
 
 
-        public async Task IrCategoria(CategoriaDTO objeto)
+        public async Task IrProducto(ProductoDTO objeto)
         {
             //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
             try
@@ -137,7 +137,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
 
 
-                await App.Navigate.PushAsync(new FormCategoriaView(objeto, "Edicion Categoria"));
+                await App.Navigate.PushAsync(new FormProductoView(objeto, "Edicion Producto"));
 
 
             }
@@ -150,7 +150,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         }
 
-        public async Task EliminarCategoria(int id = 0)
+        public async Task EliminarProducto(int id = 0)
         {
 
             Respuesta res;
@@ -170,7 +170,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                     flgindicador = true;
 
 
-                    res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarcategoria + "/" + id);
+                    res = await GenericLH.Delete(Constantes.url + Constantes.api_geteliminarproducto + "/" + id);
                     if (res.codigo == 1)
                     {
 
@@ -195,18 +195,17 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
 
         }
-        public ICommand IrCategoriacommand => new Command<CategoriaDTO>(async (p) => await IrCategoria(p));
+        public ICommand IrProductocommand => new Command<ProductoDTO>(async (p) => await IrProducto(p));
 
-        public ICommand CrearCategoriaComand => new Command(async () => await CrearCategoria());
+        public ICommand CrearProductoComand => new Command(async () => await CrearProducto());
         public ICommand RefreshComand => new Command(async () => await MostrarLista());
         public ICommand RefreshIncrementComand => new Command(async () => await MostrarListaRefrsh());
 
 
         //public ICommand seleccionadoComand => new Command(async () => await MostrarListaRefrsh());
-        public ICommand EliminarComand => new Command<int>(async (p) => await EliminarCategoria(p));
+        public ICommand EliminarComand => new Command<int>(async (p) => await EliminarProducto(p));
 
     }
-
 
 }
 
