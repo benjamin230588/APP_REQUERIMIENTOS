@@ -9,4 +9,9 @@ public partial class PedidoCategoriaView : ContentPage
 		InitializeComponent();
         BindingContext = new PedidoCategoriaViewModel(App.Navigate);
     }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        DisplayAlert("ddd", "d", "vvv");
+    }
 }

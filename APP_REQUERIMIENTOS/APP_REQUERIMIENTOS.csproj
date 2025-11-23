@@ -127,6 +127,9 @@
 	  <MauiXaml Update="MVVM\Vistas\PedidoCategoriaView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Vistas\PedidoProductoView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Vistas\PrincipalMasterView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -11,7 +11,7 @@
 
         <CollectionView x:Name="cvMenu" Margin="0,10" 
                     ItemsSource="{Binding listamenu}"
-                    SelectionMode="Single" ItemsLayout="VerticalList">
+                    SelectionMode="None" ItemsLayout="VerticalList">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>

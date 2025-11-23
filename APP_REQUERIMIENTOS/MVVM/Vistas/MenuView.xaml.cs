@@ -9,6 +9,7 @@ public partial class MenuView : ContentPage
     public List<Menu> listamenu { get; set; }
     public string Activeusuario { get; set; }
     private Grid _ultimoSeleccionado;
+    private Grid _lastSelectedGrid = null;
     public MenuView()
 	{
 		InitializeComponent();
@@ -80,9 +81,35 @@ public partial class MenuView : ContentPage
     {
       //  DisplayAlert("dd","ddd","dd");
         var grid = (Grid)sender;
+        if (grid == null) return;
+
         var item = grid.BindingContext;
         var selectedItem = (Menu)item;
-       // cvMenu.SelectedItem = item;
+        // VisualStateManager.GoToState(grid, "Selected");
+
+
+
+        // Validar que el BindingContext sea del tipo correcto
+        // if (grid.BindingContext is not Menu selectedItem) return;
+
+        //if (_lastSelectedGrid != null)
+        //{
+        //    VisualStateManager.GoToState(_lastSelectedGrid, "Normal");
+        //}
+        //if (_lastSelectedItem != null && _lastSelectedItem != selectedItem)
+        //{
+        //    foreach (var child in cvMenu.VisibleCells()) // pseudo-código, ver abajo cómo obtener los grids visibles
+        //    {
+        //        if (child.BindingContext == _lastSelectedItem)
+        //            VisualStateManager.GoToState(child, "Normal");
+        //    }
+        //}
+        //// Marcar el actual
+        VisualStateManager.GoToState(grid, "Selected");
+        await Task.Delay(200); // 200 ms dura el color
+        VisualStateManager.GoToState(grid, "Normal");
+      //  _lastSelectedGrid = grid;
+        // cvMenu.SelectedItem = item;
         //// await Task.Delay(150);
         //await Task.Delay(3000);
         //cvMenu.SelectedItem = item;
