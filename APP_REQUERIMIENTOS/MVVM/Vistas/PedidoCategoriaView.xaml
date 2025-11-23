@@ -5,7 +5,7 @@
              Title="PedidoCategoriaView">
     <Grid RowDefinitions="*">
         <StackLayout>
-            <StackLayout  VerticalOptions="FillAndExpand">
+            <ScrollView  VerticalOptions="FillAndExpand">
                 <CollectionView ItemsSource="{Binding listacategoria}"             
                     Margin="10"
                     ItemSizingStrategy="MeasureFirstItem"
@@ -41,7 +41,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-            </StackLayout>
+            </ScrollView>
             
             <StackLayout Orientation="Horizontal" Spacing="15" Margin="10,30,10,10">
                 
