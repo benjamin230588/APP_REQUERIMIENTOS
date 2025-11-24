@@ -74,4 +74,21 @@ public partial class benja : ContentPage
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
+
+    private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        await App.Navigate.PushAsync(new FormPedidoView());
+
+    }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+       // MenuItem oMenuItem = sender as MenuItem;
+        var btn = sender as Button;
+
+        // aquí YA VIENE EL OBJETO COMPLETO DEL ITEM
+        var item = btn.CommandParameter as Articulo;
+
+        DisplayAlert("Item", $"Nombre: {item.Cantidad}", "OK");
+    }
 }

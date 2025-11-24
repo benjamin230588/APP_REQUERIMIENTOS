@@ -4,11 +4,17 @@
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.benja"
              Title="benja">
     <Grid>
-        <!-- CollectionView -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <CollectionView x:Name="cvItems"
                 SelectionMode="None" ItemSizingStrategy="MeasureFirstItem"
                 ItemsLayout="VerticalGrid,2"
-                VerticalScrollBarVisibility="Never">
+                VerticalScrollBarVisibility="Never" Grid.Column="0" Grid.Row="0">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -46,9 +52,9 @@
                             Increment="1"
                             Value="{Binding Cantidad}"   
                             ValueChanged="Stepper_ValueChanged" />
-                           
 
-                            <Button Text="Agregar" Grid.Column="0" Padding="10,2"  Grid.Row="3" Grid.ColumnSpan="2"  HorizontalOptions="Center" ></Button>
+
+                            <Button Text="Agregar" Grid.Column="0" Padding="10,2"  Grid.Row="3" Grid.ColumnSpan="2"  HorizontalOptions="Center" Clicked="Button_Clicked"  CommandParameter="{Binding .}"></Button>
 
 
                         </Grid>
@@ -60,6 +66,21 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="1" BackgroundColor="Blue" Spacing="10" Padding="20,5">
+            <Label  HorizontalOptions="StartAndExpand" Text="VER PEDIDO " FontSize="20" HeightRequest="50" TextColor="White" ></Label>
+
+            <Border   StrokeShape="RoundRectangle 30" BackgroundColor="White" HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" Padding="15,2">
+                    <Label  Text="S/.1200.00" FontSize="20" HeightRequest="50" VerticalTextAlignment="Center" TextColor="Black"   HorizontalOptions="FillAndExpand" ></Label>
+                    <Image Source="realizarpedido"  WidthRequest="40" HeightRequest="40" Aspect="AspectFill"   />
+
+                </StackLayout>
+
+            </Border>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
 
     </Grid>
 

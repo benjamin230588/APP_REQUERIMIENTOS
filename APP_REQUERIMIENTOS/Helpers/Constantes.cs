@@ -51,6 +51,7 @@ namespace APP_REQUERIMIENTOS.Helpers
         public const string RecordarContra = "RecordarContra";
         public const string idNewToken = "idNewToken";
         public const string idversion = "idversion";
+        public const string detallepedido = "detallepedido";
 
     }
 }

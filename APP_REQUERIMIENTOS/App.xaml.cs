@@ -15,8 +15,8 @@ namespace APP_REQUERIMIENTOS
             //   change
             if (Preferences.Get(Constantes.RecordarContra, false) == true)
             {
-                //Application.Current.MainPage = new PrincipalMasterView();
-                MainPage = new NavigationPage(new benja());
+                Application.Current.MainPage = new PrincipalMasterView();
+                //MainPage = new NavigationPage(new FormPedidoView());
             }
             else
             {

@@ -109,6 +109,9 @@
 	  <MauiXaml Update="MVVM\Vistas\FormCategoriaView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Vistas\FormPedidoView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Vistas\FormProductoView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

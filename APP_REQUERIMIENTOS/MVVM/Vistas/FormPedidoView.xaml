@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.FormPedidoView"
+             Title="Pedido">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <CollectionView x:Name="cvItems"
+                ItemsSource="{Binding Items}"
+                SelectionMode="None" Grid.Column="0" Grid.Row="0" Margin="10">
+
+            <!-- HEADER -->
+            <CollectionView.Header>
+                <Grid Padding="5" ColumnSpacing="10" BackgroundColor="#DDDDDD">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="80"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Text="ID" Grid.Column="0" FontAttributes="Bold"/>
+                    <Label Text="Producto" Grid.Column="1" FontAttributes="Bold"/>
+                    <Label Text="Precio" Grid.Column="2" FontAttributes="Bold"/>
+                    <Label Text="Cant." Grid.Column="3" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                    <Label Text="Subtotal" Grid.Column="4" FontAttributes="Bold"/>
+                </Grid>
+            </CollectionView.Header>
+
+            <!-- ITEMS -->
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="5" ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="{Binding Id}" Grid.Column="0"/>
+
+                        <Label Text="{Binding Producto}" Grid.Column="1"/>
+
+                        <Label Text="{Binding Precio, StringFormat='S/{0:F2}'}"
+                       Grid.Column="2"/>
+
+                        <Label Text="{Binding Cantidad} " HorizontalOptions="CenterAndExpand"
+                       Grid.Column="3"/>
+
+                        <Label Text="{Binding Subtotal, StringFormat='S/{0:F2}'}"
+                       Grid.Column="4"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <!-- FOOTER -->
+            <CollectionView.Footer>
+                <Grid Padding="10" ColumnSpacing="10" Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Text="Grabar" Background="Green" TextColor="White"   Grid.Column="0"
+                    x:Name="btnRegistrarUsuario" Command="{Binding GuardarRequerimientoComand}"
+                    CornerRadius="15"  HorizontalOptions="FillAndExpand"/>  
+                    <Label Text="TOTAL:"
+                   Grid.Column="1"
+                   FontAttributes="Bold"
+                   FontSize="18"
+                   HorizontalOptions="End" />
+
+                    <Label Text="150"
+                   Grid.Column="2"
+                   FontSize="18"
+                   FontAttributes="Bold"/>
+                </Grid>
+            </CollectionView.Footer>
+
+        </CollectionView>
+
+        <StackLayout Orientation="Horizontal" Spacing="15" Margin="10,30,10,10" Grid.Column="0" Grid.Row="1">
+            <Button Text="Volver" BackgroundColor="Red" Clicked="btnVolverLogin_Clicked"
+         x:Name="btnVolverLogin"  TextColor="White" HorizontalOptions="FillAndExpand" CornerRadius="15"/>
+            <Button Text="Grabar" Background="Green" TextColor="White" 
+         x:Name="btnRegistrardddUsuario" Clicked="btnRegistrardddUsuario_Clicked"
+         CornerRadius="15"  HorizontalOptions="FillAndExpand"/>
+
+
+        </StackLayout>
+       
+
+
+    </Grid>
+
+           
+
+</ContentPage>
