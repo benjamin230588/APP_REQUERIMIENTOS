@@ -88,6 +88,12 @@
 	  <MauiXaml Update="MVVM\Vistas\ANIMACION.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Vistas\benja.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Vistas\CAMBIO222.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Vistas\CategoriaView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

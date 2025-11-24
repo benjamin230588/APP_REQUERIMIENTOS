@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.CAMBIO222"
+             Title="CAMBIO222">
+    <VerticalStackLayout>
+        <Label x:Name="lblcambio123" Text="label"></Label>
+        <CollectionView x:Name="cvItems"
+                 ItemsSource="{Binding Items}"
+                 SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout Padding="10" Spacing="12">
+                        <Label x:Name="lbltexto"></Label>
+                       
+                        <Button Text="Acción"
+                         HeightRequest="36" Clicked="btngrabar_Clicked_1"
+                         x:Name="btngrabar"/>
+
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

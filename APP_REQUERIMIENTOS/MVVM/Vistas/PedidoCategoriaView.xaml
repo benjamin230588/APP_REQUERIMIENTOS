@@ -2,55 +2,65 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.PedidoCategoriaView"
-             Title="PedidoCategoriaView">
-    <Grid RowDefinitions="*">
-        <StackLayout>
-            <ScrollView  VerticalOptions="FillAndExpand">
-                <CollectionView ItemsSource="{Binding listacategoria}"             
-                    Margin="10"
-                    ItemSizingStrategy="MeasureFirstItem"
-                    ItemsLayout="VerticalGrid,2"
-                    VerticalScrollBarVisibility="Never" >
+             Title="Pedido">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <CollectionView ItemsSource="{Binding listacategoria}"             
+            Margin="10"
+            ItemSizingStrategy="MeasureFirstItem"
+            ItemsLayout="VerticalGrid,2"
+            VerticalScrollBarVisibility="Never" Grid.Column="0" Grid.Row="0">
 
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
 
-                            <Border 
-                        StrokeShape="RoundRectangle 30"
-                        BackgroundColor="White"
-                        Padding="1,5"
-                        Margin="6"
-                        HeightRequest="240" >
-                            <StackLayout Orientation="Vertical" Spacing="10" HorizontalOptions="Center" Margin="8">
-                                <Image Source="{Binding rutaarchivo}"
-                                    Aspect="AspectFill"   HeightRequest="180" HorizontalOptions="CenterAndExpand" />
-                                <Label Text="{Binding Nombre}"
-                                    FontSize="Medium"
-                                    HorizontalTextAlignment="Center"/>
+                    <Border 
+                StrokeShape="RoundRectangle 30"
+                BackgroundColor="White"
+                Padding="1,5"
+                Margin="6"
+                HeightRequest="200" >
+                    <StackLayout Orientation="Vertical" Spacing="10" HorizontalOptions="Center" Margin="8">
+                        <Image Source="{Binding rutaarchivo}"
+                            Aspect="AspectFill"  WidthRequest="150" HeightRequest="120" HorizontalOptions="CenterAndExpand" />
+                        <Label Text="{Binding Nombre}"
+                            FontSize="Medium"
+                            HorizontalTextAlignment="Center"/>
 
-                            </StackLayout>
-                                <Border.GestureRecognizers>
-                                    <TapGestureRecognizer
-                            Tapped="TapGestureRecognizer_Tapped"
-                            NumberOfTapsRequired="1" />
-                                </Border.GestureRecognizers>
+                    </StackLayout>
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                    Tapped="TapGestureRecognizer_Tapped"
+                    NumberOfTapsRequired="1" />
+                        </Border.GestureRecognizers>
 
-                            </Border>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
 
-            </ScrollView>
-            
-            <StackLayout Orientation="Horizontal" Spacing="15" Margin="10,30,10,10">
+
+        <StackLayout Orientation="Horizontal" Grid.Column="0" Grid.Row="1" BackgroundColor="Blue" Spacing="10" Padding="20,5">
+            <Label  HorizontalOptions="StartAndExpand" Text="VER PEDIDO " FontSize="20" HeightRequest="50" TextColor="White" ></Label>
+
+            <Border   StrokeShape="RoundRectangle 30" BackgroundColor="White" HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal" Padding="15,2">
+                    <Label  Text="S/.1200.00" FontSize="20" HeightRequest="50" VerticalTextAlignment="Center" TextColor="Black"   HorizontalOptions="FillAndExpand" ></Label>
+                    <Image Source="realizarpedido"  WidthRequest="40" HeightRequest="40" Aspect="AspectFill"   />
+
+                </StackLayout>
                 
-                <Label Text="Pedido" HorizontalOptions="FillAndExpand"></Label>
-
-            </StackLayout>
+            </Border>
         </StackLayout>
         
-        <Grid  Grid.Column="0" Grid.Row="0"   Opacity=".8" 
+        <Grid  Grid.Column="0" Grid.Row="0"  Grid.RowSpan="2" Opacity=".8" 
          IsVisible="{Binding flgindicador}" InputTransparent="False"  BackgroundColor="#FAFAFA">
 
             <Grid.GestureRecognizers>
