@@ -13,6 +13,22 @@ public partial class benja : ContentPage
 		InitializeComponent();
         Lista = new List<Articulo>()
         {
+            new Articulo(){ Nombre="S/50.0 Lomo Saltado de Carne Fino Alfredo", Precio=10 },
+            new Articulo(){ Nombre="S/50.0 Crne Saltado de Pollo", Precio=20 },
+            new Articulo(){ Nombre="S/50.0 Platano Carne Fino Alfredo", Precio=18 },
+
+            new Articulo(){ Nombre="S/50.0 Arroz Saltado de Carne Fino Alfredo", Precio=10 },
+            new Articulo(){ Nombre="S/50.0 Fideo Saltado de Carne Fino Alfredo", Precio=20 },
+            new Articulo(){ Nombre="S/50.0 Guiso Saltado Fino Alfredo", Precio=18 },
+
+            new Articulo(){ Nombre="S/50.0 Chifa Saltado de Carne Fino Alfredo", Precio=10 },
+            new Articulo(){ Nombre="S/50.0 Sopa Saltado de Carne Fino Alfredo", Precio=20 },
+            new Articulo(){ Nombre="S/50.0 Lomo Saltado de Carne Fino Alfredo", Precio=18 },
+
+             new Articulo(){ Nombre="LSS 65", Precio=10 },
+            new Articulo(){ Nombre="MAQ 100", Precio=20 },
+            new Articulo(){ Nombre="LSE 80 I", Precio=18 },
+
             new Articulo(){ Nombre="LSS 65", Precio=10 },
             new Articulo(){ Nombre="MAQ 100", Precio=20 },
             new Articulo(){ Nombre="LSE 80 I", Precio=18 }
