@@ -1,3 +1,5 @@
+using APP_REQUERIMIENTOS.Helpers;
+using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -89,6 +91,27 @@ public partial class benja : ContentPage
         // aquí YA VIENE EL OBJETO COMPLETO DEL ITEM
         var item = btn.CommandParameter as Articulo;
 
-        DisplayAlert("Item", $"Nombre: {item.Cantidad}", "OK");
+        List<ItemVentaDetalle> listaProd = null;
+        if (Preferences.Get(Constantes.detallepedido, "") == "")
+        {
+            listaProd = new List<ItemVentaDetalle>();
+        }
+        else
+        {
+            listaProd = JsonConvert.DeserializeObject<List<ItemVentaDetalle>>(Preferences.Get(Constantes.detallepedido, ""));
+        }
+
+        listaProd.Add(new ItemVentaDetalle
+        {
+            Id = 1,
+            Producto = item.Nombre,
+            Precio = item.Precio,
+            Cantidad = item.Cantidad
+        });
+
+        
+        Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaProd));
+
+       // DisplayAlert("Item", $"Nombre: {item.Cantidad}", "OK");
     }
 }

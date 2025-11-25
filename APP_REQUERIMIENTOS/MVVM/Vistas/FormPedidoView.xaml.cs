@@ -10,6 +10,10 @@ public partial class FormPedidoView : ContentPage
     public FormPedidoView()
 	{
 		InitializeComponent();
+
+        Items = JsonConvert.DeserializeObject<List<ItemVentaDetalle>>(Preferences.Get(Constantes.detallepedido, ""));
+
+        BindingContext = this;
         //Items = new ObservableCollection<ItemVentaDetalle>()
         //{
         //    new ItemVentaDetalle { Id = 1, Producto = "Coca Cola 500ml", Precio = 3.50m, Cantidad = 2 },

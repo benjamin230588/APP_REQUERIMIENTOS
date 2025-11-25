@@ -1,6 +1,7 @@
 ﻿using APP_REQUERIMIENTOS.Helpers;
 using APP_REQUERIMIENTOS.MVVM.Vistas;
 using Microsoft.Maui.Storage;
+using Newtonsoft.Json;
 
 namespace APP_REQUERIMIENTOS
 {
@@ -16,6 +17,7 @@ namespace APP_REQUERIMIENTOS
             if (Preferences.Get(Constantes.RecordarContra, false) == true)
             {
                 Application.Current.MainPage = new PrincipalMasterView();
+                Preferences.Set(Constantes.detallepedido, "");
                 //MainPage = new NavigationPage(new FormPedidoView());
             }
             else
