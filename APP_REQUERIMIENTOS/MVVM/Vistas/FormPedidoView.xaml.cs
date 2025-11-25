@@ -28,40 +28,16 @@ public partial class FormPedidoView : ContentPage
     private void btnVolverLogin_Clicked(object sender, EventArgs e)
     {
 
-        List<ItemVentaDetalle> listaProd = null;
-        if (Preferences.Get(Constantes.detallepedido, "") == "")
-        {
-            listaProd = new List<ItemVentaDetalle>();
-        }
-        else {
-            listaProd = JsonConvert.DeserializeObject<List<ItemVentaDetalle>>(Preferences.Get(Constantes.detallepedido, ""));
-        }
-
-        listaProd.Add(new ItemVentaDetalle
-        {
-            Id = 1,
-            Producto = "delia fdf",
-            Precio = 123,
-            Cantidad = 50
-        });
-
-        listaProd.Add(new ItemVentaDetalle
-        {
-            Id = 1,
-            Producto = "Arrroz con pollo",
-            Precio = 123,
-            Cantidad = 50
-        });
-        Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaProd));
+       
     }
 
     private void btnRegistrardddUsuario_Clicked(object sender, EventArgs e)
     {
-        
-            Items = JsonConvert.DeserializeObject<List<ItemVentaDetalle>>(Preferences.Get(Constantes.detallepedido, ""));
-       
-           BindingContext = this;
-    }
+        Respuesta res;
+        res = await GenericLH.Post<RequerimientoDTO>(Constantes.url + Constantes.api_getgrabarequerimiento, objrequerimiento);
+        if (res.codigo == 1)
+        {
+        }
 }
 public class ItemVentaDetalle
 {
@@ -70,4 +46,16 @@ public class ItemVentaDetalle
     public decimal Precio { get; set; }
     public int Cantidad { get; set; }
     public decimal Subtotal => Precio * Cantidad;
-}
+
+
+        public int Iddetalle { get; set; }
+        public int Idpedido { get; set; }
+
+        public string Idproducto { get; set; }
+        public string Producto { get; set; }
+
+        public int Cantidad { get; set; }
+        public int precio { get; set; }
+
+        public int SubTotal { get; set; }
+    }
