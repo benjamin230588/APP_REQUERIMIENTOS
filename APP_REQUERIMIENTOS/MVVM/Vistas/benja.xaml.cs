@@ -91,22 +91,25 @@ public partial class benja : ContentPage
         // aquí YA VIENE EL OBJETO COMPLETO DEL ITEM
         var item = btn.CommandParameter as Articulo;
 
-        List<ItemVentaDetalle> listaProd = null;
+        List<PedidoDetalle> listaProd = null;
         if (Preferences.Get(Constantes.detallepedido, "") == "")
         {
-            listaProd = new List<ItemVentaDetalle>();
+            listaProd = new List<PedidoDetalle>();
         }
         else
         {
-            listaProd = JsonConvert.DeserializeObject<List<ItemVentaDetalle>>(Preferences.Get(Constantes.detallepedido, ""));
+            listaProd = JsonConvert.DeserializeObject<List<PedidoDetalle>>(Preferences.Get(Constantes.detallepedido, ""));
         }
 
-        listaProd.Add(new ItemVentaDetalle
+        listaProd.Add(new PedidoDetalle
         {
-            Id = 1,
+            
             Producto = item.Nombre,
-            Precio = item.Precio,
-            Cantidad = item.Cantidad
+            Idproducto="1",
+            precio = item.Precio,
+            Cantidad = item.Cantidad,
+            SubTotal= item.Precio * item.Cantidad
+            
         });
 
         

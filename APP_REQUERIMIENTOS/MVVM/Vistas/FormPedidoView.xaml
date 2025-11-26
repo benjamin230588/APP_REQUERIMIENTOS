@@ -51,13 +51,13 @@
 
                         <Label Text="{Binding Producto}" Grid.Column="1"/>
 
-                        <Label Text="{Binding Precio, StringFormat='S/{0:F2}'}"
+                        <Label Text="{Binding precio, StringFormat='S/{0:F2}'}"
                        Grid.Column="2"/>
 
                         <Label Text="{Binding Cantidad} " HorizontalOptions="CenterAndExpand"
                        Grid.Column="3"/>
 
-                        <Label Text="{Binding Subtotal, StringFormat='S/{0:F2}'}"
+                        <Label Text="{Binding SubTotal, StringFormat='S/{0:F2}'}"
                        Grid.Column="4"/>
                     </Grid>
                 </DataTemplate>

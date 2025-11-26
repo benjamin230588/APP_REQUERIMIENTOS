@@ -41,6 +41,9 @@ namespace APP_REQUERIMIENTOS.Helpers
         public const string api_getmodificarcategoria = "/api/categoria/Modificar";
         public const string api_getmodificarproducto = "/api/Producto/Modificar";
 
+        public const string api_getgrabarpedido = "/api/Pedido/Grabar";
+
+
 
         public const string api_getaveria = "/Averias/Index";
 
