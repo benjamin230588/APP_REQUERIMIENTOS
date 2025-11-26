@@ -129,7 +129,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         }
 
 
-        public async Task IrCategoria(CategoriaDTO objeto)
+        public async Task IrProductos(int idcategoria)
         {
             //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
             try
@@ -137,7 +137,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
 
 
-                await App.Navigate.PushAsync(new FormCategoriaView(objeto, "Edicion Categoria"));
+                await App.Navigate.PushAsync(new benja());
 
 
             }
@@ -195,7 +195,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
 
         }
-        public ICommand IrCategoriacommand => new Command<CategoriaDTO>(async (p) => await IrCategoria(p));
+        public ICommand IrProductoscommand => new Command<int>(async (p) => await IrProductos(p));
 
         public ICommand CrearCategoriaComand => new Command(async () => await CrearCategoria());
         public ICommand RefreshComand => new Command(async () => await MostrarLista());
