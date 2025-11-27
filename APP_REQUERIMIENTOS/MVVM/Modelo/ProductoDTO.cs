@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace APP_REQUERIMIENTOS.MVVM.Modelo
 {
-    public class ProductoDTO
+    public class ProductoDTO : INotifyPropertyChanged
     {
         public int Id { get; set; }
+
 
 
         public string Nombre { get; set; }
@@ -16,6 +18,9 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
 
         public string? Descripcion { get; set; }
         public int Idcategoria { get; set; }
+
+        private int _cantidad;
+
 
         public string Nombrecategoria { get; set; }
 
@@ -41,5 +46,22 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
             return this.MemberwiseClone();
         }
 
+        public int Cantidad
+        {
+            get => Cantidad;
+            set
+            {
+                if (_cantidad != value)
+                {
+                    _cantidad = value;
+                    
+                    OnPropertyChanged(nameof(Cantidad));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged(string prop) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
     }
 }

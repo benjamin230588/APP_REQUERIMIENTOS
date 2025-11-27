@@ -83,38 +83,38 @@ public partial class benja : ContentPage
 
     }
 
-    private void Button_Clicked(object sender, EventArgs e)
-    {
-       // MenuItem oMenuItem = sender as MenuItem;
-        var btn = sender as Button;
+    //private void Button_Clicked(object sender, EventArgs e)
+    //{
+    //   // MenuItem oMenuItem = sender as MenuItem;
+    //    var btn = sender as Button;
 
-        // aquí YA VIENE EL OBJETO COMPLETO DEL ITEM
-        var item = btn.CommandParameter as Articulo;
+    //    // aquí YA VIENE EL OBJETO COMPLETO DEL ITEM
+    //    var item = btn.CommandParameter as Articulo;
 
-        List<PedidoDetalle> listaProd = null;
-        if (Preferences.Get(Constantes.detallepedido, "") == "")
-        {
-            listaProd = new List<PedidoDetalle>();
-        }
-        else
-        {
-            listaProd = JsonConvert.DeserializeObject<List<PedidoDetalle>>(Preferences.Get(Constantes.detallepedido, ""));
-        }
+    //    List<PedidoDetalle> listaProd = null;
+    //    if (Preferences.Get(Constantes.detallepedido, "") == "")
+    //    {
+    //        listaProd = new List<PedidoDetalle>();
+    //    }
+    //    else
+    //    {
+    //        listaProd = JsonConvert.DeserializeObject<List<PedidoDetalle>>(Preferences.Get(Constantes.detallepedido, ""));
+    //    }
 
-        listaProd.Add(new PedidoDetalle
-        {
+    //    listaProd.Add(new PedidoDetalle
+    //    {
             
-            Producto = item.Nombre,
-            Idproducto="1",
-            precio = item.Precio,
-            Cantidad = item.Cantidad,
-            SubTotal= item.Precio * item.Cantidad
+    //        Producto = item.Nombre,
+    //        Idproducto="1",
+    //        precio = item.Precio,
+    //        Cantidad = item.Cantidad,
+    //        SubTotal= item.Precio * item.Cantidad
             
-        });
+    //    });
 
         
-        Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaProd));
+    //    Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaProd));
 
-       // DisplayAlert("Item", $"Nombre: {item.Cantidad}", "OK");
-    }
+    //   // DisplayAlert("Item", $"Nombre: {item.Cantidad}", "OK");
+    //}
 }

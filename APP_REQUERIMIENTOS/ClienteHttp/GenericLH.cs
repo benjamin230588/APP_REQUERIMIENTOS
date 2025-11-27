@@ -50,7 +50,11 @@ public class GenericLH
         {
             var cadena = JsonConvert.SerializeObject(obj);
             var body = new StringContent(cadena, Encoding.UTF8, "application/json");
+              
             var rpta = await cliente.PostAsync(url, body);
+                
+
+                      
             //var rpta = await cliente.GetAsync(url);
             if (!rpta.IsSuccessStatusCode) return new Respuesta { codigo = 0 };
             else
@@ -72,18 +76,27 @@ public class GenericLH
 }
 
 
-    public static async Task<T> Get<T>(string url)
+    public static async Task<Respuesta> Get(string url)
     {
         HttpClient cliente = new HttpClient();
+        Respuesta res = new Respuesta();
         var rpta = await cliente.GetAsync(url);
 
         //Como String
-        var result = await rpta.Content.ReadAsStringAsync();
-        T l = JsonConvert.DeserializeObject<T>(result);
-        return l;
+       // var result = await rpta.Content.ReadAsStringAsync();
+        if (!rpta.IsSuccessStatusCode) return new Respuesta { codigo = 0 };
+        else
+        {
+            //Como String
+            var result = await rpta.Content.ReadAsStringAsync();
+            //List<T> l = JsonConvert.DeserializeObject<List<L>>(result);
+            res = JsonConvert.DeserializeObject<Respuesta>(result);
 
+        }
 
-    }
+            return res;
+
+        }
 
     public static async Task<Respuesta> Post<T>(string url, T obj)
     {

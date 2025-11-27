@@ -93,7 +93,7 @@
             <Button Text="Volver" BackgroundColor="Red" Clicked="btnVolverLogin_Clicked"
          x:Name="btnVolverLogin"  TextColor="White" HorizontalOptions="FillAndExpand" CornerRadius="15"/>
             <Button Text="Grabar" Background="Green" TextColor="White" 
-         x:Name="btnRegistrardddUsuario" Clicked="btnRegistrardddUsuario_Clicked"
+         x:Name="btnRegistrardddUsuario" 
          CornerRadius="15"  HorizontalOptions="FillAndExpand"/>
 
 

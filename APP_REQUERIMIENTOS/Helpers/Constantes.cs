@@ -32,6 +32,7 @@ namespace APP_REQUERIMIENTOS.Helpers
 
         public const string api_geteliminarproducto = "/api/Producto/delete";
         public const string api_getlistaproducto = "/api/Producto/Lista";
+        public const string api_getlistaproductocategoria = "/api/Producto/ListaXcategoria/";
 
 
         public const string api_getgrabarcategoria = "/api/categoria/grabar";

@@ -137,7 +137,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
 
 
-                await App.Navigate.PushAsync(new benja());
+                await App.Navigate.PushAsync(new PedidoProductoView(idcategoria));
 
 
             }

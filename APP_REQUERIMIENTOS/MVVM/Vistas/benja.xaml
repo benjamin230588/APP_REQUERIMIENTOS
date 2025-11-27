@@ -51,10 +51,10 @@
                             Maximum="100"
                             Increment="1"
                             Value="{Binding Cantidad}"   
-                            ValueChanged="Stepper_ValueChanged" />
+                             />
 
 
-                            <Button Text="Agregar" Grid.Column="0" Padding="10,2"  Grid.Row="3" Grid.ColumnSpan="2"  HorizontalOptions="Center" Clicked="Button_Clicked"  CommandParameter="{Binding .}"></Button>
+                            <Button Text="Agregar" Grid.Column="0" Padding="10,2"  Grid.Row="3" Grid.ColumnSpan="2"  HorizontalOptions="Center"   CommandParameter="{Binding .}"></Button>
 
 
                         </Grid>
