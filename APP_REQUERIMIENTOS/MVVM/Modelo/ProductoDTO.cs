@@ -20,7 +20,7 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
         public int Idcategoria { get; set; }
 
         private int _cantidad;
-
+        private bool _activeagregar;
 
         public string Nombrecategoria { get; set; }
 
@@ -48,7 +48,7 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
 
         public int Cantidad
         {
-            get => Cantidad;
+            get => _cantidad;
             set
             {
                 if (_cantidad != value)
@@ -56,6 +56,20 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
                     _cantidad = value;
                     
                     OnPropertyChanged(nameof(Cantidad));
+                }
+            }
+        }
+
+        public bool Activeagregar
+        {
+            get => _activeagregar;
+            set
+            {
+                if (_activeagregar != value)
+                {
+                    _activeagregar = value;
+
+                    OnPropertyChanged(nameof(Activeagregar));
                 }
             }
         }

@@ -15,25 +15,12 @@ public partial class FormPedidoView : ContentPage
         InitializeComponent();
         vm = new FormPedidoViewModel(Navigation);
         BindingContext = vm;
-        //Items = JsonConvert.DeserializeObject<List<PedidoDetalle>>(Preferences.Get(Constantes.detallepedido, ""));
-
-        //BindingContext = this;
-        //Items = new ObservableCollection<ItemVentaDetalle>()
-        //{
-        //    new ItemVentaDetalle { Id = 1, Producto = "Coca Cola 500ml", Precio = 3.50m, Cantidad = 2 },
-        //    new ItemVentaDetalle { Id = 2, Producto = "Hamburguesa", Precio = 12.00m, Cantidad = 1 },
-        //    new ItemVentaDetalle { Id = 3, Producto = "Papas Fritas", Precio = 5.00m, Cantidad = 1 }
-        //};
-        //BindingContext = this;
+      
     }
 
 
 
-    private void btnVolverLogin_Clicked(object sender, EventArgs e)
-    {
-
-
-    }
+   
 
    
 }

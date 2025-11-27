@@ -10,7 +10,7 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
     {
         public int Idventa { get; set; }
 
-        public string Idcliente { get; set; }
+        public int Idcliente { get; set; }
         public string Cliente { get; set; }
 
         public DateTime fecha { get; set; }

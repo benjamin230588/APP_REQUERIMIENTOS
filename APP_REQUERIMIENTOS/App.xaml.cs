@@ -16,9 +16,9 @@ namespace APP_REQUERIMIENTOS
             //   change
             if (Preferences.Get(Constantes.RecordarContra, false) == true)
             {
-                Application.Current.MainPage = new PrincipalMasterView();
+               Application.Current.MainPage = new PrincipalMasterView();
               //  Preferences.Set(Constantes.detallepedido, "");
-                //MainPage = new NavigationPage(new FormPedidoView());
+               // MainPage = new NavigationPage(new Slepperview());
             }
             else
             {

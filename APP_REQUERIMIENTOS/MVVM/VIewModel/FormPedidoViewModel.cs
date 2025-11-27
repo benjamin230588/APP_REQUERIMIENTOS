@@ -3,6 +3,7 @@ using APP_REQUERIMIENTOS.ClienteHttp;
 using APP_REQUERIMIENTOS.Helpers;
 using APP_REQUERIMIENTOS.Modelos;
 using APP_REQUERIMIENTOS.MVVM.Modelo;
+using APP_REQUERIMIENTOS.MVVM.Vistas;
 using CommunityToolkit.Maui.Views;
 using Newtonsoft.Json;
 using System;
@@ -21,8 +22,11 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         private PedidoCabeceraDTO _objpedido;
         private bool _flgindicador;
         public byte[] imgmedia;
+        private decimal _totalpedido;
+
         public string extension { get; set; }
-        private List<string> _listacategoria;
+
+        private ObservableCollection<PedidoDetalleDTO> _listaproductos;
         //private ObservableCollection<CategoriaDTO> _listacategoriaobjeto;
 
         public FormPedidoViewModel(INavigation navigation)
@@ -30,6 +34,10 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             Navigation = navigation;
            // this.titulo = titulo;
             flgindicador = true;
+
+            listaproductos = JsonConvert.DeserializeObject<ObservableCollection<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+            totalpedido = listaproductos.Sum(x => x.SubTotal);
+            flgindicador = false;
             // listacategoria = cargarCategorias( model);
             // objrequerimiento = (RequerimientoDTO)model.Clone();
             //  objproducto = (ProductoDTO)model.Clone();
@@ -42,10 +50,10 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
 
         }
-        public List<string> listacategoria
+        public ObservableCollection<PedidoDetalleDTO> listaproductos
         {
-            get { return _listacategoria; }
-            set { SetValue(ref _listacategoria, value); }
+            get { return _listaproductos; }
+            set { SetValue(ref _listaproductos, value); }
 
         }
 
@@ -53,6 +61,11 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         {
             get { return _titulo; }
             set { SetValue(ref _titulo, value); }
+        }
+        public decimal totalpedido
+        {
+            get { return _totalpedido; }
+            set { SetValue(ref _totalpedido, value); }
         }
         public bool flgindicador
         {
@@ -108,7 +121,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         //    get { return _imgmedia; }
         //    set { SetValue(ref _imgmedia, value); }
         //}
-        public async Task GuardarProducto()
+        public async Task GuardarPedido()
         {
 
             Respuesta res;
@@ -116,50 +129,43 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             {
                 flgindicador = true;
 
-                //await Task.Delay(10000);
-                // Thread.Sleep(10000);
-                if (objpedido.Idventa == 0)
+                
+                PedidoCabeceraDTO objetoventa = new PedidoCabeceraDTO();
+                var fecha = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+                objetoventa.fecha = fecha;
+                objetoventa.Cliente = "JOSUE";
+                objetoventa.Idcliente = 0;
+
+                objetoventa.UsuCreacion = 1;
+                objetoventa.FecCreacion = fecha;
+
+                objetoventa.lista = listaproductos.ToList();
+
+
+
+                res = await GenericLH.Post<PedidoCabeceraDTO>(Constantes.url + Constantes.api_getgrabarpedido, objetoventa);
+                if (res.codigo == 1)
                 {
-                    objpedido.UsuCreacion = Preferences.Get(Constantes.IdUsuario, 0);
+                    Preferences.Set(Constantes.detallepedido, "");
 
-                    var fecha = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
-                    objpedido.FecCreacion = DateTime.Now;
-                  //  objpedido.Descripcion = "pruen";
-                   // objproducto.Idcategoria = _listacategoriaobjeto.Where(x => x.Nombre == objproducto.Nombrecategoria).FirstOrDefault().Id;
+                    var pages = App.Navigate.NavigationStack.ToList();
+                    //  var pagina23 = pages.FirstOrDefault(x => x.GetType().Name == "");
 
-                    res = await GenericLH.PostFile<PedidoCabeceraDTO>(imgmedia, extension, Constantes.url + Constantes.api_getgrabarproducto, objpedido);
-                    if (res.codigo == 1)
+                    for (int i = 0; i <= pages.Count - 1; i++)
                     {
-                        //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
-                        var popup = new MensajeConfirmacion();
-                        var result = await Application.Current.MainPage.ShowPopupAsync(popup);
+                        if (i != 0)
+                        {
+                            App.Navigate.RemovePage(pages[i]);
 
+                        }
 
-                        await App.Navigate.PopAsync();
-                        await ProductoViewModel.GetInstance().MostrarLista();
-                    }
-                }
-                else
-                {
-                    objpedido.UsuModificacion = Preferences.Get(Constantes.IdUsuario, 0);
-
-                    var fecha = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
-                    objpedido.FecActualizacion = fecha;
-                    //objpedido.Idcategoria = _listacategoriaobjeto.Where(x => x.Nombre == objproducto.Nombrecategoria).FirstOrDefault().Id;
-
-
-                    res = await GenericLH.PostFile<PedidoCabeceraDTO>(imgmedia, extension, Constantes.url + Constantes.api_getmodificarproducto, objpedido);
-                    if (res.codigo == 1)
-                    {
-                        //   objres = JsonConvert.DeserializeObject<List<RequerimientoDTO>>(JsonConvert.SerializeObject(res.data));
-                        var popup = new MensajeConfirmacion();
-                        var result = await Application.Current.MainPage.ShowPopupAsync(popup);
-
-                        await App.Navigate.PopAsync();
-                        await ProductoViewModel.GetInstance().MostrarLista();
 
                     }
+
+                    await App.Navigate.PushAsync(new PedidoCategoriaView());
+
                 }
+
                 flgindicador = false;
 
             }
@@ -178,8 +184,8 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
 
 
-        public ICommand GuardarRequerimientoComand => new Command(async () => await GuardarProducto());
-        public ICommand VolverRequerimientocommand => new Command(async () => await VolverProducto());
+        public ICommand GuardarPedidoComand => new Command(async () => await GuardarPedido());
+        public ICommand Volvercommand => new Command(async () => await VolverProducto());
 
         //public ICommand CargarImagenocommand => new Command(async () => await CargarImagen());
 

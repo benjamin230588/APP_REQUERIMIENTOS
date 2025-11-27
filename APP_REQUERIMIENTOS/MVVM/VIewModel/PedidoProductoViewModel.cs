@@ -3,6 +3,7 @@ using APP_REQUERIMIENTOS.ClienteHttp;
 using APP_REQUERIMIENTOS.Helpers;
 using APP_REQUERIMIENTOS.Modelos;
 using APP_REQUERIMIENTOS.MVVM.Modelo;
+using APP_REQUERIMIENTOS.MVVM.Vistas;
 using CommunityToolkit.Maui.Views;
 using Newtonsoft.Json;
 using System;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 {
@@ -19,25 +21,20 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
     {
         private bool _flgindicador;
         private bool _flgrefresh;
+        private decimal _importetotal;
         //private int _cantidad;
-        private ObservableCollection<ProductoDTO> _listaproducto;
-        public static CategoriaViewModel instance;
-        public static CategoriaViewModel GetInstance()
-        {
-            if (instance == null)
-            {
-                return new CategoriaViewModel(App.Navigate);
+        public ObservableCollection<ProductoDTO> listaproducto { get; set; }
 
-            }
-            else return instance;
-        }
 
-        public PedidoProductoViewModel(INavigation navigation , int idcategoria)
+        public PedidoProductoViewModel(INavigation navigation, int idcategoria)
         {
             //instance = this;
             flgindicador = true;
             Navigation = navigation;
             listaproducto = new ObservableCollection<ProductoDTO>();
+            List<PedidoDetalleDTO> listaProd = null;
+            listaProd = string.IsNullOrWhiteSpace(Preferences.Get(Constantes.detallepedido, "") ) ?  new List<PedidoDetalleDTO>() : JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+            importetotal = listaProd.Sum(x => x.SubTotal);
 
             Task.Run(async () => await cargarProductos(idcategoria));
 
@@ -52,6 +49,10 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             {
                 var objres = JsonConvert.DeserializeObject<ObservableCollection<ProductoDTO>>(JsonConvert.SerializeObject(res.data));
                 listaproducto = objres;
+                foreach (var item in listaproducto)
+                {
+                    item.Activeagregar = true;
+                }
             }
             flgindicador = false;
         }
@@ -59,6 +60,11 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         {
             get { return _flgrefresh; }
             set { SetValue(ref _flgrefresh, value); }
+        }
+        public decimal importetotal
+        {
+            get { return _importetotal; }
+            set { SetValue(ref _importetotal, value); }
         }
         //public int cantidad
         //{
@@ -71,60 +77,14 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             set { SetValue(ref _flgindicador, value); }
         }
 
-        public ObservableCollection<ProductoDTO> listaproducto
-        {
-            get { return _listaproducto; }
-            set { SetValue(ref _listaproducto, value); }
-        }
+        //public ObservableCollection<ProductoDTO> listaproducto
+        //{
+        //    get { return _listaproducto; }
+        //    set { SetValue(ref _listaproducto, value); }
+        //}
 
 
-        public async Task MostrarLista(int skip = 0, int tipo = 0)
-        {
-            Respuesta res;
-            try
-            {
-                var objeto = new Paginacion { pagine = 90, skip = skip };
-                ResulLista<ProductoDTO> objres = new ResulLista<ProductoDTO>();
 
-                //List<RequerimientoDTO> objres = new List<RequerimientoDTO>();
-                flgindicador = true;
-                res = await GenericLH.GetAll<Paginacion>(Constantes.url + Constantes.api_getlistacategoria, objeto);
-                if (res.codigo == 1)
-                {
-                    objres = JsonConvert.DeserializeObject<ResulLista<ProductoDTO>>(JsonConvert.SerializeObject(res.data));
-
-                }
-                // listarequerimiento = objres;
-                if (tipo == 0)
-                {
-                    listaproducto.Clear();
-                    flgrefresh = false;
-                }
-
-                for (int i = 0; i < objres.lista.Count; i++)
-                {
-                    bool valida = listaproducto.Where(x => x.Id == objres.lista[i].Id).Any();
-                    if (!valida)
-                    {
-                        listaproducto.Add(objres.lista[i]);
-                    }
-
-                }
-                flgindicador = false;
-            }
-            catch (Exception ex)
-            {
-                flgindicador = false;
-                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
-            }
-
-
-        }
-        public async Task MostrarListaRefrsh()
-        {
-            await MostrarLista(listaproducto.Count, 1);
-
-        }
 
         //public async Task CrearCategoria()
         //{
@@ -144,17 +104,111 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         //}
 
+        public async Task SllperComand(ProductoDTO objeto)
+        {
+            //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
+            try
+            {
 
-       
-      
-      //  public ICommand CrearCategoriaComand => new Command(async () => await CrearCategoria());
-        public ICommand RefreshComand => new Command(async () => await MostrarLista());
-        public ICommand RefreshIncrementComand => new Command(async () => await MostrarListaRefrsh());
-        public ICommand Agregarcommand => new Command<ProductoDTO>(async (p) => await IrCategoria(p));
 
-        public ICommand Sllepercommand => new Command<ProductoDTO>(async (p) => await IrCategoria(p));
 
-        //public ICommand seleccionadoComand => new Command(async () => await MostrarListaRefrsh());
+               // await App.Navigate.PushAsync(new FormCategoriaView(objeto, "Edicion Categoria"));
+
+
+            }
+            catch (Exception ex)
+            {
+                //flgindicador = false;
+                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
+
+            }
+
+        }
+        public async Task AgregarCommnado(ProductoDTO objeto)
+        {
+            //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
+            try
+            {
+                objeto.Activeagregar = false;
+                List<PedidoDetalleDTO> listaProd = null;
+                if (Preferences.Get(Constantes.detallepedido, "") == "")
+                {
+                    listaProd = new List<PedidoDetalleDTO>();
+                }
+                else
+                {
+                    listaProd = JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+                }
+
+                listaProd.Add(new PedidoDetalleDTO
+                {
+
+                    Producto = objeto.Nombre,
+                    Idproducto = objeto.Id,
+                    precio =  objeto.Precio,
+                    Cantidad = objeto.Cantidad,
+                    SubTotal = objeto.Precio * objeto.Cantidad
+
+                });
+
+                importetotal = listaProd.Sum(x => x.SubTotal);
+                Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaProd));
+
+
+            }
+            catch (Exception ex)
+            {
+                //flgindicador = false;
+                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
+
+            }
+
+        }
+
+        public async Task IRaPedidos()
+        {
+            //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
+            try
+            {
+                var texto = Preferences.Get(Constantes.detallepedido, "");
+
+                ObservableCollection<PedidoDetalleDTO> listaprodu;
+                 listaprodu = string.IsNullOrWhiteSpace(texto) ? new ObservableCollection<PedidoDetalleDTO>() : JsonConvert.DeserializeObject<ObservableCollection<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+                if (listaprodu.Count > 0 )
+                {
+                    await App.Navigate.PushAsync(new FormPedidoView());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No Hay Productos Seleccionados", "Cancelar");
+
+                }
+
+
+                // await App.Navigate.PushAsync(new FormCategoriaView(objeto, "Edicion Categoria"));
+
+
+            }
+            catch (Exception ex)
+            {
+                //flgindicador = false;
+                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
+
+            }
+
+        }
+
+        //  public ICommand CrearCategoriaComand => new Command(async () => await CrearCategoria());
+        //public ICommand RefreshComand => new Command(async () => await MostrarLista());
+        //public ICommand RefreshIncrementComand => new Command(async () => await MostrarListaRefrsh());
+        //public ICommand Agregarcommand => new Command<ProductoDTO>(async (p) => await IrCategoria(p));
+
+        public ICommand Sllepercommand => new Command<ProductoDTO>(async (p) => await SllperComand(p));
+
+        public ICommand Agregarcommand => new Command<ProductoDTO>(async (p) => await AgregarCommnado(p));
+
+        public ICommand IraPedidoscommand => new Command(async () => await IRaPedidos());
 
     }
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.Slepperview"
+             Title="Slepperview">
+    <VerticalStackLayout Padding="20">
+
+        <!-- Label que muestra el valor -->
+        <Label Text="{Binding Cantidad}" 
+           FontSize="24"
+           HorizontalOptions="Center" />
+
+        <!-- Stepper que modifica el valor -->
+        <Stepper Minimum="0"
+             Maximum="100"
+             Increment="1"
+             Value="{Binding Cantidad}" />
+
+    </VerticalStackLayout>
+</ContentPage>
