@@ -20,7 +20,8 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
         public int Idcategoria { get; set; }
 
         private int _cantidad;
-        private bool _activeagregar;
+        private string _nombreButon;
+        private Microsoft.Maui.Graphics.Color _colorfondo;
 
         public string Nombrecategoria { get; set; }
 
@@ -60,16 +61,30 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
             }
         }
 
-        public bool Activeagregar
+        public string NombreButon
         {
-            get => _activeagregar;
+            get => _nombreButon;
             set
             {
-                if (_activeagregar != value)
+                if (_nombreButon != value)
                 {
-                    _activeagregar = value;
+                    _nombreButon = value;
 
-                    OnPropertyChanged(nameof(Activeagregar));
+                    OnPropertyChanged(nameof(NombreButon));
+                }
+            }
+        }
+
+        public Microsoft.Maui.Graphics.Color Colorfondo
+        {
+            get => _colorfondo;
+            set
+            {
+                if (_colorfondo != value)
+                {
+                    _colorfondo = value;
+
+                    OnPropertyChanged(nameof(Colorfondo));
                 }
             }
         }

@@ -147,6 +147,9 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 if (res.codigo == 1)
                 {
                     Preferences.Set(Constantes.detallepedido, "");
+                    var popup = new MensajeConfirmacion();
+                    var result = await Application.Current.MainPage.ShowPopupAsync(popup);
+
 
                     var pages = App.Navigate.NavigationStack.ToList();
                     //  var pagina23 = pages.FirstOrDefault(x => x.GetType().Name == "");

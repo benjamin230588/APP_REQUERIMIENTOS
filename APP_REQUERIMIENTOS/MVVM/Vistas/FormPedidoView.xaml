@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.FormPedidoView"
-             Title="Pedido">
+             Title="Detalle de Pedido">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -18,13 +18,14 @@
 
             <!-- HEADER -->
             <CollectionView.Header>
-                <Grid Padding="5" ColumnSpacing="10" BackgroundColor="#DDDDDD">
+                <Grid  RowSpacing="0" BackgroundColor="#DDDDDD">
                     <Grid.ColumnDefinitions>
                        
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="60"/>
                         <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="40"/>
                         <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
 
                    
@@ -32,34 +33,55 @@
                     <Label Text="Precio" Grid.Column="1" FontAttributes="Bold"/>
                     <Label Text="Cant." Grid.Column="2" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
                     <Label Text="Subtotal" Grid.Column="3" FontAttributes="Bold"/>
+                    <Label Text="" Grid.Column="4" FontAttributes="Bold"/>
                 </Grid>
             </CollectionView.Header>
 
             <!-- ITEMS -->
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="5" ColumnSpacing="10">
-                        <Grid.ColumnDefinitions>
-                            
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="50"/>
-                            <ColumnDefinition Width="40"/>
-                            <ColumnDefinition Width="80"/>
-                        </Grid.ColumnDefinitions>
+                    <Border 
+            Stroke="#CCCCCC"
+            StrokeThickness="1"
+            Background="White"
+            StrokeShape="RoundRectangle 8"
+            Margin="0,0">
+                        <Grid Padding="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
 
-                      
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Text="{Binding Producto}" Grid.Column="0"/>
 
-                        <Label Text="{Binding precio, StringFormat='S/{0:F1}'}"
+
+                            <Label Text="{Binding Producto}" Grid.Column="0" />
+
+                            <Label Text="{Binding precio, StringFormat='S/{0:F1}'}" 
                        Grid.Column="1"/>
 
-                        <Label Text="{Binding Cantidad} " HorizontalOptions="CenterAndExpand"
+                            <Label Text="{Binding Cantidad} " HorizontalOptions="CenterAndExpand" 
                        Grid.Column="2"/>
 
-                        <Label Text="{Binding SubTotal, StringFormat='S/{0:F1}'}"
+                            <Label Text="{Binding SubTotal, StringFormat='S/{0:F1}'}" 
                        Grid.Column="3"/>
-                    </Grid>
+                            <Grid Grid.Column="4" BackgroundColor="Transparent"  Padding="0" Margin="0">
+                                <Image Aspect="AspectFill" VerticalOptions="Fill"
+HorizontalOptions="CenterAndExpand"   Source="elima22.svg" x:Name="iconEliminar" HeightRequest="30" WidthRequest="30"   />
+
+                            </Grid>
+
+
+
+                        </Grid>
+
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 

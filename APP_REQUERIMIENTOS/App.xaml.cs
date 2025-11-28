@@ -17,8 +17,8 @@ namespace APP_REQUERIMIENTOS
             if (Preferences.Get(Constantes.RecordarContra, false) == true)
             {
                Application.Current.MainPage = new PrincipalMasterView();
-              //  Preferences.Set(Constantes.detallepedido, "");
-               // MainPage = new NavigationPage(new Slepperview());
+               //Preferences.Set(Constantes.detallepedido, "");
+               //MainPage = new NavigationPage(new todaalto());
             }
             else
             {

@@ -36,12 +36,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             listaProd = string.IsNullOrWhiteSpace(Preferences.Get(Constantes.detallepedido, "") ) ?  new List<PedidoDetalleDTO>() : JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
             importetotal = listaProd.Sum(x => x.SubTotal);
 
-            Task.Run(async () => await cargarProductos(idcategoria));
+            Task.Run(async () => await cargarProductos(idcategoria, listaProd));
 
 
 
         }
-        public async Task cargarProductos(int idcategoria)
+        public async Task cargarProductos(int idcategoria , List<PedidoDetalleDTO> listapro)
         {
             //int idtipousuario = Preferences.Get(Preferencias.IdTipoUsuario, 0);
             var res = await GenericLH.Get(Constantes.url + Constantes.api_getlistaproductocategoria + idcategoria);
@@ -51,9 +51,22 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 listaproducto = objres;
                 foreach (var item in listaproducto)
                 {
-                    item.Activeagregar = true;
+                    if (listapro.Where(x => x.Idproducto== item.Id).Any())
+                    {
+                        item.NombreButon = "Eliminar";
+                        item.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#FF0000");
+                        item.Cantidad = listapro.Where(x => x.Idproducto == item.Id).Select(x => x.Cantidad).FirstOrDefault();
+                    }
+                    else
+                    {
+                        item.NombreButon = "Agregar";
+                        item.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#165ded");
+                    }
+                        
                 }
+
             }
+            
             flgindicador = false;
         }
         public bool flgrefresh
@@ -129,7 +142,8 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
             try
             {
-                objeto.Activeagregar = false;
+
+                string texto = objeto.NombreButon;
                 List<PedidoDetalleDTO> listaProd = null;
                 if (Preferences.Get(Constantes.detallepedido, "") == "")
                 {
@@ -139,20 +153,42 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 {
                     listaProd = JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
                 }
+                if (texto=="Agregar")
+                {
+                   
 
-                listaProd.Add(new PedidoDetalleDTO
+                    listaProd.Add(new PedidoDetalleDTO
+                    {
+
+                        Producto = objeto.Nombre,
+                        Idproducto = objeto.Id,
+                        precio = objeto.Precio,
+                        Cantidad = objeto.Cantidad,
+                        SubTotal = objeto.Precio * objeto.Cantidad
+
+                    });
+
+                    importetotal = listaProd.Sum(x => x.SubTotal);
+                    Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaProd));
+                    objeto.NombreButon = "Eliminar";
+                    objeto.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#FF0000");
+
+
+                }
+                else
                 {
 
-                    Producto = objeto.Nombre,
-                    Idproducto = objeto.Id,
-                    precio =  objeto.Precio,
-                    Cantidad = objeto.Cantidad,
-                    SubTotal = objeto.Precio * objeto.Cantidad
+                    
+                    List<PedidoDetalleDTO> listaNew = listaProd.Where(p => p.Idproducto != objeto.Id).ToList();
+                    
+                    //Settings.ProductListAdd = JsonConvert.SerializeObject(listaNew);
+                    importetotal = listaNew.Sum(x => x.SubTotal);
+                    Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaNew));
+                    objeto.NombreButon = "Agregar";
+                    objeto.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#165ded");
+                    objeto.Cantidad = 0;
+                }
 
-                });
-
-                importetotal = listaProd.Sum(x => x.SubTotal);
-                Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaProd));
 
 
             }
