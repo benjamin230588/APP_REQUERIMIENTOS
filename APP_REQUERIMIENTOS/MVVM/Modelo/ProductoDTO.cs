@@ -42,6 +42,8 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
 
         public string rutaarchivo { get; set; }
 
+        public bool InicializadoSlepper { get; set; } 
+
         public object Clone()
         {
             return this.MemberwiseClone();

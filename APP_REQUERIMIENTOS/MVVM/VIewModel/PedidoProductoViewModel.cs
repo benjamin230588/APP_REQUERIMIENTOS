@@ -20,30 +20,48 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
     public class PedidoProductoViewModel : BaseViewModel
     {
         private bool _flgindicador;
+        private int _idcategoria;
         private bool _flgrefresh;
         private decimal _importetotal;
         //private int _cantidad;
         public ObservableCollection<ProductoDTO> listaproducto { get; set; }
+        public static PedidoProductoViewModel instance;
+        public static PedidoProductoViewModel GetInstance()
+        {
+           
 
+            if (instance == null)
+            {
+                return null;
+
+            }
+            else return instance;
+        }
 
         public PedidoProductoViewModel(INavigation navigation, int idcategoria)
         {
-            //instance = this;
+            instance = this;
             flgindicador = true;
             Navigation = navigation;
+            _idcategoria = idcategoria;
             listaproducto = new ObservableCollection<ProductoDTO>();
             List<PedidoDetalleDTO> listaProd = null;
             listaProd = string.IsNullOrWhiteSpace(Preferences.Get(Constantes.detallepedido, "") ) ?  new List<PedidoDetalleDTO>() : JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
             importetotal = listaProd.Sum(x => x.SubTotal);
 
-            Task.Run(async () => await cargarProductos(idcategoria, listaProd));
+            Task.Run(async () => await cargarProductos());
 
 
 
         }
-        public async Task cargarProductos(int idcategoria , List<PedidoDetalleDTO> listapro)
+        public async Task cargarProductos()
         {
+            int idcategoria = _idcategoria;
             //int idtipousuario = Preferences.Get(Preferencias.IdTipoUsuario, 0);
+            List<PedidoDetalleDTO> listaProd = null;
+            listaProd = string.IsNullOrWhiteSpace(Preferences.Get(Constantes.detallepedido, "")) ? new List<PedidoDetalleDTO>() : JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+
+
             var res = await GenericLH.Get(Constantes.url + Constantes.api_getlistaproductocategoria + idcategoria);
             if (res.codigo == 1)
             {
@@ -51,11 +69,11 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 listaproducto = objres;
                 foreach (var item in listaproducto)
                 {
-                    if (listapro.Where(x => x.Idproducto== item.Id).Any())
+                    if (listaProd.Where(x => x.Idproducto== item.Id).Any())
                     {
                         item.NombreButon = "Eliminar";
                         item.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#FF0000");
-                        item.Cantidad = listapro.Where(x => x.Idproducto == item.Id).Select(x => x.Cantidad).FirstOrDefault();
+                        item.Cantidad = listaProd.Where(x => x.Idproducto == item.Id).Select(x => x.Cantidad).FirstOrDefault();
                     }
                     else
                     {
@@ -68,6 +86,31 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
             
             flgindicador = false;
+        }
+
+        public async Task ActualizarProductos()
+        {
+            int idcategoria = _idcategoria;
+            //int idtipousuario = Preferences.Get(Preferencias.IdTipoUsuario, 0);
+            List<PedidoDetalleDTO> listaProd = null;
+            listaProd = string.IsNullOrWhiteSpace(Preferences.Get(Constantes.detallepedido, "")) ? new List<PedidoDetalleDTO>() : JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+
+            foreach (var item in listaproducto)
+            {
+                if (listaProd.Where(x => x.Idproducto == item.Id).Any())
+                {
+                    item.NombreButon = "Eliminar";
+                    item.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#FF0000");
+                    item.Cantidad = listaProd.Where(x => x.Idproducto == item.Id).Select(x => x.Cantidad).FirstOrDefault();
+                }
+                else
+                {
+                    item.NombreButon = "Agregar";
+                    item.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#165ded");
+                }
+
+            }
+            
         }
         public bool flgrefresh
         {
@@ -122,11 +165,68 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
             try
             {
+                if (objeto == null)
+                    return;
+
+                //if (!objeto.InicializadoSlepper)
+                //{
+                //    objeto.InicializadoSlepper = true;
+                //    return; // Ignora la primera ejecución para este ítem
+                //}
+
+                string texto = objeto.NombreButon;
+                List<PedidoDetalleDTO> listaProd = null;
+                if (Preferences.Get(Constantes.detallepedido, "") == "")
+                {
+                    listaProd = new List<PedidoDetalleDTO>();
+                }
+                else
+                {
+                    listaProd = JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+                }
+                if (texto == "Eliminar")
+                {
+                    if (objeto.Cantidad > 0)
+                    {
+                        foreach (var item in listaProd)
+                        {
+                            if (item.Idproducto == objeto.Id)
+                            {
+                                // item.NombreButon = "Eliminar";
+                                //item.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#FF0000");
+                                item.Cantidad = objeto.Cantidad;
+                                item.SubTotal = objeto.Cantidad * objeto.Precio;
+                            }
+                        }
+
+                        importetotal = listaProd.Sum(x => x.SubTotal);
+                        Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaProd));
+
+                    }
+                    else
+                    {
+                        List<PedidoDetalleDTO> listaNew = listaProd.Where(p => p.Idproducto != objeto.Id).ToList();
+
+                        //Settings.ProductListAdd = JsonConvert.SerializeObject(listaNew);
+                        importetotal = listaNew.Sum(x => x.SubTotal);
+                        Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaNew));
+                        objeto.NombreButon = "Agregar";
+                        objeto.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#165ded");
+                        //objeto.Cantidad = 0;
+                        //quitarlo de la lista y cambiar a agregar 
 
 
+                    }
 
-               // await App.Navigate.PushAsync(new FormCategoriaView(objeto, "Edicion Categoria"));
 
+                        //Settings.ProductListAdd = JsonConvert.SerializeObject(listaNew);
+                        
+
+                }
+                
+
+
+                
 
             }
             catch (Exception ex)
@@ -156,6 +256,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 if (texto=="Agregar")
                 {
                    
+                    //si cantidad es cero no poder agregar
+                    if (objeto.Cantidad == 0)
+                    {
+                        await DisplayAlert("Error", "Ingrese Cantidad", "Cancelar");
+                        return;
+                    }
 
                     listaProd.Add(new PedidoDetalleDTO
                     {

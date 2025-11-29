@@ -54,12 +54,17 @@
 
             <Border   StrokeShape="RoundRectangle 30" BackgroundColor="White" HorizontalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal" Padding="15,2">
-                    <Label  Text="S/.1200.00" FontSize="20" HeightRequest="50" VerticalTextAlignment="Center" TextColor="Black"   HorizontalOptions="FillAndExpand" ></Label>
+                    <Label  Text="{Binding importetotal, StringFormat='S/{0:F2}'}" FontSize="20" HeightRequest="50" VerticalTextAlignment="Center" TextColor="Black"   HorizontalOptions="FillAndExpand" ></Label>
                     <Image Source="realizarpedido"  WidthRequest="40" HeightRequest="40" Aspect="AspectFill"   />
 
                 </StackLayout>
                 
             </Border>
+
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding IraPedidoscommand}"/>
+            </StackLayout.GestureRecognizers>
+
         </StackLayout>
         
         <Grid  Grid.Column="0" Grid.Row="0"  Grid.RowSpan="2" Opacity=".8" 

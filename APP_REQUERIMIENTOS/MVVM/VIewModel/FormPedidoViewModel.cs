@@ -33,11 +33,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         {
             Navigation = navigation;
            // this.titulo = titulo;
-            flgindicador = true;
+           
+            Task.Run(async () => await CargarDatosAsync());
 
-            listaproductos = JsonConvert.DeserializeObject<ObservableCollection<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
-            totalpedido = listaproductos.Sum(x => x.SubTotal);
-            flgindicador = false;
+            //listaproductos = JsonConvert.DeserializeObject<ObservableCollection<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+            //totalpedido = listaproductos.Sum(x => x.SubTotal);
+            //flgindicador = false;
             // listacategoria = cargarCategorias( model);
             // objrequerimiento = (RequerimientoDTO)model.Clone();
             //  objproducto = (ProductoDTO)model.Clone();
@@ -49,6 +50,23 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
 
 
+        }
+        public async Task CargarDatosAsync()
+        {
+            //flgindicador = true;
+            flgindicador = true;
+
+           // await Task.Delay(5000); // permite que la UI se actualice
+            listaproductos = JsonConvert.DeserializeObject<ObservableCollection<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+            totalpedido = listaproductos.Sum(x => x.SubTotal);
+            flgindicador = false;
+            //listaproductos = JsonConvert.DeserializeObject<ObservableCollection<PedidoDetalleDTO>>(
+            //    Preferences.Get(Constantes.detallepedido, "")
+            //);
+
+            //totalpedido = listaproductos.Sum(x => x.SubTotal);
+
+            //flgindicador = false;
         }
         public ObservableCollection<PedidoDetalleDTO> listaproductos
         {
@@ -121,12 +139,58 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         //    get { return _imgmedia; }
         //    set { SetValue(ref _imgmedia, value); }
         //}
+
+        public async Task EliminarDetalle(PedidoDetalleDTO OBJMODEL)
+        {
+            //await Application.Current.MainPage.DisplayAlert("Error", "Error de Conexion", "Cancelar");
+
+            //  int idtipousuario = Preferences.Get(Preferencias.IdTipoUsuario, 0);
+            //ImageButton img = sender as ImageButton;
+            //DetalleVentaCLS oProductoCLS = (DetalleVentaCLS)img.BindingContext;
+            //int iidproducto = oProductoCLS.iidproducto;
+              List<PedidoDetalleDTO> listaProd = null;
+              flgindicador = true;
+                //List<DetalleVentaCLS> listaSetting = JsonConvert.DeserializeObject<List<DetalleVentaCLS>>(Settings.ProductListAdd);
+
+              listaProd = JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+
+              List<PedidoDetalleDTO> listaNew = listaProd.Where(p => p.Idproducto !=  OBJMODEL.Idproducto).ToList();
+                
+              totalpedido = listaNew.Sum(x => x.SubTotal);
+              Preferences.Set(Constantes.detallepedido, JsonConvert.SerializeObject(listaNew));
+
+              ObservableCollection<PedidoDetalleDTO> listaObservable =
+              new ObservableCollection<PedidoDetalleDTO>(listaNew);
+              listaproductos = listaObservable;
+              if (PedidoProductoViewModel.GetInstance() != null)
+              {
+               await PedidoProductoViewModel.GetInstance().cargarProductos();
+
+                PedidoProductoViewModel.GetInstance().importetotal = totalpedido;
+              }
+                if (PedidoCategoriaViewModel.GetInstance() != null)
+                {
+                
+                    PedidoCategoriaViewModel.GetInstance().importetotal = totalpedido;
+                }
+            flgindicador = false;
+
+
+        }
         public async Task GuardarPedido()
         {
 
             Respuesta res;
             try
             {
+
+                if (listaproductos.Count==0)
+                {
+                    await DisplayAlert("Error", "Debe de Elegir Productos", "Cancelar");
+
+                    return;
+                }
+
                 flgindicador = true;
 
                 
@@ -190,7 +254,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
         public ICommand GuardarPedidoComand => new Command(async () => await GuardarPedido());
         public ICommand Volvercommand => new Command(async () => await VolverProducto());
 
-        //public ICommand CargarImagenocommand => new Command(async () => await CargarImagen());
+        public ICommand Eliminarcommand => new Command<PedidoDetalleDTO>(async (p) => await EliminarDetalle(p));
 
 
 

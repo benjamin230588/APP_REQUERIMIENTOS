@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.FormPedidoView"
+             x:Name="thispage"
              Title="Detalle de Pedido">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -12,43 +13,40 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <CollectionView x:Name="cvItems"
-                ItemsSource="{Binding listaproductos}"
-                SelectionMode="None" Grid.Column="0" Grid.Row="0" Margin="10">
 
-            <!-- HEADER -->
-            <CollectionView.Header>
-                <Grid  RowSpacing="0" BackgroundColor="#DDDDDD">
-                    <Grid.ColumnDefinitions>
-                       
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition Width="50"/>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
+        
+            <CollectionView x:Name="cvItems"
+         ItemsSource="{Binding listaproductos}"
+         SelectionMode="None" Grid.Column="0" Grid.Row="0" Margin="10">
 
-                   
-                    <Label Text="Producto" Grid.Column="0" FontAttributes="Bold"/>
-                    <Label Text="Precio" Grid.Column="1" FontAttributes="Bold"/>
-                    <Label Text="Cant." Grid.Column="2" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
-                    <Label Text="Subtotal" Grid.Column="3" FontAttributes="Bold"/>
-                    <Label Text="" Grid.Column="4" FontAttributes="Bold"/>
-                </Grid>
-            </CollectionView.Header>
+                <!-- HEADER -->
+                <CollectionView.Header>
+                    <Grid   BackgroundColor="#DDDDDD">
+                        <Grid.ColumnDefinitions>
 
-            <!-- ITEMS -->
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border 
-            Stroke="#CCCCCC"
-            StrokeThickness="1"
-            Background="White"
-            StrokeShape="RoundRectangle 8"
-            Margin="0,0">
-                        <Grid Padding="5">
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+
+                        <Label Text="Producto" Grid.Column="0" FontSize="17" FontAttributes="Bold"/>
+                        <Label Text="Precio" Grid.Column="1" FontSize="17" FontAttributes="Bold"/>
+                        <Label Text="Cant" Grid.Column="2" FontSize="17" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
+                        <Label Text="Subtotal" Grid.Column="3" FontSize="17" FontAttributes="Bold"/>
+                        <Label Text="" Grid.Column="4" FontAttributes="Bold"/>
+                    </Grid>
+                </CollectionView.Header>
+
+                <!-- ITEMS -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Grid Margin="0,5" >
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
+                                <RowDefinition Height="30" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
 
@@ -64,16 +62,23 @@
                             <Label Text="{Binding Producto}" Grid.Column="0" />
 
                             <Label Text="{Binding precio, StringFormat='S/{0:F1}'}" 
-                       Grid.Column="1"/>
+                Grid.Column="1"/>
 
                             <Label Text="{Binding Cantidad} " HorizontalOptions="CenterAndExpand" 
-                       Grid.Column="2"/>
+                Grid.Column="2"/>
 
                             <Label Text="{Binding SubTotal, StringFormat='S/{0:F1}'}" 
-                       Grid.Column="3"/>
+                Grid.Column="3"/>
                             <Grid Grid.Column="4" BackgroundColor="Transparent"  Padding="0" Margin="0">
                                 <Image Aspect="AspectFill" VerticalOptions="Fill"
-HorizontalOptions="CenterAndExpand"   Source="elima22.svg" x:Name="iconEliminar" HeightRequest="30" WidthRequest="30"   />
+                             HorizontalOptions="CenterAndExpand"   Source="elima22.svg" x:Name="iconEliminar" HeightRequest="30" WidthRequest="30">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                     Command="{Binding Path=BindingContext.Eliminarcommand,Source={x:Reference thispage}}"
+                                     CommandParameter="{Binding .}" />
+                                    </Image.GestureRecognizers>
+
+                                </Image>
 
                             </Grid>
 
@@ -81,46 +86,58 @@ HorizontalOptions="CenterAndExpand"   Source="elima22.svg" x:Name="iconEliminar"
 
                         </Grid>
 
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-            <!-- FOOTER -->
-            <CollectionView.Footer>
-                <Grid Padding="10" ColumnSpacing="10" Margin="0,20,0,0">
-                    <Grid.ColumnDefinitions>
-                        
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="80"/>
-                    </Grid.ColumnDefinitions>
-                     
-                    <Label Text="TOTAL:"
-                   Grid.Column="0"
-                   FontAttributes="Bold"
-                   FontSize="18"
-                   HorizontalOptions="End" />
+                <!-- FOOTER -->
+                <CollectionView.Footer>
+                    <Grid  Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
 
-                    <Label Text="{Binding totalpedido, StringFormat='S/{0:F1}'}"
-                   Grid.Column="1"
-                   FontSize="18"
-                   FontAttributes="Bold"/>
-                </Grid>
-            </CollectionView.Footer>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120"/>
+                        </Grid.ColumnDefinitions>
 
-        </CollectionView>
+                        <Label Text="TOTAL:"
+            Grid.Column="0"
+            FontAttributes="Bold"
+            FontSize="18"
+            Padding="0,0,10,0"        
+            HorizontalOptions="End" />
 
-        <StackLayout Orientation="Horizontal" Spacing="15" Margin="10,30,10,10" Grid.Column="0" Grid.Row="1">
-            <Button Text="Volver" BackgroundColor="Red" Command="{Binding Volvercommand}"
-         x:Name="btnVolverLogin"  TextColor="White" HorizontalOptions="FillAndExpand" CornerRadius="15"/>
-            <Button Text="Grabar" Background="Green" TextColor="White" 
-         x:Name="btnRegistrardddUsuario" Command="{Binding GuardarPedidoComand}"
-         CornerRadius="15"  HorizontalOptions="FillAndExpand"/>
+                        <Label Text="{Binding totalpedido, StringFormat='S/{0:F2}'}"
+            Grid.Column="1"
+            FontSize="18"
+            FontAttributes="Bold"/>
+                    </Grid>
+                </CollectionView.Footer>
+
+            </CollectionView>
+
+            <StackLayout Orientation="Horizontal" Spacing="15" Margin="10,30,10,10" Grid.Column="0" Grid.Row="1">
+                <Button Text="Volver" BackgroundColor="Red" Command="{Binding Volvercommand}"
+                  x:Name="btnVolverLogin"  TextColor="White" HorizontalOptions="FillAndExpand" CornerRadius="15"/>
+                            <Button Text="Grabar" Background="Green" TextColor="White" 
+                  x:Name="btnRegistrardddUsuario" Command="{Binding GuardarPedidoComand}"
+                  CornerRadius="15"  HorizontalOptions="FillAndExpand"/>    
 
 
-        </StackLayout>
+            </StackLayout>
+
        
-
-
+             <Grid  x:Name="gridcontenido"  BackgroundColor="#FAFAFA" Opacity=".8"
+                    Grid.Column="0" Grid.Row="0"  Grid.RowSpan="2"
+                    HorizontalOptions="FillAndExpand" InputTransparent="False"
+                    VerticalOptions="FillAndExpand" IsVisible="{Binding flgindicador}">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer />
+                    </Grid.GestureRecognizers>
+            <ActivityIndicator
+         HorizontalOptions="Center"
+          IsRunning="{Binding flgindicador}"
+          Color="#DF013A"
+          />
+        </Grid>
     </Grid>
 
            

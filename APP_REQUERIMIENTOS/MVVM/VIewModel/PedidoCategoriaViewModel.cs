@@ -20,13 +20,14 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
     {
         private bool _flgindicador;
         private bool _flgrefresh;
+        private decimal _importetotal;
         private ObservableCollection<CategoriaDTO> _listacategoria;
-        public static CategoriaViewModel instance;
-        public static CategoriaViewModel GetInstance()
+        public static PedidoCategoriaViewModel instance;
+        public static PedidoCategoriaViewModel GetInstance()
         {
             if (instance == null)
             {
-                return new CategoriaViewModel(App.Navigate);
+                return null;
 
             }
             else return instance;
@@ -34,10 +35,12 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         public PedidoCategoriaViewModel(INavigation navigation)
         {
-            //instance = this;
+            instance = this;
             Navigation = navigation;
             listacategoria = new ObservableCollection<CategoriaDTO>();
-
+            List<PedidoDetalleDTO> listaProd = null;
+            listaProd = string.IsNullOrWhiteSpace(Preferences.Get(Constantes.detallepedido, "")) ? new List<PedidoDetalleDTO>() : JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+            importetotal = listaProd.Sum(x => x.SubTotal);
             Task.Run(async () => await MostrarLista());
 
 
@@ -54,7 +57,11 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             get { return _flgindicador; }
             set { SetValue(ref _flgindicador, value); }
         }
-
+        public decimal importetotal
+        {
+            get { return _importetotal; }
+            set { SetValue(ref _importetotal, value); }
+        }
         public ObservableCollection<CategoriaDTO> listacategoria
         {
             get { return _listacategoria; }
@@ -149,7 +156,39 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
             }
 
         }
+        public async Task IRaPedidos()
+        {
+            //await Application.Current.MainPage.DisplayAlert("Error", "Error al Grabar", "Cancelar");
+            try
+            {
+                var texto = Preferences.Get(Constantes.detallepedido, "");
 
+                ObservableCollection<PedidoDetalleDTO> listaprodu;
+                listaprodu = string.IsNullOrWhiteSpace(texto) ? new ObservableCollection<PedidoDetalleDTO>() : JsonConvert.DeserializeObject<ObservableCollection<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+                if (listaprodu.Count > 0)
+                {
+                    await App.Navigate.PushAsync(new FormPedidoView());
+
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No Hay Productos Seleccionados", "Cancelar");
+
+                }
+
+
+                // await App.Navigate.PushAsync(new FormCategoriaView(objeto, "Edicion Categoria"));
+
+
+            }
+            catch (Exception ex)
+            {
+                //flgindicador = false;
+                await DisplayAlert("Error", "Error de Conexion", "Cancelar");
+
+            }
+
+        }
         public async Task EliminarCategoria(int id = 0)
         {
 
@@ -204,6 +243,9 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
         //public ICommand seleccionadoComand => new Command(async () => await MostrarListaRefrsh());
         public ICommand EliminarComand => new Command<int>(async (p) => await EliminarCategoria(p));
+
+        public ICommand IraPedidoscommand => new Command(async () => await IRaPedidos());
+
 
     }
 }
