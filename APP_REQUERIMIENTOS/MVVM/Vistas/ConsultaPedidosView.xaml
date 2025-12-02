@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="APP_REQUERIMIENTOS.MVVM.Vistas.ConsultaPedidosView"
+             Title="ConsultaPedidosView">
+    <Grid Padding="4">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <SearchBar Grid.Row="0" Placeholder="ingrese Categoria" x:Name="searchcliente"     />
+
+        <CollectionView Grid.Row="1" x:Name="lstCategoria"   ItemsSource="{Binding listacategoria}"
+                    SelectionMode="None" ItemsLayout="VerticalList"  >
+
+            <CollectionView.EmptyView>
+                <StackLayout VerticalOptions="Center">
+
+                    <Label Text="Ningun Registro Ingresado" HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <SwipeItem
+                                     IconImageSource="ic_delete.png"
+                                     BackgroundColor="White" 
+                                     Command="{Binding Path=BindingContext.EliminarComand, Source={x:Reference thispage }}"
+                                     CommandParameter="{Binding Id}"
+                                    />
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+                        <Frame BackgroundColor="#FAFAFA"  HasShadow="True"
+                    CornerRadius="10" Margin="5,0,5,10" Padding="10,10,13,10" BorderColor="#848484"  >
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#FAFAFA"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#A8E6A3"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+
+
+                            <StackLayout Orientation="Vertical">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+
+
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding Nombre}" Grid.Column="0" Grid.Row="0"  TextColor="#2E64FE"    FontSize="Large"/>
+                                    <Label Text="{Binding Descripcion}" Grid.Column="0" Grid.Row="1" FontAttributes="Bold" FontSize="Medium" />
+                                    <Label Text="{Binding FecCreacion}" Grid.Column="0" Grid.Row="2" FontAttributes="Bold" FontSize="Medium" />
+
+
+                                </Grid>
+
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Path=BindingContext.IrCategoriacommand,Source={x:Reference thispage}}"
+                            CommandParameter="{Binding .}"
+                            />
+                            </Frame.GestureRecognizers>
+
+                        </Frame>
+                    </SwipeView>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+
+
+        <Button Grid.Row="1" Text="Nuevo" BorderColor="#2b3c3c" BorderWidth="0" FontAttributes="Bold" 
+                BackgroundColor="#FFC733"
+                TextColor="Black" HorizontalOptions="End" WidthRequest="100" CornerRadius="70"
+                HeightRequest="50" Margin="0,0,10,10" VerticalOptions="End" Command="{Binding CrearCategoriaComand}"/>
+
+        <Grid  Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" x:Name="gridcontenido"   Opacity=".8" 
+             IsVisible="{Binding flgindicador}" InputTransparent="False"  BackgroundColor="#FAFAFA">
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer />
+            </Grid.GestureRecognizers>
+
+            <ActivityIndicator
+                HorizontalOptions="Center"
+                IsRunning="{Binding flgindicador}"
+                Color="#DF013A"
+                />
+        </Grid>
+    </Grid>
+
+</ContentPage>

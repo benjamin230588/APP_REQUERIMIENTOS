@@ -11,8 +11,14 @@ namespace APP_REQUERIMIENTOS.MVVM.Modelo
     {
         public int Id { get; set; }
 
-
-
+        //valor.ToString("#,##0.00")
+        public string PrecioProducto
+        {
+            get
+            {
+                return $"S/{Precio.ToString("N2")} {Nombre}";
+            }
+        }
         public string Nombre { get; set; }
 
 

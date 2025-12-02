@@ -164,7 +164,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
               listaproductos = listaObservable;
               if (PedidoProductoViewModel.GetInstance() != null)
               {
-               await PedidoProductoViewModel.GetInstance().cargarProductos();
+                await PedidoProductoViewModel.GetInstance().ActualizarProductos();
 
                 PedidoProductoViewModel.GetInstance().importetotal = totalpedido;
               }

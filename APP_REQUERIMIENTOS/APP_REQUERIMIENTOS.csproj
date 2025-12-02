@@ -103,6 +103,9 @@
 	  <MauiXaml Update="MVVM\Vistas\compara.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Vistas\ConsultaPedidosView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Vistas\dale.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

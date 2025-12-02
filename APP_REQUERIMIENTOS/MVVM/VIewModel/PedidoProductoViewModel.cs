@@ -107,6 +107,8 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 {
                     item.NombreButon = "Agregar";
                     item.Colorfondo = Microsoft.Maui.Graphics.Color.FromArgb("#165ded");
+                    item.Cantidad = 0;
+
                 }
 
             }
@@ -218,15 +220,16 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
 
                     }
 
+                    actualizarImporteCategoria();
 
-                        //Settings.ProductListAdd = JsonConvert.SerializeObject(listaNew);
-                        
+                    //Settings.ProductListAdd = JsonConvert.SerializeObject(listaNew);
+
 
                 }
-                
 
 
-                
+
+
 
             }
             catch (Exception ex)
@@ -234,6 +237,24 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                 //flgindicador = false;
                 await DisplayAlert("Error", "Error de Conexion", "Cancelar");
 
+            }
+
+        }
+        public void actualizarImporteCategoria()
+        {
+            List<PedidoDetalleDTO> listaProd = null;
+            if (Preferences.Get(Constantes.detallepedido, "") == "")
+            {
+                listaProd = new List<PedidoDetalleDTO>();
+            }
+            else
+            {
+                listaProd = JsonConvert.DeserializeObject<List<PedidoDetalleDTO>>(Preferences.Get(Constantes.detallepedido, ""));
+            }
+            if (PedidoCategoriaViewModel.GetInstance() != null)
+            {
+
+                PedidoCategoriaViewModel.GetInstance().importetotal = listaProd.Sum(x => x.SubTotal); 
             }
 
         }
@@ -295,7 +316,7 @@ namespace APP_REQUERIMIENTOS.MVVM.VIewModel
                     objeto.Cantidad = 0;
                 }
 
-
+                actualizarImporteCategoria();
 
             }
             catch (Exception ex)

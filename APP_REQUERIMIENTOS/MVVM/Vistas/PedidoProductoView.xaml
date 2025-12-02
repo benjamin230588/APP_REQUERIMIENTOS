@@ -57,7 +57,7 @@
                          Aspect="AspectFill"  WidthRequest="150" HeightRequest="120" HorizontalOptions="CenterAndExpand" />
 
 
-                            <Label Text="{Binding Nombre}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                            <Label Text="{Binding PrecioProducto}" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
                           FontAttributes="Bold" FontSize="16"/>
 
                             <Label x:Name="lblCantidad" Grid.Column="0" Grid.Row="2"
